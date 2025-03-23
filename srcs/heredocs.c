@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:18:56 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/21 19:27:22 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/23 12:24:28 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*return_result(char *result, int expand)
 	return (result);
 }
 
-// result and tmp are passed as NULL
+//If expand is 1, expansion happens
 char	*create_heredoc(char *terminator, int expand, char *result, char *tmp)
 {
 	while (tmp == NULL || ft_strncmp(terminator, tmp, ft_strlen(terminator
