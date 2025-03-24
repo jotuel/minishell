@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:55:05 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/22 19:47:20 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/23 12:55:27 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	deallocate(t_data *data)
 /*
  *   checks with what value and if to exit at all.
  */
-static int	check_exit_status(int exit_status, t_sent *sentence, int argc, char *argv[])
+static int	check_exit_status(int exit_status, t_sent *sentence, \
+	int argc, char *argv[])
 {
 	if (exit_status == 2 && ft_strncmp(argv[1], "2", 2))
 	{
