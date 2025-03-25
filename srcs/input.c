@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:11:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/23 12:21:27 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:51:00 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	prompt_input(char *line, int pfd[2], t_data *data, int input)
 		input = 0;
 	else
 		line = rl_gets();
-	rl_on_new_line();
 	if (line == NULL)
 		return (1);
 	else if (line[0] == '\0')
