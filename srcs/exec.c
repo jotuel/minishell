@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:21:45 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/25 15:46:44 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/25 16:00:01 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	execute_child(t_sent *sent, int pfd[2], pid_t child)
 		ft_exit(get_data(), "fork", strerror(errno), errno);
 }
 
-static int wait_for_child(int ret, int state, pid_t last_child, int *i)
+static int	wait_for_child(int ret, int state, pid_t last_child, int *i)
 {
 	while (*i)
 	{
