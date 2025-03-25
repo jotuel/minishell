@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:18:56 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/23 12:24:28 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:44:56 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	t_compare(t_char *str, char *str2)
 	int	i;
 
 	if (!str)
-		perror("Heredocs delimiter should not be NULL\n");
+		error_printf("debug", "heredoc delimiter should not be NULL");
 	if (!str2)
 		return (1);
 	i = 0;
