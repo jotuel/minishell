@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:55:23 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/20 12:46:19 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:40:23 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	expand_envvar(char *unexp, char *exp, int *i, int *k)
 	if (unexp[*i] == '$')
 		(*i)++;
 	else
-		perror("DEBUG, something seems wrong");
+		error_printf("DEBUG", "something seems wrong");
 	while (ft_isalnum(unexp[*i]) || unexp[*i] == '_')
 		(*i)++;
 }
