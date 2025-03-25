@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 15:36:21 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/25 18:16:45 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# ifndef PATH_MAX /// Max path lenght
+# ifndef PATH_MAX
 #  define PATH_MAX (5000)
 # endif
 # define ENV_SIZE 4096
@@ -49,8 +49,6 @@
 # ifndef USER
 #  define USER "minishell"
 # endif
-
-# define PROMPT GREEN USER ":" RESET
 
 # define RED "\x1b[31m"
 # define GREEN "\x1b[32m" // Used for variable expansion
@@ -85,7 +83,7 @@ typedef struct s_sent
 	bool		inpipe;
 	t_dir		redirs[20];
 	bool		outpipe;
-	int 		error;
+	int			error;
 	int			heredocs;
 	int			argc;
 }				t_sent;
@@ -124,7 +122,7 @@ int				bi_exit(int argc, char *argv[], t_sent *sentence);
 const char		*ft_get_env(const char *target);
 int				add_envvar(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *envvar,
 					char *value);
-const char		*find_env_char(char *source, t_data *data);
+//const char		*find_env_char(char *source, t_data *data);
 const char		*find_env_value(char *source, t_data *data);
 int				builtin_cd(char *path);
 

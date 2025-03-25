@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:25:30 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/25 15:29:54 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/25 15:59:17 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ static void	handle_infile(char *sent, int fd)
 	close(fd);
 }
 
-
 static void	handle_heredoc(int fd)
 {
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 }
 
-bool handle_redirection(char *sentence, enum e_token type, int fd)
+bool	handle_redirection(char *sentence, enum e_token type, int fd)
 {
 	if (type == APPEND)
 		handle_append(sentence, fd);

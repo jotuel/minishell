@@ -6,16 +6,15 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:54:24 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/14 12:18:15 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:06:44 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// Untested 24.2
-
-// static int	ft_isescapable(char c);
-
+/*
+** Returns the lenght of custom char line
+*/
 size_t	ft_tcharlen(t_char *line)
 {
 	size_t	length;
@@ -28,6 +27,10 @@ size_t	ft_tcharlen(t_char *line)
 	return (length);
 }
 
+/*
+** Converts a custom line to regular line
+** Extra space was reserved for escapes but seem redunant now
+*/
 char	*cnvrt_to_char(t_char *line)
 {
 	size_t	i;
