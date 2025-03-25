@@ -31,7 +31,7 @@ $()
 $(env)
 
 =======
-tarkista <<EO"F" should not expand I think?
+<<EO"F" should not expand 
 
 cat blaa | echo $HOME | <Makefile | echo duh <-this is valid
 
@@ -69,3 +69,17 @@ cat << "$USER" exit is "$USER"
 <<EOF | cat Makefile 
 >EOF
 minishell: ��: No such file or directory
+
+jrimpila:/home/jrimpila/Git/minishell😎>echo hello>out |grep "hello"<out
+outfile: outhello
+jrimpila:/home/jrimpila/Git/minishell😎>echo hello>out|grep "hello"<out
+outfile: outhello
+jrimpila:/home/jrimpila/Git/minishell😎>echo <out<out<out<out<out
+
+jrimpila:/home/jrimpila/Git/minishell😎>cat <out<out<out<out<out
+
+out is empty
+
+inbuilds are not redirected to outfiles
+
+heredocs are not working as infiles 

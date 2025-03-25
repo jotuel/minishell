@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:25:30 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/25 12:13:39 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/25 14:19:20 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	handle_append(char *sent, int fd)
 	fd = open(sent, O_WRONLY | O_CREAT, 0644);
 	if (-1 == fd)
 		ft_exit(get_data(), sent, strerror(errno), errno);
-	printf("append: %s", sent);
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 }
@@ -27,7 +26,6 @@ static void	handle_outfile(char *sent, int fd)
 	fd = open(sent, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (-1 == fd)
 		ft_exit(get_data(), sent, strerror(errno), errno);
-	printf("outfile: %s", sent);
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 }
@@ -37,16 +35,15 @@ static void	handle_infile(char *sent, int fd)
 	fd = open(sent, O_RDONLY);
 	if (-1 == fd)
 		ft_exit(get_data(), sent, strerror(errno), errno);
-	printf("infile: %s", sent);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 }
 
-//This should depend on if there is a quote in the heredoc delimiter
-static void	handle_heredoc(char *sent, int fd, int expand)
+
+static void	handle_heredoc(int fd)
 {
-	sent = create_heredoc(sent, expand, NULL, NULL);
-	write(fd, sent, ft_strlen(sent));
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 }
 
 bool handle_redirection(char *sentence, enum e_token type, int fd)
@@ -57,9 +54,7 @@ bool handle_redirection(char *sentence, enum e_token type, int fd)
 		handle_outfile(sentence, fd);
 	else if (type == IN_FILE)
 		handle_infile(sentence, fd);
-	else if (type == HERE_QUOTE)
-		handle_heredoc(sentence, fd, 0);
 	else
-		handle_heredoc(sentence, fd, 1);
+		handle_heredoc(fd);
 	return (true);
 }
