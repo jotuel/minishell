@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:11:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 16:00:31 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:11:53 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*rl_gets(void)
 	static char	*tmp;
 
 	cwd();
-	tmp = ft_strjoin(PROMPT, get_data()->cwd);
+	tmp = ft_strjoin(GREEN USER ":" RESET, get_data()->cwd);
 	strcwd = ft_strjoin(tmp, BRIGHT_YELLOW "😎>" RESET);
 	free(tmp);
 	tmp = NULL;

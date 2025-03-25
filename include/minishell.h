@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 17:34:38 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:16:45 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# ifndef PATH_MAX /// Max path lenght
+# ifndef PATH_MAX
 #  define PATH_MAX (5000)
 # endif
 # define ENV_SIZE 4096
@@ -49,8 +49,6 @@
 # ifndef USER
 #  define USER "minishell"
 # endif
-
-# define PROMPT GREEN USER ":" RESET
 
 # define RED "\x1b[31m"
 # define GREEN "\x1b[32m" // Used for variable expansion
@@ -85,7 +83,7 @@ typedef struct s_sent
 	bool		inpipe;
 	t_dir		redirs[20];
 	bool		outpipe;
-	int 		error;
+	int			error;
 	int			heredocs;
 	int			argc;
 }				t_sent;
