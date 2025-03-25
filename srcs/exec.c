@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:21:45 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/25 14:59:26 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/25 15:46:44 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ static void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2]);
  * all the forked subprocesses end up here, redirections are dealt with
  * and commands get executed.
  */
-static void	execute_child(t_sent *sent, int pfd[2], pid_t child, int i)
+static void	execute_child(t_sent *sent, int pfd[2], pid_t child)
 {
 	if (!child)
 	{
 		unset_signals();
-		deal_with_sentence(sent, -1, pfd, (bool[2]){0, 0});
+		deal_with_sentence(sent, 0, pfd, (bool[2]){0, 0});
 		if (!sent->array[0])
-			exit (0);
+			exit(0);
 		if (is_builtin(sent->array[0]))
-			exit(run_builtin(get_data()->page[i]->argc,
-					sent->array, get_data()->page[0]));
+			exit(run_builtin(sent->argc,
+					sent->array, sent));
 		if (-1 == execve(sent->array[0], sent->array, __environ))
 			ft_exit(get_data(), sent->array[0], strerror(errno), errno);
 	}
@@ -38,15 +38,27 @@ static void	execute_child(t_sent *sent, int pfd[2], pid_t child, int i)
 		ft_exit(get_data(), "fork", strerror(errno), errno);
 }
 
+static int wait_for_child(int ret, int state, pid_t last_child, int *i)
+{
+	while (*i)
+	{
+		if (last_child == waitpid(0, &state, 0))
+			ret = state;
+		(*i) -= 1;
+	}
+	deallocate(get_data());
+	if (WIFEXITED(ret))
+		return (WEXITSTATUS(ret));
+	return (EXIT_SUCCESS);
+}
+
 /*
 ** forks recursively as long as there are new commands
 */
-int	execute(t_sent *sentence, int pfd[2], pid_t my_child, int state)
+int	execute(t_sent *sentence, int pfd[2], pid_t my_child)
 {
 	static int	i;
-	int			ret;
 
-	ret = 0;
 	if (my_child > 0 && get_data()->page[i])
 	{
 		close(pfd[1]);
@@ -55,18 +67,12 @@ int	execute(t_sent *sentence, int pfd[2], pid_t my_child, int state)
 			get_data()->page[i]->error = pfd[STDIN_FILENO];
 			pipe(pfd);
 		}
-		return (execute(get_data()->page[i++], pfd, fork(), 0));
+		return (execute(get_data()->page[i++], pfd, fork()));
 	}
-	execute_child(sentence, pfd, my_child, i);
+	execute_child(sentence, pfd, my_child);
 	close(pfd[0]);
 	close(pfd[1]);
-	while (--i)
-		if (my_child == waitpid(0, &state, 0))
-			ret = state;
-	deallocate(get_data());
-	if (WIFEXITED(ret))
-		return (WEXITSTATUS(ret));
-	return (EXIT_SUCCESS);
+	return (wait_for_child(0, 0, my_child, &i));
 }
 
 /*
@@ -75,7 +81,7 @@ int	execute(t_sent *sentence, int pfd[2], pid_t my_child, int state)
 */
 void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2])
 {
-	while (sentence->redirs[++i].path)
+	while (sentence->redirs[i].path || sentence->redirs[i].here_fd)
 	{
 		if (sentence->redirs[i].type == APPEND)
 			w[1] = handle_redirection(sentence->redirs[i].path, APPEND, -1);
@@ -86,6 +92,7 @@ void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2])
 		else
 			w[0] = handle_redirection(sentence->redirs[i].path, HERE_DOCS, \
 			sentence->redirs[i].here_fd);
+		i += 1;
 	}
 	if (sentence->inpipe)
 	{

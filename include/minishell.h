@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/22 19:25:24 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:36:21 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,7 @@ void			expand_envvar(char *unexp, char *exp, int *i, int *k);
 ** EXECUTION
 */
 void			util_parse_args(t_data *data, int i);
-int				execute(t_sent *sentence, int pfd[2], pid_t my_child,
-					int state);
+int				execute(t_sent *sentence, int pfd[2], pid_t my_child);
 int				store_return_value(int ret_val, bool add);
 
 /*

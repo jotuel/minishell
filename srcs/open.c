@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:59:49 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 14:36:17 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:30:51 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	open_temp_heredocs(t_node *node, int expand, char *eof, char *txt)
 		return (-1);
 	close(fd);
 	fd = open(file_name, O_RDWR, 0640);
-	//system(ft_strjoin("cat ", file_name));
 	unlink(file_name);
 	free(file_name);
 	free(txt);
