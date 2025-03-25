@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:59:49 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 17:35:34 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 19:50:38 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*ft_itoa_rec(unsigned int nbr, char *buffer)
 	return (++buffer);
 }
 
-static char	*ft_itoa(unsigned int nbr)
+char	*ft_itoa(unsigned int nbr)
 {
 	static char	result[12];
 	char		*buffer;
