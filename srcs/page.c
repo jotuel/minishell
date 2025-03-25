@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/20 16:04:05 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/22 19:05:54 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ bool	is_file(t_token type)
 
 // i is 0, k is 0, sentence is calloced, node is pulled from data
 t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence);
+
 static t_node	*check_inpipe(t_sent *sentence, t_node *node)
 {
 	if (node && node->type == PIPE)
@@ -50,7 +51,8 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
 		{
 			if (node->next->type == REDIRECT || node->next->type == PIPE
 				|| get_data()->tokens.last == node)
-				ft_exit(get_data(), "syntax error near unexpected token", "nl", 1);
+				ft_exit(get_data(), "syntax error near \
+				unexpected token", "nl", 1);
 		}
 		else if (is_file(node->type))
 			add_redirection(node, sentence, k++);
@@ -61,7 +63,6 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
 	sentence->argc = i;
 	return (sentence);
 }
-
 
 void	destroy_old_page(void)
 {

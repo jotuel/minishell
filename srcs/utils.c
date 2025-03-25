@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:41:05 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/19 14:25:45 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/22 19:06:15 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	iterate_list(t_list *list, t_node_func func)
 		func(list, current);
 	}
 }
-
-
 
 // Destroys the current node and moves to the next node
 t_node	*destroy_node(t_list *list, t_node *node)

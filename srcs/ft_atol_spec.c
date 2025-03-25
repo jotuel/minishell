@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:42:12 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/20 15:51:48 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/22 19:25:01 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int	all_isspace(char *nptr);
 
-static void error_print_spec(const char *cmd, const char *message1, const char *message2)
+static void	error_print_spec(const char *cmd, const char *message1, \
+const char *message2)
 {
 	dup2(STDERR_FILENO, STDOUT_FILENO);
 	printf("minishell: %s: %s: %s\n", cmd, message1, message2);
@@ -42,15 +43,15 @@ int	overflow_check(long ret, int sign, int addition, const char *nptr)
 
 // Meant to handle the inbuilt exit the same way as bash. 
 // int sign should be passed as 1
-int	ft_atoi_spec(const char *nptr, int sign)
+int	ft_atoi_spec(const char *nptr, int sign, long ret)
 {
-	long	ret;
 	int		i;
 
 	ret = 0;
 	i = all_isspace((char *)nptr);
-	if (nptr[i++] == '-')
+	if (nptr[i] == '-')
 	{
+		i++;
 		sign = -1;
 	}
 	else if (nptr[i] == '+')

@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:26 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/20 16:48:08 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/22 19:04:28 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ export SPECIAL_VAR=1@#$%^&*()_!3+{}|:"<>?-=ta[]\;d,./`~
 export SPECIAL_VAR=1@#$%^&*()_cd ..+{}|:"<>?-=ta[]\;d,./`~
 bash: syntax error near unexpected token `_cd'
 
-jrimpila@c1r1p11:~/Hiveprojects/philo5.3$ export SPECIAL_VAR=1!@#$%^&*()_3+{}|:"<>?-=ta[]\;d,./`~
+jrimpila@c1r1p11:~/Hiveprojects/philo5.3$ export 
+SPECIAL_VAR=1!@#$%^&*()_3+{}|:"<>?-=ta[]\;d,./`~
 bash: !@#: event not found
 
 
@@ -34,10 +35,10 @@ int	match_env_argument(t_char *source, char *env_var)
 	if (env_var == NULL || env_var[0] == '\0')
 		return (0);
 	if ((ft_isalnum(source[1].c) == 0 && source[1].c != '_'))
-		{
-			source[0].esc = 1;
-			return (0);
-		}
+	{
+		source[0].esc = 1;
+		return (0);
+	}
 	i = 1;
 	while (env_var[i - 1] && source[i].c && source[i].c == env_var[i - 1]
 		&& source[i].var)

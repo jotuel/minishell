@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/20 11:59:58 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/22 19:00:27 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	expand_arguments(t_char *dst, t_char *src, t_data *data, int di)
 	si = 0;
 	while (src[si].c != 0)
 	{
-		if (src[si].c == '$' && src[si].esc == 0 && src[si].var && (ft_isalnum(src[si + 1].c) || src[si + 1].c == '_'))
+		if (src[si].c == '$' && src[si].esc == 0 && src[si].var && \
+		(ft_isalnum(src[si + 1].c) || src[si + 1].c == '_'))
 		{
 			temp = find_env(src + si, data);
 			di = copy_env_to_tchar(dst, di, temp);

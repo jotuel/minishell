@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:55:05 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/20 17:16:03 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/23 12:55:27 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*
  *frees all heap memory, prints message to stderr and exits with correct code
  */
-void    ft_exit(t_data *data, char *cmd, char *message, int exit_code)
+void	ft_exit(t_data *data, char *cmd, char *message, int exit_code)
 {
 	deallocate(data);
 	error_printf(cmd, message);
@@ -27,7 +27,7 @@ void    ft_exit(t_data *data, char *cmd, char *message, int exit_code)
 /*
 ** writes to stderr
 */
-void    error_printf(char *cmd, char *message)
+void	error_printf(char *cmd, char *message)
 {
 	dup2(STDERR_FILENO, STDOUT_FILENO);
 	printf("minishell: %s: %s\n", cmd, message);
@@ -54,10 +54,10 @@ void	deallocate(t_data *data)
 /*
  *   checks with what value and if to exit at all.
  */
-static int	check_exit_status(int exit_status, t_sent *sentence, char **argv,
-		int argc)
+static int	check_exit_status(int exit_status, t_sent *sentence, \
+	int argc, char *argv[])
 {
-	if (exit_status == 2 && ft_strncmp(argv[1], "2", 2) != 0)
+	if (exit_status == 2 && ft_strncmp(argv[1], "2", 2))
 	{
 		if (sentence->outpipe || sentence->inpipe)
 			return (2);
@@ -101,6 +101,6 @@ int	bi_exit(int argc, char *argv[], t_sent *sentence)
 			exit(0);
 		}
 	}
-	exit_status = ft_atoi_spec(argv[1], 0);
-	return (check_exit_status(exit_status, sentence, argv, argc));
+	exit_status = ft_atoi_spec(argv[1], 0, 0);
+	return (check_exit_status(exit_status, sentence, argc, argv));
 }

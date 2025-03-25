@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/20 16:05:26 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/22 19:25:24 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct s_sent
 	bool		inpipe;
 	t_dir		redirs[20];
 	bool		outpipe;
-	int error; // error code here
+	int 		error;
 	int			heredocs;
 	int			argc;
 }				t_sent;
@@ -154,8 +154,7 @@ void			ft_exit(t_data *data, char *cmd, char *message, int exit_code);
 void			error_printf(char *cmd, char *message);
 void			test(void);
 void			deallocate(t_data *data);
-int				ft_atoi_spec(const char *nptr, int sign);
-
+int				ft_atoi_spec(const char *nptr, int sign, long ret);
 
 /*
 ** UTILITIES
@@ -196,7 +195,8 @@ t_sent			*conv_linked_to_sentence(int i, int k, t_node *node,
 					t_sent *sentence);
 int				check_emp_arg(char *src, int i, t_char *dst, int *k);
 void			remove_quotes(t_char *dst, char *src, int i, int k);
-int				open_temp_heredocs(t_node *node, int expand, char *eof, char *txt);
+int				open_temp_heredocs(t_node *node, int expand, char *eof, \
+				char *txt);
 void			mark_commands(t_char *com_line, int i);
 
 /*

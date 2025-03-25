@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:39:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/19 15:18:49 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/22 19:07:00 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static int	is_valid_cd(const char *dir)
 	{
 		if (!S_ISREG(file_stat.st_mode) && !S_ISDIR(file_stat.st_mode) \
 		&& !S_ISLNK(file_stat.st_mode))
-		error_printf("cd", "no such file or directory");
+			error_printf("cd", "no such file or directory");
 		else if (!S_ISDIR(file_stat.st_mode) && !S_ISLNK(file_stat.st_mode))
-		error_printf("cd", "not a directory");
+			error_printf("cd", "not a directory");
 		else if (access(dir, X_OK))
-		error_printf("cd", "permission denied");
+			error_printf("cd", "permission denied");
 		else
 			error_printf("cd", "unknown stat error");
 		return (0);

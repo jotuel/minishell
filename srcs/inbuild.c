@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:05:36 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/20 16:48:07 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/22 19:05:14 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,3 @@ int	bi_pwd(void)
 		error_printf("system", "getcwd() error");
 	return (0);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtuomi <jtuomi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:29:40 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/20 15:40:15 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/22 19:03:15 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ bool	path_is_abs_or_rel(t_data *data, int nbr)
 ** then checks with access if file exists and tries to see
 ** whether that file is also executable (has those rights).
 */
+
 bool	command_in_path(t_data *data, int nbr, char *cmd_p, int i)
 {
 	char	*tmp;
@@ -98,7 +99,7 @@ void	util_parse_args(t_data *data, int i)
 	{
 		tmp = is_path_in_env(data, "PATH=", NULL, 0);
 		if (tmp)
-		  data->path = ft_split(&tmp[5], ':');
+			data->path = ft_split(&tmp[5], ':');
 	}
 	while (data->page[i] && data->page[i]->array[0])
 	{

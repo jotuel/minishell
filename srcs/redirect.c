@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:25:30 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/18 20:42:59 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/23 12:23:57 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ static void	handle_infile(char *sent, int fd)
 	close(fd);
 }
 
-static void	handle_heredoc(char *sent, int fd)
+//This should depend on if there is a quote in the heredoc delimiter
+static void	handle_heredoc(char *sent, int fd, int expand)
 {
-	sent = create_heredoc(sent, 0, NULL, NULL);
+	sent = create_heredoc(sent, expand, NULL, NULL);
 	write(fd, sent, ft_strlen(sent));
 }
 
@@ -56,6 +57,8 @@ void	handle_redirection(char *sentence, enum e_token type, int fd)
 		handle_outfile(sentence, fd);
 	else if (type == IN_FILE)
 		handle_infile(sentence, fd);
+	else if (type == HERE_QUOTE)
+		handle_heredoc(sentence, fd, 0);
 	else
-		handle_heredoc(sentence, fd);
+		handle_heredoc(sentence, fd, 1);
 }
