@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:21:45 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/25 13:51:16 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/25 14:21:50 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2])
 			w[1] = handle_redirection(sentence->redirs[i].path, OUT_FILE, -1);
 		else if (sentence->redirs[i].type == IN_FILE)
 			w[0] = handle_redirection(sentence->redirs[i].path, IN_FILE, -1);
-		else if (sentence->redirs[i].type == HERE_DOCS)
-			handle_redirection(sentence->redirs[i].path, HERE_DOCS, pfd[0]);
+		else
+			w[0] = handle_redirection(sentence->redirs[i].path, HERE_DOCS, \
+			sentence->redirs[i].here_fd);
 	}
 	if (sentence->inpipe)
 	{

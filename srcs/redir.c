@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:39:47 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 13:54:40 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:10:16 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static int	check_here_expansion(t_char *str)
 	{
 		if (str[i].esc || str[i].blok)
 			return (1);
-
-			i++;
+		i++;
 	}
 	return (0);
 }
