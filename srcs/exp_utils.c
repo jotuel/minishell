@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:55:23 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 14:40:23 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:38:07 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ int	match_env_argument_char(char *source, char *env_var)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	if (env_var == NULL || env_var[0] == '\0')
 		return (0);
 	if ((ft_isalnum(source[1]) == 0 && source[1] != '_'))
 		return (0);
-	i = 1;
 	while (ft_isalnum(source[i]) || source[i] == '_')
 	{
 		if (source[i] == env_var[i - 1])
@@ -79,7 +78,7 @@ void	expand_envvar(char *unexp, char *exp, int *i, int *k)
 	j = 0;
 	while (ptr_envvar && ptr_envvar[j] && ptr_envvar[j] != '=')
 		j++;
-	if (ptr_envvar[j] == '=')
+	if (ptr_envvar && ptr_envvar[j] == '=')
 		j++;
 	while (ptr_envvar && ptr_envvar[j])
 	{
