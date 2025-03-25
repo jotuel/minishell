@@ -6,13 +6,13 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:21:45 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/20 16:33:35 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:00:42 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void		handle_redirection(char *sentence, enum e_token type, int fd);
+bool		handle_redirection(char *sentence, enum e_token type, int fd);
 static void	deal_with_sentence(t_sent *sentence, int i, int pfd[2]);
 
 /*
@@ -38,7 +38,7 @@ static void execute_child(t_sent *sent, int pfd[2], pid_t child, int i)
 }
 
 /*
-** this is forks recursively as long as there are new commands
+** forks recursively as long as there are new commands
 */
 int	execute(t_sent *sentence, int pfd[2], pid_t my_child, int state)
 {
@@ -50,12 +50,9 @@ int	execute(t_sent *sentence, int pfd[2], pid_t my_child, int state)
 	execute_child(sentence, pfd, my_child, i);
 	close(pfd[0]);
 	close(pfd[1]);
-	while (i)
-	{
+	while (--i)
 		if (my_child == waitpid(0, &state, 0))
 			ret = state;
-		i--;
-	}
 	deallocate(get_data());
 	if (WIFEXITED(ret))
 		return (WEXITSTATUS(ret));
