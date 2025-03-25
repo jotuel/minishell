@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 18:16:45 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 19:27:07 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int				bi_exit(int argc, char *argv[], t_sent *sentence);
 const char		*ft_get_env(const char *target);
 int				add_envvar(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *envvar,
 					char *value);
-//const char		*find_env_char(char *source, t_data *data);
+// const char		*find_env_char(char *source, t_data *data);
 const char		*find_env_value(char *source, t_data *data);
 int				builtin_cd(char *path);
 
@@ -136,6 +136,7 @@ int				unset_one(char *env_val);
 ** ENVVAR UTILS
 */
 void			expand_envvar(char *unexp, char *exp, int *i, int *k);
+void			update_env(int value, char *name);
 
 /*
 ** EXECUTION
@@ -192,8 +193,8 @@ t_sent			*conv_linked_to_sentence(int i, int k, t_node *node,
 					t_sent *sentence);
 int				check_emp_arg(char *src, int i, t_char *dst, int *k);
 void			remove_quotes(t_char *dst, char *src, int i, int k);
-int				open_temp_heredocs(t_node *node, int expand, char *eof, \
-				char *txt);
+int				open_temp_heredocs(t_node *node, int expand, char *eof,
+					char *txt);
 void			mark_commands(t_char *com_line, int i);
 
 /*
