@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:40 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/19 17:35:26 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/25 17:33:40 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ int	errorcheck_expand(char *var)
 	i = 0;
 	if (!var || (var[i] != '_' && ft_isalpha(var[i]) == 0))
 	{
-		error_printf("export", "Env max exceeded");
-		return (-1);
+		printf("minishell: export: `%s': not a valid identifier\n", var);
+		return (1);
 	}
 	while (ft_isalnum(var[i]) || var[i] == '_')
 		i++;
 	if (var[i] != 0 && var[i] != '=')
 	{
-		error_printf("export", "Env max exceeded");
-		return (-1);
+		printf("minishell: export: `%s': not a valid identifier\n", var);
+		return (1);
 	}
 	return (0);
 }
@@ -123,12 +123,11 @@ int	bi_export(int argc, char *argv[], t_sent *sent)
 	retval = 0;
 	if (argc == 1)
 		return (print_alphabetically(get_data()->env));
-	if (sent->outpipe || sent->inpipe)
-		return (0);
 	i = 1;
 	while (i < argc)
 	{
-		if (argv[i] && !errorcheck_expand(argv[i]))
+		retval = errorcheck_expand(argv[i]);
+		if (argv[i] && retval == 0)
 		{
 			if (sent->inpipe == 0 && sent->outpipe == 0)
 				process_new_envvarr(get_data()->env, argv[i]);

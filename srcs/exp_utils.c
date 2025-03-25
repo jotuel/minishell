@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:55:23 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 14:40:23 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:17:01 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //Todennakoisesti tahan kohtaan $?
 
-int	match_env_argument_char(char *source, char *env_var)
+static int	match_env_argument_char(char *source, char *env_var)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ int	match_env_argument_char(char *source, char *env_var)
 	return (0);
 }
 
-const char	*find_env_char(char *source, t_data *data)
+static const char	*find_env_char(char *source, t_data *data)
 {
 	int	i;
 
@@ -69,6 +69,9 @@ const char	*find_env_value(char *source, t_data *data)
 	}
 	return (ptr + i);
 }
+/*
+**This is the main expansion function
+*/
 
 void	expand_envvar(char *unexp, char *exp, int *i, int *k)
 {

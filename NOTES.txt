@@ -6,16 +6,10 @@ it gets updated even inside children. in pipe the last pipe updates it.
 
 _ ei ole subjektissa tai arviointilomakkeessa
 
-<<""EOF apparenty tells the heredocs not to expand env variables inside heredocs
+
 
 Jos HOME on unset bash antaa sen errorina, mutta jos HOME= niin bash ei anna erroria ja exit status on 0
 
-rimpila@c3r1p7:~$ export _old=$_
-jrimpila@c3r1p7:~$ env | grep old
-_old=export
-jrimpila@c3r1p7:~$ export _old=$_
-jrimpila@c3r1p7:~$ env | grep old
-_old=_old=export
 
 $_ paivittyy todella oudosti, cd "" antaa sen arvoksi "" kun taas echo blaablaa laittaa arvoksi echo
 
@@ -50,36 +44,14 @@ cat $HOME/input.txt cat $HOME/input.txt >> outfile.txt | echo $USER grep $invali
 
 vetaa jumiin.
 
-ls >>test2 | echo blaa <<TEST test2 ei sisalla ls outputtia
+jos exportilla on monta argumenttia niin error yhdessa ei lopeta
 
 suunnitelma, otetaan _ getenvilla
 
-add support for /minishell command.
 
-bi_exit is buggy
 
-jrimpila:/home/jrimpila/Git/minishell😎><<EOF
-ctrl d ei toimi
 
-Makefile | grep blaa
-minishell: �: No such file or directory
 
-cat << "$USER" exit is "$USER"
 
-<<EOF | cat Makefile 
->EOF
-minishell: ��: No such file or directory
 
-jrimpila:/home/jrimpila/Git/minishell😎>echo hello>out |grep "hello"<out
-outfile: outhello
-jrimpila:/home/jrimpila/Git/minishell😎>echo hello>out|grep "hello"<out
-outfile: outhello
-jrimpila:/home/jrimpila/Git/minishell😎>echo <out<out<out<out<out
 
-jrimpila:/home/jrimpila/Git/minishell😎>cat <out<out<out<out<out
-
-out is empty
-
-inbuilds are not redirected to outfiles
-
-heredocs are not working as infiles 
