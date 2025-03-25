@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:37:53 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/18 12:41:11 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:57:28 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	bi_echo(int argc, char *argv[])
 	{
 		printf("%s", argv[i]);
 		i++;
+		if (i < argc)
+			printf(" ");
 	}
 	if (!opt)
 		printf("\n");
