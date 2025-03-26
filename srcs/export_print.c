@@ -6,14 +6,14 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:29:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/18 15:57:01 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:48:49 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 static void	sort_cpy(char **cpy);
-static void	final_print(char **env);
+static void	final_print(char **env, int i);
 
 // Creates an array of pointers that are later sorted and printed
 int	print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1])
@@ -35,7 +35,7 @@ int	print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1])
 	}
 	cpy[i] = NULL;
 	sort_cpy(cpy);
-	final_print(cpy);
+	final_print(cpy, 0);
 	return (0);
 }
 
@@ -63,16 +63,33 @@ static void	sort_cpy(char **cpy)
 	}
 }
 
-// Prints the variables in the format desired by export;
-static void	final_print(char **env)
+// Prints the variables in the format desired by export
+//int i gets passed as zero to appease norminette
+static void	final_print(char **env, int i)
 {
-	int	i;
+	int	k;
 
-	i = 0;
 	while (i < ENV_SIZE && env[i])
 	{
+		k = 0;
 		if (ft_strchr(env[i], '=') && (ft_strncmp(env[i], "_=", 2) != 0))
-			printf("declare -x \"%s\"\n", env[i]);
+			{
+				printf("declare -x ");
+				while (env[i][k] && env[i][k] != '=')
+				{
+					printf("%c", env[i][k]);
+					k++;
+				}
+				k++;
+				printf("=\"");
+				while (env[i][k])
+				{
+					printf("%c", env[i][k]);
+					k++;
+				}
+				printf("\"\n");
+			}
+			
 		i++;
 	}
 }
