@@ -6,12 +6,11 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:21:45 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/25 16:00:01 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:01:11 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <unistd.h>
 
 bool		handle_redirection(char *sentence, enum e_token type, int fd);
 static void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2]);
@@ -61,17 +60,19 @@ int	execute(t_sent *sentence, int pfd[2], pid_t my_child)
 
 	if (my_child > 0 && get_data()->page[i])
 	{
-		close(pfd[1]);
+		close(pfd[STDOUT_FILENO]);
 		if (sentence->outpipe)
 		{
 			get_data()->page[i]->error = pfd[STDIN_FILENO];
 			pipe(pfd);
 		}
+		if (sentence->inpipe)
+			close(get_data()->page[i - 1]->error);
 		return (execute(get_data()->page[i++], pfd, fork()));
 	}
 	execute_child(sentence, pfd, my_child);
-	close(pfd[0]);
-	close(pfd[1]);
+	close(pfd[STDIN_FILENO]);
+	close(pfd[STDOUT_FILENO]);
 	return (wait_for_child(0, 0, my_child, &i));
 }
 
@@ -102,8 +103,8 @@ void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2])
 	}
 	if (sentence->outpipe && !w[1])
 		dup2(pfd[STDOUT_FILENO], STDOUT_FILENO);
-	close(pfd[STDOUT_FILENO]);
 	close(pfd[STDIN_FILENO]);
+	close(pfd[STDOUT_FILENO]);
 }
 
 /*

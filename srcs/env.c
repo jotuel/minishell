@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:26 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/22 19:04:28 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:36:44 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	match_env_argument(t_char *source, char *env_var)
 	i = 0;
 	if (env_var == NULL || env_var[0] == '\0')
 		return (0);
-	if ((ft_isalnum(source[1].c) == 0 && source[1].c != '_'))
+	if ((ft_isalnum(source[1].c) == 0 && source[1].c != '_' && source[1].c != '?'))
 	{
 		source[0].esc = 1;
 		return (0);
@@ -90,4 +90,14 @@ void	bi_env(t_data *data)
 			printf("%s\n", str);
 		i++;
 	}
+}
+
+/*
+** keeps env variables up to date between commands
+ */
+void update_env(int value, char *cmd, bool update)
+{
+	add_envvar(get_data()->env, "?", ft_itoa(value));
+	if (update)
+		add_envvar(get_data()->env, "_", cmd);
 }
