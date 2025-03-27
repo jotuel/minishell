@@ -1,55 +1,18 @@
 
-SHLVL inkrementointi kun minishell ajetaan minishellin kautta.
-
-_ is the last argument of executed command, this could be likely tested with inbuilds. Even if inbuids are not exactly executed the _ gets still updated
-it gets updated even inside children. in pipe the last pipe updates it.
-
-_ ei ole subjektissa tai arviointilomakkeessa
-
-
-
-Jos HOME on unset bash antaa sen errorina, mutta jos HOME= niin bash ei anna erroria ja exit status on 0
-
-
-$_ paivittyy todella oudosti, cd "" antaa sen arvoksi "" kun taas echo blaablaa laittaa arvoksi echo
-
-env is an external command in bash located in _=/usr/bin/env
-
-? ei palauta edellisen palauttamaa arvoa
-
-export blaa"'"blaa=duu
-bash: export: `blaa'blaa=duu': not a valid identifier
-
-
-$()
-$(env)
-
-=======
 <<EO"F" should not expand 
-
-cat blaa | echo $HOME | <Makefile | echo duh <-this is valid
-
-cat blaa | echo $HOME
-
-<<EOF grep jrimpila seems to explode
-heredocs expansion seems to have trouble
-
-rimpila:/home/jrimpila/Git/minishell😎><Makefile >test
-jrimpila:/home/jrimpila/Git/minishell😎>cat test
-infile: Makefileoutfile: test
-
-<<BLAA >test ls ei luo outfilea
-
-cat $HOME/input.txt cat $HOME/input.txt >> outfile.txt | echo $USER grep $invalid search_pattern <<EOF < $HOME/input.txt <<EOF > $HOME/error.log | sort | uniq | echo > test.txt Found line: $line | echo Current user: $USER | echo Non-existent variable: $NONEXISTENTVA
-
-vetaa jumiin.
 
 jos exportilla on monta argumenttia niin error yhdessa ei lopeta
 
-suunnitelma, otetaan _ getenvilla
+Poistin kun viimeaikaisien muutoksien tarkoitus oli korjata melkein kaikki.
+Yhden merkin kokoisien env variablien expandaaminen on kaiketi ainoa vika.
 
-
-
+===========
+export A=A
+echo $A => ""
+===========
+echo $? => "?"
+===========
+echo $_ => ""
 
 
 
