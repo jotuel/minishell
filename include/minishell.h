@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/26 18:30:55 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/27 14:08:40 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,10 @@ void			update_env(int value, char *name, bool update);
 ** EXECUTION
 */
 void			util_parse_args(t_data *data, int i);
-int				execute(t_sent *sentence, int pfd[2], pid_t my_child);
+int				execute(t_sent *sentence, int pfd[2], pid_t my_child,
+					t_data *data);
 int				store_return_value(int ret_val, bool add);
+void			pipe_closer(int *fd);
 
 /*
 ** EXIT & ERROR PRINTING

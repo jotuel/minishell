@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:55:23 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 18:56:36 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/27 14:53:49 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	match_env_argument_char(char *source, char *env_var)
 		return (0);
 	if ((ft_isalnum(source[i]) == 0 && source[i] != '_' && source[i] != '?'))
 		return (0);
-	while (ft_isalnum(source[i]) || source[i] == '_')
+	while (ft_isalnum(source[i]) || source[i] == '_' || source[i] == '?')
 	{
 		if (source[i] == env_var[i - 1])
 			i++;
@@ -31,7 +31,7 @@ static int	match_env_argument_char(char *source, char *env_var)
 			break ;
 	}
 	if ((env_var[i - 1] == 0 || env_var[i - 1] == '=')
-		&& !ft_isalnum(source[i]) && source[i] != '_')
+		&& !ft_isalnum(source[i]) && source[i] != '_' && source[i] != '?')
 		return (1);
 	return (0);
 }

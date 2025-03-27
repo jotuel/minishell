@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:41:05 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/22 19:06:15 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:07:50 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,13 @@ t_node	*destroy_node(t_list *list, t_node *node)
 	free(node);
 	node = NULL;
 	return (cur);
+}
+
+void pipe_closer(int *fd)
+{
+	if (*fd > 2)
+	{
+		close(*fd);
+		*fd = -1;
+	}
 }
