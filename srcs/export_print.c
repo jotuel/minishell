@@ -64,7 +64,7 @@ static void	sort_cpy(char **cpy)
 }
 
 // Prints the variables in the format desired by export
-//int i gets passed as zero to appease norminette
+// int i gets passed as zero to appease norminette
 static void	final_print(char **env, int i)
 {
 	int	k;
@@ -73,23 +73,22 @@ static void	final_print(char **env, int i)
 	{
 		k = 0;
 		if (ft_strchr(env[i], '=') && (ft_strncmp(env[i], "_=", 2) != 0))
+		{
+			printf("declare -x ");
+			while (env[i][k] && env[i][k] != '=')
 			{
-				printf("declare -x ");
-				while (env[i][k] && env[i][k] != '=')
-				{
-					printf("%c", env[i][k]);
-					k++;
-				}
+				printf("%c", env[i][k]);
 				k++;
-				printf("=\"");
-				while (env[i][k])
-				{
-					printf("%c", env[i][k]);
-					k++;
-				}
-				printf("\"\n");
 			}
-			
+			k++;
+			printf("=\"");
+			while (env[i][k])
+			{
+				printf("%c", env[i][k]);
+				k++;
+			}
+			printf("\"\n");
+		}
 		i++;
 	}
 }

@@ -137,6 +137,7 @@ int				unset_one(char *env_val);
 */
 void			expand_envvar(char *unexp, char *exp, int *i, int *k);
 void			update_env(int value, char *name, bool update);
+int				question_or_underscore(char c);
 
 /*
 ** EXECUTION

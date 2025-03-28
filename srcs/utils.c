@@ -53,11 +53,16 @@ t_node	*destroy_node(t_list *list, t_node *node)
 	return (cur);
 }
 
-void pipe_closer(int *fd)
+void	pipe_closer(int *fd)
 {
 	if (*fd > 2)
 	{
 		close(*fd);
 		*fd = -1;
 	}
+}
+
+int	question_or_underscore(char const c)
+{
+	return (c == '?' || c == '_');
 }

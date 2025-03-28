@@ -94,7 +94,7 @@ bool	command_in_path(t_data *data, int nbr, char *cmd_p, int i)
 void	util_parse_args(t_data *data, int i)
 {
 	char	*tmp;
-	int i1;
+	int		i1;
 
 	i1 = 0;
 	if (data->env[0][0])
@@ -114,6 +114,6 @@ void	util_parse_args(t_data *data, int i)
 	while (data->page[i - 1] && data->page[i - 1]->array[i1])
 		i1++;
 	if (data->page[i - 1] && data->page[i - 1])
-		update_env(store_return_value(0, false),	\
-			   data->page[i - 1]->array[i1 - 1], true);
+		update_env(store_return_value(0, false), data->page[i - 1]->array[i1
+			- 1], true);
 }
