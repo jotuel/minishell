@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:26 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/26 18:36:44 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/27 15:37:56 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ export SPECIAL_VAR=1@#$%^&*()_!3+{}|:"<>?-=ta[]\;d,./`~
 export SPECIAL_VAR=1@#$%^&*()_cd ..+{}|:"<>?-=ta[]\;d,./`~
 bash: syntax error near unexpected token `_cd'
 
-jrimpila@c1r1p11:~/Hiveprojects/philo5.3$ export 
+jrimpila@c1r1p11:~/Hiveprojects/philo5.3$ export
 SPECIAL_VAR=1!@#$%^&*()_3+{}|:"<>?-=ta[]\;d,./`~
 bash: !@#: event not found
 
@@ -34,7 +34,8 @@ int	match_env_argument(t_char *source, char *env_var)
 	i = 0;
 	if (env_var == NULL || env_var[0] == '\0')
 		return (0);
-	if ((ft_isalnum(source[1].c) == 0 && source[1].c != '_' && source[1].c != '?'))
+	if ((ft_isalnum(source[1].c) == 0 && source[1].c != '_'
+			&& source[1].c != '?'))
 	{
 		source[0].esc = 1;
 		return (0);
@@ -94,8 +95,8 @@ void	bi_env(t_data *data)
 
 /*
 ** keeps env variables up to date between commands
- */
-void update_env(int value, char *cmd, bool update)
+*/
+void	update_env(int value, char *cmd, bool update)
 {
 	add_envvar(get_data()->env, "?", ft_itoa(value));
 	if (update)
