@@ -76,8 +76,8 @@ const char	*token_to_color(t_token token)
 
 void	print_node(t_list *list, t_node *node)
 {
-		int			i;
-		const char	*color;
+	//	int			i;
+	//	const char	*color;
 
 	(void)node;
 	(void)list; /*
@@ -118,7 +118,7 @@ void	print_node(t_list *list, t_node *node)
 
 void	debug_print(t_char *array, t_data *data)
 {
-		int	i;
+	//	int	i;
 
 	(void)array;
 	(void)data; /*
@@ -149,7 +149,7 @@ void	debug_print(t_char *array, t_data *data)
 
 void	print_sentence(t_sent *sentence)
 {
-		int	i;
+	//	int	i;
 
 	(void)sentence; /*
 		i = 0;

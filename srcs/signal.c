@@ -21,6 +21,14 @@ void	signal_handler(int sig_nbr)
 	(void)sig_nbr;
 }
 
+void signal_handler_execution(int sig_nbr)
+{
+    if (sig_nbr == SIGINT)
+        printf("\n");
+    else if (sig_nbr == SIGQUIT)
+        printf("Quit (core dumped)\n");
+}
+
 void	set_signals(void)
 {
 	signal(SIGINT, &signal_handler);
@@ -35,6 +43,6 @@ void	unset_signals(void)
 
 void	block_signals_in_parent(void)
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, &signal_handler_execution);
+	signal(SIGINT, &signal_handler_execution);
 }
