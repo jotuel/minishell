@@ -41,7 +41,7 @@ int	handle_d_quotes(char *src, t_char *dst, int *k, int *exp)
 			*exp = 1;
 		else if (*exp == 1)
 		{
-			if (ft_isalnum(*src) == 0 && *src != '_')
+			if (ft_isalnum(*src) == 0 && *src != '_' && *src != '?')
 			{
 				*exp = 0;
 				dst[*k + 1].blok = 1;

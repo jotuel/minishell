@@ -12,55 +12,51 @@
 
 #include "../include/minishell.h"
 
-void	mark_commands(t_char *cli, int i)
+void	mark_commands(t_char *cl, int i)
 {
-	if (i == 0 || cli[i].esc || cli[i - 1].esc || cli[i + 1].c == 0 || \
-	cli[i + 1].esc)
+	if (!i || cl[i].esc || cl[i - 1].esc || cl[i + 1].c == 0 || cl[i + 1].esc)
 		;
-	else if (cli[i - 1].c == cli[i].c && !cli[i - 2].esc && cli[i - 2].c == \
-	' ' && cli[i + 1].c == ' ' && (cli[i].c == '<' || cli[i].c == '>'))
+	else if (cl[i - 1].c == cl[i].c && !cl[i - 2].esc && cl[i - 2].c == ' '
+		&& cl[i + 1].c == ' ' && (cl[i].c == '<' || cl[i].c == '>'))
 	{
-		cli[i].com = 1;
-		cli[i - 1].com = 1;
+		cl[i].com = 1;
+		cl[i - 1].com = 1;
 	}
-	else if (cli[i - 1].c == ' ' && cli[i].c == '>' && cli[i \
-	+ 1].c == '>' && !cli[i + 2].esc && cli[i + 2].c == ' ')
+	else if (cl[i - 1].c == ' ' && cl[i].c == '>' && cl[i + 1].c == '>'
+		&& !cl[i + 2].esc && cl[i + 2].c == ' ')
 	{
-		cli[i].com = 1;
-		cli[i + 1].com = 1;
+		cl[i].com = 1;
+		cl[i + 1].com = 1;
 	}
-	else if (cli[i].c == '<' && cli[i + 1].c == '<' && cli[i + 2].c != 0 && \
-	cli[i + 2].esc == 0 && cli[i + 2].c == ' ')
+	else if (cl[i].c == '<' && cl[i + 1].c == '<' && cl[i + 2].c != 0
+		&& cl[i + 2].esc == 0 && cl[i + 2].c == ' ')
 	{
-		cli[i].com = 1;
-		cli[i + 1].com = 1;
-	}	
-	else if (cli[i - 1].c != ' ' || cli[i + 1].c != ' ')
+		cl[i].com = 1;
+		cl[i + 1].com = 1;
+	}
+	else if (cl[i - 1].c != ' ' || cl[i + 1].c != ' ')
 		;
-	else if (cli[i].c == '|' || cli[i].c == '<' || cli[i].c == '>')
-		cli[i].com = 1;
+	else if (cl[i].c == '|' || cl[i].c == '<' || cl[i].c == '>')
+		cl[i].com = 1;
 }
 
-void	mark_env_var(t_char *newline, int start)
+void	mark_env_var(t_char *nl, int end)
 {
-	int	end;
-
-	end = start;
-	newline[end].var = 1;
+	nl[end].var = 1;
 	end++;
-	if (newline[end].c == 0 || newline[end].esc || (!ft_isalpha(newline[end].c)
-			&& newline[end].c != '_'))
+	if (nl[end].c == 0 || nl[end].esc || (!ft_isalpha(nl[end].c)
+			&& nl[end].c != '_' && nl[end].c != '?'))
 		return ;
 	else
 	{
-		newline[end].var = 1;
+		nl[end].var = 1;
 		end++;
 	}
-	while (newline[end].ghost || (newline[end].c != 0 && !newline[end].esc
-			&& (ft_isalnum(newline[end].c) || newline[end].c == '_')))
+	while (nl[end].ghost || (nl[end].c != 0 && !nl[end].esc
+			&& (ft_isalnum(nl[end].c) || question_or_underscore(nl[end].c))))
 	{
-		if (newline[end + 1].blok != 1)
-			newline[end].var = 1;
+		if (nl[end + 1].blok != 1)
+			nl[end].var = 1;
 		else
 			return ;
 		end++;
@@ -82,32 +78,32 @@ void	mark_arguments(t_char *newline)
 	}
 }
 
-//di is passed as a 0 to reduce lines
-void	expand_arguments(t_char *dst, t_char *src, t_data *data, int di)
+// di is passed as a 0 to reduce lines
+void	expand_arguments(t_char *dst, t_char *c, t_data *data, int di)
 {
-	int			si;
+	int			i;
 	const char	*temp;
 
-	si = 0;
-	while (src[si].c != 0)
+	i = 0;
+	while (c[i].c != 0)
 	{
-		if (src[si].c == '$' && src[si].esc == 0 && src[si].var && \
-		(ft_isalnum(src[si + 1].c) || src[si + 1].c == '_'))
+		if (c[i].c == '$' && c[i].esc == 0 && c[i].var
+			&& (ft_isalnum(c[i + 1].c) || question_or_underscore(c[i + 1].c)))
 		{
-			temp = find_env(src + si, data);
+			temp = find_env(c + i, data);
 			di = copy_env_to_tchar(dst, di, temp);
 		}
-		if (src[si].var == 0)
+		if (c[i].var == 0)
 		{
-			dst[di].ghost = src[si].ghost;
-			dst[di].c = src[si].c;
-			dst[di].esc = src[si].esc;
-			dst[di].var = src[si].var;
-			dst[di].com = src[si].com;
-			dst[di].added = src[si].added;
+			dst[di].ghost = c[i].ghost;
+			dst[di].c = c[i].c;
+			dst[di].esc = c[i].esc;
+			dst[di].var = c[i].var;
+			dst[di].com = c[i].com;
+			dst[di].added = c[i].added;
 			di++;
 		}
-		si++;
+		i++;
 	}
 	dst[di].c = 0;
 }

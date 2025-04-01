@@ -6,21 +6,20 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:05:36 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/22 19:05:14 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:31:15 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 //Cant handle redirection support currently
-int	run_builtin(int argc, char *argv[], t_sent *sent)
+int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 {
+	update_env(store_return_value(0, false), argv[0], update);
 	if (argc == 0)
 		return (1);
 	if (ft_strncmp("cd", argv[0], 3) == 0)
-	{
 		bi_cd(argc, argv, sent);
-	}
 	else if (ft_strncmp("pwd", argv[0], 4) == 0)
 		bi_pwd();
 	else if (ft_strncmp("echo", argv[0], 5) == 0)

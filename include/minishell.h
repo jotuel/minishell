@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 19:50:58 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:08:40 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef struct s_point
 ** BUILT' INS
 */
 int				cwd(void);
-int				run_builtin(int argc, char *argv[], t_sent *sent);
+int				run_builtin(int argc, char *argv[], t_sent *sent, bool update);
 int				is_builtin(char *cmd);
 int				bi_pwd(void);
 int				bi_cd(int argc, char *argv[], t_sent *sent);
@@ -136,14 +136,17 @@ int				unset_one(char *env_val);
 ** ENVVAR UTILS
 */
 void			expand_envvar(char *unexp, char *exp, int *i, int *k);
-void			update_env(int value, char *name);
+void			update_env(int value, char *name, bool update);
+int				question_or_underscore(char c);
 
 /*
 ** EXECUTION
 */
 void			util_parse_args(t_data *data, int i);
-int				execute(t_sent *sentence, int pfd[2], pid_t my_child);
+int				execute(t_sent *sentence, int pfd[2], pid_t my_child,
+					t_data *data);
 int				store_return_value(int ret_val, bool add);
+void			pipe_closer(int *fd);
 
 /*
 ** EXIT & ERROR PRINTING

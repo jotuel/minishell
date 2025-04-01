@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:21:45 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/25 16:00:01 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:11:55 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	execute_child(t_sent *sent, int pfd[2], pid_t child)
 			exit(0);
 		if (is_builtin(sent->array[0]))
 			exit(run_builtin(sent->argc,
-					sent->array, sent));
+					sent->array, sent, false));
 		if (-1 == execve(sent->array[0], sent->array, __environ))
 			ft_exit(get_data(), sent->array[0], strerror(errno), errno);
 	}
@@ -55,23 +55,27 @@ static int	wait_for_child(int ret, int state, pid_t last_child, int *i)
 /*
 ** forks recursively as long as there are new commands
 */
-int	execute(t_sent *sentence, int pfd[2], pid_t my_child)
+int	execute(t_sent *sentence, int pfd[2], pid_t my_child, t_data *data)
 {
 	static int	i;
 
-	if (my_child > 0 && get_data()->page[i])
+	if (my_child > 0 && data->page[i])
 	{
-		close(pfd[1]);
+		pipe_closer(&pfd[STDOUT_FILENO]);
 		if (sentence->outpipe)
 		{
-			get_data()->page[i]->error = pfd[STDIN_FILENO];
+			if (data->page[i - 1] && data->page[i - 1]->error > 2)
+				pipe_closer(&data->page[i - 1]->error);
+			data->page[i]->error = pfd[STDIN_FILENO];
 			pipe(pfd);
 		}
-		return (execute(get_data()->page[i++], pfd, fork()));
+		return (execute(data->page[i++], pfd, fork(), data));
 	}
 	execute_child(sentence, pfd, my_child);
-	close(pfd[0]);
-	close(pfd[1]);
+	pipe_closer(&pfd[STDIN_FILENO]);
+	pipe_closer(&pfd[STDOUT_FILENO]);
+	if (data->page[i - 1] && data->page[i - 1]->error > 2)
+		pipe_closer(&data->page[i - 1]->error);
 	return (wait_for_child(0, 0, my_child, &i));
 }
 
@@ -98,12 +102,12 @@ void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2])
 	{
 		if (!w[0])
 			dup2(sentence->error, STDIN_FILENO);
-		close(sentence->error);
 	}
 	if (sentence->outpipe && !w[1])
 		dup2(pfd[STDOUT_FILENO], STDOUT_FILENO);
-	close(pfd[STDOUT_FILENO]);
-	close(pfd[STDIN_FILENO]);
+	pipe_closer(&pfd[STDIN_FILENO]);
+	pipe_closer(&pfd[STDOUT_FILENO]);
+	pipe_closer(&sentence->error);
 }
 
 /*
