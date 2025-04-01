@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:26 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/27 15:37:56 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/04/01 12:39:43 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ const char	*find_env(t_char *source, t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->env_count)
+	while (i < ENV_SIZE)
 	{
 		if (match_env_argument(source, data->env[i]))
 			return (ft_get_env(data->env[i]));
@@ -87,7 +87,7 @@ void	bi_env(t_data *data)
 	while (i < MAX_LENGTH)
 	{
 		str = (data->env[i]);
-		if (str && str[0])
+		if (str && str[0] && str[0] != '?')
 			printf("%s\n", str);
 		i++;
 	}
