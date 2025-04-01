@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include <stdlib.h>
 #include <unistd.h>
 
 bool		handle_redirection(char *sentence, enum e_token type, int fd);
@@ -47,6 +48,8 @@ static int	wait_for_child(int ret, int state, pid_t last_child, int *i)
 		(*i) -= 1;
 	}
 	deallocate(get_data());
+	if (WIFSIGNALED(ret))
+	   return (WTERMSIG(ret) + 128);
 	if (WIFEXITED(ret))
 		return (WEXITSTATUS(ret));
 	return (EXIT_SUCCESS);

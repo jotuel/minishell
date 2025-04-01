@@ -49,7 +49,7 @@ int	match_env_argument(t_char *source, char *env_var)
 	return (0);
 }
 
-// retrns a pointer to the start of env variable if you have the
+// returns a pointer to the start of env variable if you have the
 const char	*ft_get_env(const char *target)
 {
 	if (target == NULL)

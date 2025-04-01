@@ -51,6 +51,7 @@ static char	*rl_gets(void)
 	strcwd = NULL;
 	if (line && *line)
 		add_history(line);
+	update_env(store_return_value(0, false), NULL, false);
 	return (line);
 }
 

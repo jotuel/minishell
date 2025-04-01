@@ -15,7 +15,7 @@
 //Cant handle redirection support currently
 int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 {
-	update_env(store_return_value(0, false), argv[0], update);
+    update_env(store_return_value(0, false), argv[0], update);
 	if (argc == 0)
 		return (1);
 	if (ft_strncmp("cd", argv[0], 3) == 0)
