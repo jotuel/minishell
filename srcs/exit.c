@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:55:05 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 17:31:58 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:38:58 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	ft_exit(t_data *data, char *cmd, char *message, int exit_code)
 */
 void	error_printf(char *cmd, char *message)
 {
-    FILE *tmp;
+	FILE	*tmp;
 
-    tmp = stdout;
-    stdout = stderr;
+	tmp = stdout;
+	stdout = stderr;
 	printf("minishell: %s: %s\n", cmd, message);
 	stdout = tmp;
 }
@@ -91,10 +91,10 @@ static int	check_exit_status(int exit_status, t_sent *sentence, \
 // if both arguments are legal it will fail to exit
 int	bi_exit(int argc, char *argv[], t_sent *sentence)
 {
-    FILE* tmp;
-    int	exit_status;
+	FILE	*tmp;
+	int		exit_status;
 
-    tmp = stdout;
+	tmp = stdout;
 	stdout = stderr;
 	printf("exit\n");
 	if (argc == 0)

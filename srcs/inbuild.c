@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:05:36 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 17:08:08 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:37:08 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	do_redirections(t_sent *sent)
 // Cant handle redirection support currently
 int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 {
-    update_env(store_return_value(0, false), argv[0], update);
+	update_env(store_return_value(0, false), argv[0], update);
 	if (!sent->inpipe && !sent->outpipe)
-	   update = true;
+		update = true;
 	else
-	   update = false;
+		update = false;
 	if (argc == 0)
 		return (1);
 	if (ft_strncmp("cd", argv[0], 3) == 0)

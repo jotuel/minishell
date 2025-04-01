@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 17:29:00 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:37:54 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,8 @@ int				builtin_cd(char *path);
 /*
 ** BUILT' IN UTISLS
 */
-int				print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1], int fd);
+int				print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1], \
+				int fd);
 int				unset_one(char *env_val);
 
 /*
