@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtuomi <jtuomi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 19:56:50 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/12 19:08:49 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/04/01 12:45:15 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	signal_handler(int sig_nbr)
 	(void)sig_nbr;
 }
 
-void signal_handler_execution(int sig_nbr)
+void	signal_handler_execution(int sig_nbr)
 {
-    if (sig_nbr == SIGINT)
-        printf("\n");
-    else if (sig_nbr == SIGQUIT)
-        printf("Quit (core dumped)\n");
+	if (sig_nbr == SIGINT)
+		printf("\n");
+	else if (sig_nbr == SIGQUIT)
+		printf("Quit (core dumped)\n");
 }
 
 void	set_signals(void)

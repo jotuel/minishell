@@ -15,6 +15,18 @@ echo $? => "?"
 echo $_ => ""
 
 
+$A
+zsh: segmentation fault (core dumped)  ./minishell
+
+jrimpila:/home/jrimpila/Git/minishell😎>export A=blaa
+jrimpila:/home/jrimpila/Git/minishell😎>$A
+
+Fixed it by adding if (data->page[0]) protection but check that the logic is correct, return values etc 
 
 
+mikaan uusi enviroment variable ei toimi. Jos alkuperaisen env variablen ylikirjoittaa niin sen voi echottaa
+mutta jos lisaa uuden niin se ei toimi
 
+should be fixed
+
+jos unsettaa valissa niin ei toimi
