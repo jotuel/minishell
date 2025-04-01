@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/22 19:05:54 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:29:37 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,17 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
 	return (sentence);
 }
 
-void	destroy_old_page(void)
+void	destroy_old_page(int i, int j, int k, t_data *data)
 {
-	int		i;
-	int		k;
-	t_data	*data;
-
 	data = get_data();
-	i = 0;
 	while (i < MAX_SENTENCES)
 	{
+		j = 0;
+		while(data->page[i] && data->page[i]->redirs[j].path)
+		{
+			free(data->page[i]->redirs[j].path);
+			data->page[i]->redirs[j++].path = NULL;
+		}
 		k = 0;
 		while (k < MAX_SENT_SIZE && data->page[i])
 		{
@@ -93,7 +94,7 @@ t_sent	**create_page(t_list *stack)
 	t_node	*cur;
 	int		i;
 
-	destroy_old_page();
+	destroy_old_page(0, 0, 0, get_data());
 	page = get_data()->page;
 	if (stack == NULL || stack->first == NULL)
 		return (NULL);

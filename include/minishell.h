@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/27 14:08:40 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/04/01 17:29:00 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,10 @@ int				cwd(void);
 int				run_builtin(int argc, char *argv[], t_sent *sent, bool update);
 int				is_builtin(char *cmd);
 int				bi_pwd(int fd);
-int				bi_cd(int argc, char *argv[], t_sent *sent, int fd);
+int				bi_cd(int argc, char *argv[], t_sent *sent);
 void			bi_env(t_data *data, int fd);
 int				bi_echo(int argc, char *argv[], int fd);
-int				bi_unset(int argc, char *argv[], t_sent *sent, int fd);
+int				bi_unset(int argc, char *argv[], t_sent *sent);
 int				bi_export(int argc, char *argv[], t_sent *sent, int fd);
 int				bi_exit(int argc, char *argv[], t_sent *sentence);
 const char		*ft_get_env(const char *target);
@@ -129,7 +129,7 @@ int				builtin_cd(char *path);
 /*
 ** BUILT' IN UTISLS
 */
-int				print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1]);
+int				print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1], int fd);
 int				unset_one(char *env_val);
 
 /*
@@ -177,7 +177,7 @@ size_t			ft_tcharlen(t_char *line);
 t_node			*destroy_node(t_list *list, t_node *node);
 int				copy_env_to_tchar(t_char *dst, int i, const char *env);
 char			*cnvrt_to_char(t_char *line);
-void			destroy_old_page(void);
+void			destroy_old_page(int i, int j, int k, t_data *data);
 char			*ft_itoa(unsigned int nbr);
 
 /*

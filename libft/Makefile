@@ -6,7 +6,7 @@
 #    By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 10:10:39 by jtuomi            #+#    #+#              #
-#    Updated: 2025/03/20 11:21:35 by jrimpila         ###   ########.fr        #
+#    Updated: 2025/04/01 15:57:27 by jrimpila         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ BONUS_OBJS := $(BONUS_SRCS:%.c=%.o)
 SUPP_OBJS := $(SUPP_SRCS:%.c=%.o)
 OBJS_ALL := $(OBJS) $(BONUS_OBJS) $(SUPP_OBJS)
 INC_DIR = .
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -ggdb3 -gdwarf -fsanitize=address -fsanitize=undefined
 CPPFLAGS = -I$(INC_DIR)
 NAME = libft.a
 AR = ar rcs $(NAME)

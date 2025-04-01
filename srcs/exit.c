@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:55:05 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/27 13:49:06 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/04/01 17:31:58 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
  */
 void	ft_exit(t_data *data, char *cmd, char *message, int exit_code)
 {
-	deallocate(data);
 	error_printf(cmd, message);
+	deallocate(data);
 	rl_clear_history();
 	exit(exit_code);
 }
@@ -44,7 +44,7 @@ void	deallocate(t_data *data)
 {
 	int	i;
 
-	destroy_old_page();
+	destroy_old_page(0, 0, 0, data);
 	i = 0;
 	while (data->path && data->path[i])
 	{

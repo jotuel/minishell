@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:33:26 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/19 12:03:49 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:17:17 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_char
 	bool	blok;
 	bool	ghost;
 	bool	added;
+	bool	multi;
+	//int fdsafsd;
 }	t_char;
 
 typedef enum e_token

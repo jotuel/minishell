@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:41:05 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 12:28:35 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:43:19 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,26 @@ void	pipe_closer(int *fd)
 int	question_or_underscore(char const c)
 {
 	return (c == '?' || c == '_');
+}
+
+size_t	ft_wrdlen(t_char *str, t_data *data)
+{
+	size_t	i;
+	size_t	count_i;
+
+	(void)data;
+	i = 0;
+	count_i = 0;
+	if (str == NULL)
+	{
+		perror("DEBUG: Pointer is NULL for ft_wrdlen\n");
+		return (-1);
+	}
+	while (str[i].c != 0 && (str[i].c != ' ' || str[i].esc == 1))
+	{
+		if (str[i].ghost == 0)
+			count_i++;
+		i++;
+	}
+	return (count_i);
 }

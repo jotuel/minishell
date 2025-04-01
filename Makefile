@@ -6,14 +6,14 @@
 #    By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/14 13:14:15 by jtuomi            #+#    #+#              #
-#    Updated: 2025/03/20 14:27:34 by jtuomi           ###   ########.fr        #
+#    Updated: 2025/04/01 15:58:01 by jrimpila         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 AR = ar rcs
 CC = cc
 INCLUDE_DIRS = libft
-CFLAGS = -Wall -Wextra -Werror -g2 -DUSER=\"$(USER)\"
+CFLAGS = -Wall -Wextra -Werror -g2 -DUSER=\"$(USER)\" -gdwarf -fsanitize=address -fsanitize=undefined
 
 SRC = lexer.c	ft_xcalloc.c parsing_utils.c heredocs.c init_utils.c\
 	exit.c	env.c utils.c page.c rem_quotes.c test.c open.c signal.c \

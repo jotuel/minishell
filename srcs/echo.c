@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:37:53 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 15:57:28 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:51:30 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	echo_check_opt(char *str)
 	return (isvalid);
 }
 
-int	bi_echo(int argc, char *argv[])
+int	bi_echo(int argc, char *argv[], int fd)
 {
 	int	i;
 	int	opt;
@@ -51,12 +51,12 @@ int	bi_echo(int argc, char *argv[])
 		i++;
 	while (i < argc)
 	{
-		printf("%s", argv[i]);
+		write(fd, argv[i], ft_strlen(argv[i]));
 		i++;
 		if (i < argc)
-			printf(" ");
+			write(fd, " ", 1);
 	}
 	if (!opt)
-		printf("\n");
+		write(fd, "\n", 1);
 	return (0);
 }

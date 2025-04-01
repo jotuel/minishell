@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:40 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 12:44:33 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:00:12 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,14 @@ void	process_new_envvarr(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *var)
 //BASH goes through the arguments and even if 
 //there is error in one it applies the rest
 // if any one of them fails the return value is 1
-int	bi_export(int argc, char *argv[], t_sent *sent)
+int	bi_export(int argc, char *argv[], t_sent *sent, int fd)
 {
 	int	i;
 	int	retval;
 
 	retval = 0;
 	if (argc == 1)
-		return (print_alphabetically(get_data()->env));
+		return (print_alphabetically(get_data()->env, fd));
 	i = 1;
 	while (i < argc)
 	{

@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:05:36 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/26 18:31:15 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/04/01 17:08:08 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	do_redirections(t_sent *sent)
 		if (dup2(fd, 255) == -1)
 			return (error_printf("dup2", strerror(errno)), 1);
 		close(fd);
+		free(sent->redirs[i].path);
 		fd = 255;
 		i++;
 	}
@@ -50,7 +51,7 @@ int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 	if (argc == 0)
 		return (1);
 	if (ft_strncmp("cd", argv[0], 3) == 0)
-		bi_cd(argc, argv, sent, do_redirections(sent));
+		bi_cd(argc, argv, sent);
 	else if (ft_strncmp("pwd", argv[0], 4) == 0)
 		bi_pwd(do_redirections(sent));
 	else if (ft_strncmp("echo", argv[0], 5) == 0)
@@ -60,12 +61,12 @@ int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 	else if (ft_strncmp("export", argv[0], 7) == 0)
 		bi_export(argc, argv, sent, do_redirections(sent));
 	else if (ft_strncmp("unset", argv[0], 6) == 0)
-		bi_unset(argc, argv, sent, do_redirections(sent));
+		bi_unset(argc, argv, sent);
 	else if (ft_strncmp("exit", argv[0], 5) == 0)
 		bi_exit(argc, argv, sent);
-	else if (1)
-		return (0);
-	return (1);
+	else
+		return (deallocate(get_data()), 0);
+	return (deallocate(get_data()), 1);
 }
 
 int	is_builtin(char *cmd)

@@ -6,17 +6,17 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:29:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 12:44:20 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:00:42 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 static void	sort_cpy(char **cpy);
-static void	final_print(char **env, int i);
+static void	final_print(char **env, int i, int fd);
 
 // Creates an array of pointers that are later sorted and printed
-int	print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1])
+int	print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1], int fd)
 {
 	char	*cpy[ENV_SIZE + 1];
 	int		i;
@@ -35,7 +35,8 @@ int	print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1])
 	}
 	cpy[i] = NULL;
 	sort_cpy(cpy);
-	final_print(cpy, 0);
+	final_print(cpy, 0, fd);
+	close(fd);
 	return (0);
 }
 
@@ -65,7 +66,7 @@ static void	sort_cpy(char **cpy)
 
 // Prints the variables in the format desired by export
 // int i gets passed as zero to appease norminette
-static void	final_print(char **env, int i)
+static void	final_print(char **env, int i, int fd)
 {
 	int	k;
 
@@ -75,20 +76,20 @@ static void	final_print(char **env, int i)
 		if (ft_strchr(env[i], '=') && (ft_strncmp(env[i], "_=", 2) != 0) \
 		&& env[i][0] != '?')
 		{
-			printf("declare -x ");
+			write(fd, "declare -x ", 12);
 			while (env[i][k] && env[i][k] != '=')
 			{
-				printf("%c", env[i][k]);
+				write(fd, &env[i][k], 1);
 				k++;
 			}
 			k++;
-			printf("=\"");
+			write(fd, "=\"", 3);
 			while (env[i][k])
 			{
-				printf("%c", env[i][k]);
+				write(fd, &env[i][k], 1);
 				k++;
 			}
-			printf("\"\n");
+			write(fd, "\"\n", 3);
 		}
 		i++;
 	}

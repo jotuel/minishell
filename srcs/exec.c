@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:21:45 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/27 14:11:55 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/04/01 17:14:33 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	execute(t_sent *sentence, int pfd[2], pid_t my_child, t_data *data)
 		pipe_closer(&pfd[STDOUT_FILENO]);
 		if (sentence->outpipe)
 		{
-			if (data->page[i - 1] && data->page[i - 1]->error > 2)
+			if (i >= 1 && data->page[i - 1] && data->page[i - 1]->error > 2)
 				pipe_closer(&data->page[i - 1]->error);
 			data->page[i]->error = pfd[STDIN_FILENO];
 			pipe(pfd);
@@ -98,6 +98,8 @@ void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2])
 		else
 			w[0] = handle_redirection(sentence->redirs[i].path, HERE_DOCS,
 					sentence->redirs[i].here_fd);
+		free(sentence->redirs[i].path);
+		sentence->redirs[i].path = NULL;
 		i += 1;
 	}
 	if (sentence->inpipe)

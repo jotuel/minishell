@@ -6,33 +6,13 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:06:42 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/19 14:33:14 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:42:51 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-size_t	ft_wrdlen(t_char *str, t_data *data)
-{
-	size_t	i;
-	size_t	count_i;
 
-	(void)data;
-	i = 0;
-	count_i = 0;
-	if (str == NULL)
-	{
-		perror("DEBUG: Pointer is NULL for ft_wrdlen\n");
-		return (-1);
-	}
-	while (str[i].c != 0 && (str[i].c != ' ' || str[i].esc == 1))
-	{
-		if (str[i].ghost == 0)
-			count_i++;
-		i++;
-	}
-	return (count_i);
-}
 
 const char	*token_to_string(t_token token)
 {
