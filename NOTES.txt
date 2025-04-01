@@ -48,7 +48,7 @@ jos exportilla on monta argumenttia niin error yhdessa ei lopeta
 
 suunnitelma, otetaan _ getenvilla
 
-
+export seems to be broken
 
 
 

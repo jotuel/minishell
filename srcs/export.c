@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:40 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 17:33:40 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/03/25 20:07:05 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int	bi_export(int argc, char *argv[], t_sent *sent)
 		retval = errorcheck_expand(argv[i]);
 		if (argv[i] && retval == 0)
 		{
+			
 			if (sent->inpipe == 0 && sent->outpipe == 0)
 				process_new_envvarr(get_data()->env, argv[i]);
 		}
