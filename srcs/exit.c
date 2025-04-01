@@ -29,8 +29,12 @@ void	ft_exit(t_data *data, char *cmd, char *message, int exit_code)
 */
 void	error_printf(char *cmd, char *message)
 {
-	dup2(STDERR_FILENO, STDOUT_FILENO);
+    FILE *tmp;
+
+    tmp = stdout;
+    stdout = stderr;
 	printf("minishell: %s: %s\n", cmd, message);
+	stdout = tmp;
 }
 
 /*
@@ -71,7 +75,7 @@ static int	check_exit_status(int exit_status, t_sent *sentence, \
 	if (argc > 2)
 	{
 		error_printf("exit", "too many arguments");
-		return (127);
+		return (1);
 	}
 	if (sentence->outpipe == 0 && sentence->inpipe == 0)
 	{
@@ -87,8 +91,11 @@ static int	check_exit_status(int exit_status, t_sent *sentence, \
 // if both arguments are legal it will fail to exit
 int	bi_exit(int argc, char *argv[], t_sent *sentence)
 {
-	int	exit_status;
+    FILE* tmp;
+    int	exit_status;
 
+    tmp = stdout;
+	stdout = stderr;
 	printf("exit\n");
 	if (argc == 0)
 	{
@@ -102,5 +109,7 @@ int	bi_exit(int argc, char *argv[], t_sent *sentence)
 		}
 	}
 	exit_status = ft_atoi_spec(argv[1], 0, 0);
-	return (check_exit_status(exit_status, sentence, argc, argv));
+	exit_status = check_exit_status(exit_status, sentence, argc, argv);
+	stdout = tmp;
+	return (exit_status);
 }

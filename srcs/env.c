@@ -77,7 +77,7 @@ const char	*find_env(t_char *source, t_data *data)
 }
 
 // Our env is not supposed to take arguments so dicard or error?
-void	bi_env(t_data *data)
+void	bi_env(t_data *data, int fd)
 {
 	const char	*str;
 	int			i;
@@ -88,7 +88,10 @@ void	bi_env(t_data *data)
 	{
 		str = (data->env[i]);
 		if (str && str[0] && str[0] != '?')
-			printf("%s\n", str);
+		{
+			write(fd, str, ft_strlen(str));
+			write(fd, "\n", 1);
+		}
 		i++;
 	}
 }

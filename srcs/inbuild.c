@@ -12,24 +12,55 @@
 
 #include "../include/minishell.h"
 
-//Cant handle redirection support currently
+int	do_redirections(t_sent *sent)
+{
+	int	fd;
+	int	i;
+
+	fd = 1;
+	i = 0;
+	while (sent->redirs[i].path)
+	{
+		if (sent->redirs[i].type == OUT_FILE)
+			fd = open(sent->redirs[i].path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if (sent->redirs[i].type == APPEND)
+			fd = open(sent->redirs[i].path, O_WRONLY | O_CREAT | O_APPEND,
+					0644);
+		else if (sent->redirs[i].type == HERE_DOCS)
+			fd = sent->redirs[i].here_fd;
+		if (fd == -1)
+			return (error_printf("open", strerror(errno)), 1);
+		if (dup2(fd, 255) == -1)
+			return (error_printf("dup2", strerror(errno)), 1);
+		close(fd);
+		fd = 255;
+		i++;
+	}
+	return (fd);
+}
+
+// Cant handle redirection support currently
 int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 {
     update_env(store_return_value(0, false), argv[0], update);
+	if (!sent->inpipe && !sent->outpipe)
+	   update = true;
+	else
+	   update = false;
 	if (argc == 0)
 		return (1);
 	if (ft_strncmp("cd", argv[0], 3) == 0)
-		bi_cd(argc, argv, sent);
+		bi_cd(argc, argv, sent, do_redirections(sent));
 	else if (ft_strncmp("pwd", argv[0], 4) == 0)
-		bi_pwd();
+		bi_pwd(do_redirections(sent));
 	else if (ft_strncmp("echo", argv[0], 5) == 0)
-		bi_echo(argc, argv);
+		bi_echo(argc, argv, do_redirections(sent));
 	else if (ft_strncmp("env", argv[0], 4) == 0)
-		bi_env(get_data());
+		bi_env(get_data(), do_redirections(sent));
 	else if (ft_strncmp("export", argv[0], 7) == 0)
-		bi_export(argc, argv, sent);
+		bi_export(argc, argv, sent, do_redirections(sent));
 	else if (ft_strncmp("unset", argv[0], 6) == 0)
-		bi_unset(argc, argv, sent);
+		bi_unset(argc, argv, sent, do_redirections(sent));
 	else if (ft_strncmp("exit", argv[0], 5) == 0)
 		bi_exit(argc, argv, sent);
 	else if (1)
@@ -58,14 +89,19 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-//BASH version ignores arguments
-int	bi_pwd(void)
+// BASH version ignores arguments
+int	bi_pwd(int fd)
 {
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)))
-		printf("%s\n", cwd);
+	{
+		write(fd, cwd, strlen(cwd));
+		write(fd, "\n", 1);
+	}
 	else
+	{
 		error_printf("system", "getcwd() error");
+	}
 	return (0);
 }

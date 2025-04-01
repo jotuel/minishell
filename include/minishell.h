@@ -112,12 +112,12 @@ typedef struct s_point
 int				cwd(void);
 int				run_builtin(int argc, char *argv[], t_sent *sent, bool update);
 int				is_builtin(char *cmd);
-int				bi_pwd(void);
-int				bi_cd(int argc, char *argv[], t_sent *sent);
-void			bi_env(t_data *data);
-int				bi_echo(int argc, char *argv[]);
-int				bi_unset(int argc, char *argv[], t_sent *sent);
-int				bi_export(int argc, char *argv[], t_sent *sent);
+int				bi_pwd(int fd);
+int				bi_cd(int argc, char *argv[], t_sent *sent, int fd);
+void			bi_env(t_data *data, int fd);
+int				bi_echo(int argc, char *argv[], int fd);
+int				bi_unset(int argc, char *argv[], t_sent *sent, int fd);
+int				bi_export(int argc, char *argv[], t_sent *sent, int fd);
 int				bi_exit(int argc, char *argv[], t_sent *sentence);
 const char		*ft_get_env(const char *target);
 int				add_envvar(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *envvar,

@@ -58,9 +58,7 @@ static char	*rl_gets(void)
 int	prompt_input(char *line, int pfd[2], t_data *data, int input)
 {
 	set_signals();
-	if (input == 1)
-		input = 0;
-	else
+	if (input == 0)
 		line = rl_gets();
 	if (line == NULL)
 		return (1);

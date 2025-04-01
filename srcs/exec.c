@@ -30,8 +30,7 @@ static void	execute_child(t_sent *sent, int pfd[2], pid_t child)
 		if (!sent->array[0])
 			exit(0);
 		if (is_builtin(sent->array[0]))
-			exit(run_builtin(sent->argc,
-					sent->array, sent, false));
+			exit(run_builtin(sent->argc, sent->array, sent, false));
 		if (-1 == execve(sent->array[0], sent->array, __environ))
 			ft_exit(get_data(), sent->array[0], strerror(errno), errno);
 	}
@@ -49,7 +48,7 @@ static int	wait_for_child(int ret, int state, pid_t last_child, int *i)
 	}
 	deallocate(get_data());
 	if (WIFSIGNALED(ret))
-	   return (WTERMSIG(ret) + 128);
+		return (WTERMSIG(ret) + 128);
 	if (WIFEXITED(ret))
 		return (WEXITSTATUS(ret));
 	return (EXIT_SUCCESS);
@@ -97,8 +96,8 @@ void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2])
 		else if (sentence->redirs[i].type == IN_FILE)
 			w[0] = handle_redirection(sentence->redirs[i].path, IN_FILE, -1);
 		else
-			w[0] = handle_redirection(sentence->redirs[i].path, HERE_DOCS, \
-			sentence->redirs[i].here_fd);
+			w[0] = handle_redirection(sentence->redirs[i].path, HERE_DOCS,
+					sentence->redirs[i].here_fd);
 		i += 1;
 	}
 	if (sentence->inpipe)
