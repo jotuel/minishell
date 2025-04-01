@@ -51,8 +51,8 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
 		{
 			if (node->next->type == REDIRECT || node->next->type == PIPE
 				|| get_data()->tokens.last == node)
-				ft_exit(get_data(), "syntax error near \
-				unexpected token", "nl", 1);
+				return (error_printf("syntax error near \
+				unexpected token", "nl"), NULL);
 		}
 		else if (is_file(node->type))
 			add_redirection(node, sentence, k++);
@@ -104,6 +104,8 @@ t_sent	**create_page(t_list *stack)
 	{
 		page[i] = conv_linked_to_sentence(0, 0, get_data()->tokens.first,
 				ft_xcalloc(sizeof(t_sent), 1));
+		if (!page[i])
+			return (destroy_old_page(i, 0, 0, get_data()), NULL);
 		cur = stack->first;
 		i++;
 	}

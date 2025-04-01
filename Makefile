@@ -16,20 +16,17 @@ INCLUDE_DIRS = libft
 CFLAGS = -Wall -Wextra -Werror -g2 -DUSER=\"$(USER)\" -gdwarf -fsanitize=address -fsanitize=undefined
 
 SRC = lexer.c	ft_xcalloc.c parsing_utils.c heredocs.c init_utils.c\
-	exit.c	env.c utils.c page.c rem_quotes.c test.c open.c signal.c \
-	main.c create_list.c ft_lstaddback.c	input.c	export.c redir.c \
-	redirect.c exec.c path.c inbuild.c ft_atol_spec.c exp_utils.c	\
+	exit.c	env.c utils.c page.c rem_quotes.c open.c signal.c \
+	main.c create_list.c ft_lstaddback.c input.c export.c redir.c \
+	redirect.c exec.c path.c inbuild.c ft_atol_spec.c exp_utils.c \
 	unset.c export_print.c echo.c ch_dir.c rem_quotes_utils.c
 SRC := $(addprefix srcs/, $(SRC))
-DEBUG = debug.c
-DEBUG := $(addprefix srcs/debug/, $(DEBUG))
-DEBUG_OBJ := $(DEBUG:%.c=%.o)
 OBJ := $(SRC:%.c=%.o)
 MAKE = make -C
 NAME = minishell
 LIBFT = ./libft/libft.a
 
-all: debug $(NAME)
+all: $(NAME)
 $(NAME) : $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $(OBJ) $(DEBUG_OBJ) -L $(INCLUDE_DIRS) -lft -lreadline
 %.o: %.c
@@ -43,6 +40,5 @@ fclean: clean
 	$(MAKE) libft fclean
 	rm -f $(NAME)
 re: fclean all
-debug: $(DEBUG_OBJ)
 .PHONY:
-	all, libft, clean, fclean, re, debug
+	all, libft, clean, fclean, re

@@ -77,7 +77,7 @@ size_t	ft_wrdlen(t_char *str, t_data *data)
 	count_i = 0;
 	if (str == NULL)
 	{
-		perror("DEBUG: Pointer is NULL for ft_wrdlen\n");
+		error_printf("system", "failure");
 		return (-1);
 	}
 	while (str[i].c != 0 && (str[i].c != ' ' || str[i].esc == 1))
