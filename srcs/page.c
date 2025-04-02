@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 15:42:19 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:59:40 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,20 @@ bool	is_file(t_token type)
 //ft_exit needs to be changed to errpr
 t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence);
 
-static t_node	*check_inpipe(t_sent *sentence, t_node *node)
+static t_node	*check_inpipe(t_sent **sentence, t_node *node)
 {
 	if (node && node->type == PIPE)
 	{
-		sentence->inpipe = 1;
+		(*sentence)->inpipe = 1;
 		if (get_data()->tokens.last == node || node->next->type == PIPE)
-			ft_exit(get_data(), "syntax error near token", "|", 1);
+		{
+			free(*sentence);
+			(*sentence) = NULL;
+			deallocate(get_data());
+			error_printf("syntax error near token", "|");
+			add_envvar(get_data()->env, "?", "2");
+			return (NULL);
+		}
 		node = destroy_node(&get_data()->tokens, node);
 	}
 	return (node);
@@ -38,7 +45,7 @@ static t_node	*check_inpipe(t_sent *sentence, t_node *node)
 // i is 0, k is 0, sentence is calloced, node is pulled from data
 t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
 {
-	node = check_inpipe(sentence, node);
+	node = check_inpipe(&sentence, node);
 	while (node)
 	{
 		node = get_data()->tokens.first;
@@ -60,7 +67,8 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
 			sentence->array[i++] = cnvrt_to_char(node->str);
 		node = destroy_node(&get_data()->tokens, node);
 	}
-	sentence->argc = i;
+	if (sentence)
+		sentence->argc = i;
 	return (sentence);
 }
 

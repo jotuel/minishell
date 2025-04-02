@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:41:58 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 15:42:39 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:43:13 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	add_back_utils(t_list *stack, t_node *new, t_node *cur)
 }
 
 // TODO error status
-//TODO error status
 
 static void	initialize_empty_stack(t_list *stack, t_node *new)
 {
