@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:41:58 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 15:43:13 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:10:00 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	initialize_empty_stack(t_list *stack, t_node *new)
 	if (new->type == PIPE)
 	{
 		deallocate(get_data());
+		add_envvar(get_data()->env, "?", "2");
 		return (error_printf("syntax error near", "unexpected token '|'"));
 	}
 }
