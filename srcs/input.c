@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:11:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 16:42:55 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:59:20 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	prompt_input(char *line, int pfd[2], t_data *data, int input)
 		&& is_builtin(data->page[0]->array[0]))
 		run_builtin(data->page[0]->argc, data->page[0]->array, data->page[0],
 			true);
-	else
+	else if (data->page[0])
 	{
 		util_parse_args(data, 0);
 		block_signals_in_parent();
