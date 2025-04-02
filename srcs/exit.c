@@ -110,7 +110,7 @@ int	bi_exit(int argc, char *argv[], t_sent *sentence)
 			exit(0);
 		}
 	}
-	exit_status = ft_atoi_spec(argv[1], 0, 0);
+	exit_status = ft_atoi_spec(argv[1], 1, 0);
 	exit_status = check_exit_status(exit_status, sentence, argc, argv);
 	stdout = tmp;
 	return (exit_status);

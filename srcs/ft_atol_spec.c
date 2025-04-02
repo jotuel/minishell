@@ -41,7 +41,7 @@ int	overflow_check(long ret, int sign, int addition, const char *nptr)
 	return (0);
 }
 
-// Meant to handle the inbuilt exit the same way as bash. 
+// Meant to handle the inbuilt exit the same way as bash.
 // int sign should be passed as 1
 int	ft_atoi_spec(const char *nptr, int sign, long ret)
 {
@@ -69,7 +69,7 @@ int	ft_atoi_spec(const char *nptr, int sign, long ret)
 		error_print_spec("exit", nptr, "numeric argument required");
 		return (2);
 	}
-	return (ret * sign);
+	return ((char)ret * sign);
 }
 
 static int	all_isspace(char *nptr)
