@@ -52,21 +52,22 @@ int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 	if (argc == 0)
 		return (1);
 	if (ft_strncmp("cd", argv[0], 3) == 0)
-		bi_cd(argc, argv, sent);
+		argc = bi_cd(argc, argv, sent);
 	else if (ft_strncmp("pwd", argv[0], 4) == 0)
-		bi_pwd(do_redirections(sent));
+		argc = bi_pwd(do_redirections(sent));
 	else if (ft_strncmp("echo", argv[0], 5) == 0)
-		bi_echo(argc, argv, do_redirections(sent));
+		argc = bi_echo(argc, argv, do_redirections(sent));
 	else if (ft_strncmp("env", argv[0], 4) == 0)
 		bi_env(get_data(), do_redirections(sent));
 	else if (ft_strncmp("export", argv[0], 7) == 0)
-		bi_export(argc, argv, sent, do_redirections(sent));
+		argc = bi_export(argc, argv, sent, do_redirections(sent));
 	else if (ft_strncmp("unset", argv[0], 6) == 0)
-		bi_unset(argc, argv, sent);
+		argc = bi_unset(argc, argv, sent);
 	else if (ft_strncmp("exit", argv[0], 5) == 0)
-		bi_exit(argc, argv, sent);
+		argc = bi_exit(argc, argv, sent);
 	else
 		return (deallocate(get_data()), 0);
+	store_return_value(argc, true);
 	return (deallocate(get_data()), 1);
 }
 

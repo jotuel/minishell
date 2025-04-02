@@ -53,7 +53,7 @@ char	*cnvrt_to_char(t_char *line)
 }
 
 /*
- *   when syntax error occurs frees stuff and returns NULL.
+**   when syntax error occurs frees stuff and returns NULL.
  */
 t_sent	*syntax_error(char *token, t_sent **sentence)
 {
