@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 17:37:24 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:52:50 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,13 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
 		{
 			if (node->next->type == REDIRECT || node->next->type == PIPE
 				|| get_data()->tokens.last == node)
+			{
+				deallocate(get_data());
+				free (sentence);
+				sentence = NULL;
 				return (error_printf("syntax error near \
 				unexpected token", "nl"), NULL);
+			}
 		}
 		else if (is_file(node->type))
 			add_redirection(node, sentence, k++);

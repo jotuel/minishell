@@ -15,28 +15,12 @@ echo $? => "?"
 echo $_ => ""
 
 
-jrimpila:/home/jrimpila/Git/minishell😎>| ls
-include  libft	Makefile  minishell  NOTES.txt	srcs
-jrimpila:/home/jrimpila/Git/minishell😎>
-
-=================================================================
-==1714103==ERROR: LeakSanitizer: detected memory leaks
-
-Direct leak of 16344 byte(s) in 1 object(s) allocated from:
-    #0 0x49a26d in malloc (/home/jrimpila/Git/minishell/minishell+0x49a26d)
-    #1 0x500cea in ft_calloc /home/jrimpila/Git/minishell/libft/ft_calloc.c:26:9
-    #2 0x4d11cc in ft_xcalloc /home/jrimpila/Git/minishell/srcs/ft_xcalloc.c:22:8
-    #3 0x4da0f8 in create_page /home/jrimpila/Git/minishell/srcs/page.c:106:5
-    #4 0x4e664d in process /home/jrimpila/Git/minishell/srcs/input.c:30:2
-    #5 0x4e6767 in prompt_input /home/jrimpila/Git/minishell/srcs/input.c:67:2
-    #6 0x4e08cb in main /home/jrimpila/Git/minishell/srcs/main.c:46:9
-    #7 0x79ef90029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
-
-SUMMARY: AddressSanitizer: 16344 byte(s) leaked in 1 allocation(s).
-
-Aiheuttaa viela memory leakin jos ctrl + D jalkikateen
 
 ambigious redirect olisi ok fixata, yritan
+
+
+
+
 
 Lauri lupasi arvioida perjantaina
 
