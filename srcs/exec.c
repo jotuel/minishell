@@ -51,7 +51,7 @@ static int	wait_for_child(int ret, int state, pid_t last_child, int *i)
 		return (WTERMSIG(ret) + 128);
 	if (WIFEXITED(ret))
 	{
-	   if (WEXITSTATUS(ret) == 13)
+		if (WEXITSTATUS(ret) == 13)
 				return (126);
 		else if (WEXITSTATUS(ret) == 21)
 				return (1);
