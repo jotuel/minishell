@@ -64,14 +64,30 @@ static char	*return_result(char *result, int expand)
 	return (result);
 }
 
-//If expand is 1, expansion happens
+/*
+ * strjoin_wrapper - wrapper for ft_strjoin that frees the first string
+ * @s1: first string to join
+ * @s2: second string to join
+ *
+ * Return: pointer to the joined string
+ */
+static char	*strjoin_wrapper(char *s1, char *s2)
+{
+	char	*result;
+
+	result = ft_strjoin(s1, s2);
+	free(s1);
+	return (result);
+}
+
+// If expand is 1, expansion happens
 char	*create_heredoc(char *terminat, int expand, char *result, char *tmp)
 {
 	while (tmp == NULL || ft_strncmp(terminat, tmp, ft_strlen(terminat + 1)))
 	{
 		if (tmp)
 		{
-			tmp = ft_strjoin(tmp, "\n");
+			tmp = strjoin_wrapper(tmp, "\n");
 			if (result)
 			{
 				result = ft_strjoin(result, tmp);
