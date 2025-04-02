@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:29:40 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/27 14:21:26 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/04/02 09:59:26 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ void	util_parse_args(t_data *data, int i)
 			command_not_found(data, i);
 		i++;
 	}
-	while (data->page[i - 1] && data->page[i - 1]->array[i1])
+	while (i > 0 && data->page[i - 1] && data->page[i - 1]->array[i1])
 		i1++;
-	if (data->page[i - 1] && data->page[i - 1])
+	if (i > 0 && data->page[i - 1] && data->page[i - 1])
 		update_env(store_return_value(0, false), data->page[i - 1]->array[i1
 			- 1], true);
 }

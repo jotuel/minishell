@@ -15,18 +15,35 @@ echo $? => "?"
 echo $_ => ""
 
 
-$A
-zsh: segmentation fault (core dumped)  ./minishell
+<> cat blaa
+minishell: syntax error near 				unexpected token: nl
+srcs/path.c:114:9: runtime error: index -1 out of bounds for type 't_sent *[2000]'
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior srcs/path.c:114:9 in 
+srcs/path.c:114:30: runtime error: index -1 out of bounds for type 't_sent *[2000]'
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior srcs/path.c:114:30 in 
+=================================================================
+==1703359==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6030000002d0 at pc 0x0000004f249b bp 0x7ffd607a2b70 sp 0x7ffd607a2b68
+READ of size 8 at 0x6030000002d0 thread T0
+    #0 0x4f249a in util_parse_args /home/jrimpila/Git/minishell/srcs/path.c:114:30
+    #1 0x4e7179 in prompt_input /home/jrimpila/Git/minishell/srcs/input.c:74:3
+    #2 0x4e068b in main /home/jrimpila/Git/minishell/srcs/main.c:46:9
+    #3 0x716905429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #4 0x716905429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #5 0x41f3a4 in _start (/home/jrimpila/Git/minishell/minishell+0x41f3a4)
 
-jrimpila:/home/jrimpila/Git/minishell😎>export A=blaa
-jrimpila:/home/jrimpila/Git/minishell😎>$A
+0x6030000002d0 is located 0 bytes to the right of 32-byte region [0x6030000002b0,0x6030000002d0)
+allocated by thread T0 here:
+    #0 0x49a26d in malloc (/home/jrimpila/Git/minishell/minishell+0x49a26d)
+    #1 0x50087a in ft_calloc /home/jrimpila/Git/minishell/libft/ft_calloc.c:26:9
+    #2 0x4d11cc in ft_xcalloc /home/jrimpila/Git/minishell/srcs/ft_xcalloc.c:22:8
+    #3 0x4e0790 in create_node /home/jrimpila/Git/minishell/srcs/create_list.c:22:9
+    #4 0x4e20ac in create_list /home/jrimpila/Git/minishell/srcs/create_list.c:58:33
+    #5 0x4d1150 in lexify /home/jrimpila/Git/minishell/srcs/lexer.c:126:2
+    #6 0x4e63b1 in process /home/jrimpila/Git/minishell/srcs/input.c:27:11
+    #7 0x4e6527 in prompt_input /home/jrimpila/Git/minishell/srcs/input.c:67:2
+    #8 0x4e068b in main /home/jrimpila/Git/minishell/srcs/main.c:46:9
+	
 
-Fixed it by adding if (data->page[0]) protection but check that the logic is correct, return values etc 
-
-
-mikaan uusi enviroment variable ei toimi. Jos alkuperaisen env variablen ylikirjoittaa niin sen voi echottaa
-mutta jos lisaa uuden niin se ei toimi
-
-should be fixed
-
-jos unsettaa valissa niin ei toimi
+	>< cat
+srcs/path.c:114:9: runtime error: index -1 out of bounds for type 't_sent *[2000]'
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior srcs/path.c:114:9 in 
