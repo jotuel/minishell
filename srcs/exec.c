@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:21:45 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/04/02 10:21:06 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:06:57 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ static int	wait_for_child(int ret, int state, pid_t last_child, int *i)
 	if (WIFEXITED(ret))
 	{
 		if (WEXITSTATUS(ret) == 13)
-				return (126);
+			return (126);
 		else if (WEXITSTATUS(ret) == 21)
-				return (1);
+			return (1);
 		else
-    		return (WEXITSTATUS(ret));
+			return (WEXITSTATUS(ret));
 	}
 	return (EXIT_SUCCESS);
 }

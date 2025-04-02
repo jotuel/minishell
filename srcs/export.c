@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:40 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 17:00:12 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:07:27 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	add_envvar(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *envvar,
 //Checks that export identifiers are valid
 int	errorcheck_expand(char *var)
 {
-    FILE *tmp;
-	int	i;
+	FILE	*tmp;
+	int		i;
 
 	tmp = stdout;
 	stdout = stderr;
