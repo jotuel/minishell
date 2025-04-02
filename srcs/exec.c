@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:21:45 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/04/01 17:14:33 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:21:06 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	execute(t_sent *sentence, int pfd[2], pid_t my_child, t_data *data)
 	execute_child(sentence, pfd, my_child);
 	pipe_closer(&pfd[STDIN_FILENO]);
 	pipe_closer(&pfd[STDOUT_FILENO]);
-	if (data->page[i - 1] && data->page[i - 1]->error > 2)
+	if (i > 0 && data->page[i - 1] && data->page[i - 1]->error > 2)
 		pipe_closer(&data->page[i - 1]->error);
 	return (wait_for_child(0, 0, my_child, &i));
 }

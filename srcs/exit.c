@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:55:05 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 17:38:58 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:27:20 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ void	error_printf(char *cmd, char *message)
 void	deallocate(t_data *data)
 {
 	int	i;
-
+	
+	while (data->tokens.first)
+		destroy_node(&data->tokens, data->tokens.first);
 	destroy_old_page(0, 0, 0, data);
 	i = 0;
 	while (data->path && data->path[i])
