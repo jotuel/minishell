@@ -12,22 +12,22 @@
 
 #include "../include/minishell.h"
 
-//BASH counts heredocs quite early so we do it while creating nodes
+// BASH counts heredocs quite early so we do it while creating nodes
 static void	set_type(t_node *new)
 {
 	if (new->str && new->str[0].c == '|' && new->str[0].com)
 		new->type = PIPE;
-	else if (((new->str && new->str[0].c == '>') || (new->str \
-	&& new->str[0].c == '<' && new->str[0].com)))
+	else if (((new->str && new->str[0].c == '>') || (new->str
+				&& new->str[0].c == '<' && new->str[0].com)))
 		new->type = REDIRECT;
-	else if (new->prev->str && new->prev->str[0].c == '>' \
-	&& new->prev->str[1].c == '>' && new->prev->str[0].com)
+	else if (new->prev->str && new->prev->str[0].c == '>'
+		&& new->prev->str[1].c == '>' && new->prev->str[0].com)
 		new->type = APPEND;
-	else if (new->prev->str && new->prev->str[0].c == '>' \
-	&& new->prev->str[0].com)
+	else if (new->prev->str && new->prev->str[0].c == '>'
+		&& new->prev->str[0].com)
 		new->type = OUT_FILE;
-	else if (new->prev->str && new->prev->str[0].c == '<' \
-	&& new->prev->str[1].c == '<' && new->prev->str[0].com)
+	else if (new->prev->str && new->prev->str[0].c == '<'
+		&& new->prev->str[1].c == '<' && new->prev->str[0].com)
 	{
 		new->type = HERE_DOCS;
 		get_data()->herecount++;
@@ -46,7 +46,8 @@ static void	add_back_utils(t_list *stack, t_node *new, t_node *cur)
 	cur->next = new;
 	stack->last = new;
 }
-//TODO error status
+
+// TODO error status
 static void	initialize_empty_stack(t_list *stack, t_node *new)
 {
 	stack->first = new;
@@ -58,9 +59,7 @@ static void	initialize_empty_stack(t_list *stack, t_node *new)
 	{
 		deallocate(get_data());
 		return (error_printf("syntax error near", "unexpected token '|'"));
-		
 	}
-	
 }
 
 void	ft_lstadd_back(t_list *stack, t_node *new)

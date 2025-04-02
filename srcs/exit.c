@@ -43,7 +43,7 @@ void	error_printf(char *cmd, char *message)
 void	deallocate(t_data *data)
 {
 	int	i;
-	
+
 	while (data->tokens.first)
 		destroy_node(&data->tokens, data->tokens.first);
 	destroy_old_page(0, 0, 0, data);
@@ -60,8 +60,8 @@ void	deallocate(t_data *data)
 /*
  *   checks with what value and if to exit at all.
  */
-static int	check_exit_status(int exit_status, t_sent *sentence, \
-	int argc, char *argv[])
+static int	check_exit_status(int exit_status, t_sent *sentence, int argc,
+		char *argv[])
 {
 	if (exit_status == 2 && ft_strncmp(argv[1], "2", 2))
 	{

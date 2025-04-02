@@ -1,26 +1,33 @@
 
-<<EO"F" should not expand 
+<<EO"F" should not expand
 
 jos exportilla on monta argumenttia niin error yhdessa ei lopeta
 
-Poistin kun viimeaikaisien muutoksien tarkoitus oli korjata melkein kaikki.
-Yhden merkin kokoisien env variablien expandaaminen on kaiketi ainoa vika.
+export THIS='cat that'
+export $THIS=$THIS
+export
+cat=""
+this=""
 
-===========
-export A=A
-echo $A => ""
-===========
-echo $? => "?"
-===========
-echo $_ => ""
+bash:
+cat
+that="cat"
 
-
+liittyy ambigious redirect
 
 ambigious redirect olisi ok fixata, yritan
 
-
-
-
+ja samaan syssyyn << $THIS
+>$THIS
+>cat that
+Command 'that' not found, did you mean:
+  command 'tcat' from deb libgsm-tools (1.0.19-1)
+  command 'phat' from deb phat-utils (1.6-2build2)
+  command 'chat' from deb ppp (2.4.9-1+1ubuntu3)
+  command 'jhat' from deb openjdk-8-jdk-headless (8u442-b06~us1-0ubuntu1~22.04)
+Try: apt install <deb name>
+mutta bash:
+<< $THIS
+> $THIS
 
 Lauri lupasi arvioida perjantaina
-
