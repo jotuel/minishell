@@ -41,3 +41,37 @@ Direct leak of 16344 byte(s) in 1 object(s) allocated from:
     #6 0x4e08cb in main /home/jrimpila/Git/minishell/srcs/main.c:46:9
     #7 0x730341429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
 
+jrimpila:/home/jrimpila/Git/minishell😎>echo >out2 blaablaa
+=================================================================
+==1708503==ERROR: AddressSanitizer: attempting double-free on 0x602000004b90 in thread T0:
+    #0 0x49a002 in free (/home/jrimpila/Git/minishell/minishell+0x49a002)
+    #1 0x4d902b in destroy_old_page /home/jrimpila/Git/minishell/srcs/page.c:75:4
+    #2 0x4d3711 in deallocate /home/jrimpila/Git/minishell/srcs/exit.c:49:2
+    #3 0x4f603b in run_builtin /home/jrimpila/Git/minishell/srcs/inbuild.c:69:10
+    #4 0x4e73a9 in prompt_input /home/jrimpila/Git/minishell/srcs/input.c:70:3
+    #5 0x4e08cb in main /home/jrimpila/Git/minishell/srcs/main.c:46:9
+    #6 0x74a9f9629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #7 0x74a9f9629e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #8 0x41f3a4 in _start (/home/jrimpila/Git/minishell/minishell+0x41f3a4)
+
+0x602000004b90 is located 0 bytes inside of 9-byte region [0x602000004b90,0x602000004b99)
+freed by thread T0 here:
+    #0 0x49a002 in free (/home/jrimpila/Git/minishell/minishell+0x49a002)
+    #1 0x4f55b6 in do_redirections /home/jrimpila/Git/minishell/srcs/inbuild.c:36:3
+    #2 0x4f5bfc in run_builtin /home/jrimpila/Git/minishell/srcs/inbuild.c:58:23
+    #3 0x4e73a9 in prompt_input /home/jrimpila/Git/minishell/srcs/input.c:70:3
+    #4 0x4e08cb in main /home/jrimpila/Git/minishell/srcs/main.c:46:9
+    #5 0x74a9f9629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+previously allocated by thread T0 here:
+    #0 0x49a26d in malloc (/home/jrimpila/Git/minishell/minishell+0x49a26d)
+    #1 0x500aea in ft_calloc /home/jrimpila/Git/minishell/libft/ft_calloc.c:26:9
+    #2 0x4d11cc in ft_xcalloc /home/jrimpila/Git/minishell/srcs/ft_xcalloc.c:22:8
+    #3 0x4d145d in cnvrt_to_char /home/jrimpila/Git/minishell/srcs/parsing_utils.c:44:11
+    #4 0x4eb32a in add_redirection /home/jrimpila/Git/minishell/srcs/redir.c:40:30
+    #5 0x4d8084 in conv_linked_to_sentence /home/jrimpila/Git/minishell/srcs/page.c:58:4
+    #6 0x4da108 in create_page /home/jrimpila/Git/minishell/srcs/page.c:105:13
+    #7 0x4e664d in process /home/jrimpila/Git/minishell/srcs/input.c:30:2
+    #8 0x4e6767 in prompt_input /home/jrimpila/Git/minishell/srcs/input.c:67:2
+    #9 0x4e08cb in main /home/jrimpila/Git/minishell/srcs/main.c:46:9
+    #10 0x74a9f9629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
