@@ -17,10 +17,10 @@
 # include <stdint.h>
 # include <stdlib.h>
 # ifndef MAX_VARS
-#  define MAX_VARS (100)
+#  define MAX_VARS 100
 # endif
 # ifndef MAX_LENGTH
-#  define MAX_LENGTH (400)
+#  define MAX_LENGTH 400
 # endif
 # include "../libft/libft.h"
 # include <errno.h>
@@ -36,14 +36,14 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # ifndef PATH_MAX
-#  define PATH_MAX (5000)
+#  define PATH_MAX 5000
 # endif
 # define ENV_SIZE 4096
 # ifndef MAX_SENT_SIZE
-#  define MAX_SENT_SIZE (2000)
+#  define MAX_SENT_SIZE 2000
 # endif
 # ifndef MAX_SENTENCES
-#  define MAX_SENTENCES (50)
+#  define MAX_SENTENCES 50
 # endif
 
 # ifndef USER
@@ -129,9 +129,10 @@ int				builtin_cd(char *path);
 /*
 ** BUILT' IN UTISLS
 */
-int				print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1], \
-				int fd);
+int				print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1],
+					int fd);
 int				unset_one(char *env_val);
+int				file_closer(int fd);
 
 /*
 ** ENVVAR UTILS

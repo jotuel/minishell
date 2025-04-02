@@ -36,7 +36,7 @@ int	print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1], int fd)
 	cpy[i] = NULL;
 	sort_cpy(cpy);
 	final_print(cpy, 0, fd);
-	close(fd);
+	fd = file_closer(fd);
 	return (0);
 }
 
