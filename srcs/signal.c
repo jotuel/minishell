@@ -12,6 +12,9 @@
 
 #include "../include/minishell.h"
 
+/*
+ * Signal handler for SIGINT and SIGQUIT signals.
+ */
 void	signal_handler(int sig_nbr)
 {
 	printf("\n");
@@ -21,6 +24,9 @@ void	signal_handler(int sig_nbr)
 	(void)sig_nbr;
 }
 
+/*
+ * Signal handler for SIGINT and SIGQUIT signals during execution.
+ */
 void	signal_handler_execution(int sig_nbr)
 {
 	if (sig_nbr == SIGINT)
@@ -29,18 +35,27 @@ void	signal_handler_execution(int sig_nbr)
 		printf("Quit (core dumped)\n");
 }
 
+/*
+ * Set signal handlers for SIGINT and SIGQUIT signals.
+ */
 void	set_signals(void)
 {
 	signal(SIGINT, &signal_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
 
+/*
+ * Unset signal handlers for SIGINT and SIGQUIT signals.
+ */
 void	unset_signals(void)
 {
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 }
 
+/*
+ * Block signals in parent process.
+ */
 void	block_signals_in_parent(void)
 {
 	signal(SIGQUIT, &signal_handler_execution);
