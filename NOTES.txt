@@ -18,9 +18,24 @@ echo $_ => ""
 
 ambigious redirect olisi ok fixata, yritan
 
+static t_node	*check_inpipe(t_sent *sentence, t_node *node)
+{
+	if (node && node->type == PIPE)
+	{
+		sentence->inpipe = 1;
+		if (get_data()->tokens.last == node || node->next->type == PIPE)
+			ft_exit(get_data(), "syntax error near token", "|", 1);
+		node = destroy_node(&get_data()->tokens, node);
+	}
+	return (node);
+}
+
+needs to do print error instead of exit.
+
+error_prints for syntax error need to set ?_ correctly.
 
 
 
 
-Lauri lupasi arvioida perjantaina
+Lauri ja Daniel lupasivat arvioida perjantaina
 

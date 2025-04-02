@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 11:52:50 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:33:36 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ bool	is_file(t_token type)
 }
 
 // i is 0, k is 0, sentence is calloced, node is pulled from data
+//ft_exit needs to be changed to errpr
 t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence);
 
 static t_node	*check_inpipe(t_sent *sentence, t_node *node)
@@ -56,7 +57,7 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
 				free (sentence);
 				sentence = NULL;
 				return (error_printf("syntax error near \
-				unexpected token", "nl"), NULL);
+				unexpected token", ""), NULL);
 			}
 		}
 		else if (is_file(node->type))

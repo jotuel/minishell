@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:41:58 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 11:51:13 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:59:15 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	add_back_utils(t_list *stack, t_node *new, t_node *cur)
 	stack->last = new;
 }
 //TODO error status
+
 static void	initialize_empty_stack(t_list *stack, t_node *new)
 {
 	stack->first = new;
@@ -58,9 +59,7 @@ static void	initialize_empty_stack(t_list *stack, t_node *new)
 	{
 		deallocate(get_data());
 		return (error_printf("syntax error near", "unexpected token '|'"));
-		
 	}
-	
 }
 
 void	ft_lstadd_back(t_list *stack, t_node *new)
