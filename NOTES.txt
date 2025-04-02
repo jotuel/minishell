@@ -75,3 +75,9 @@ previously allocated by thread T0 here:
     #8 0x4e6767 in prompt_input /home/jrimpila/Git/minishell/srcs/input.c:67:2
     #9 0x4e08cb in main /home/jrimpila/Git/minishell/srcs/main.c:46:9
     #10 0x74a9f9629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+	ambiguous redirect
+	<$invalid blaa
+	if invalid is invalid or has 0 or 2+ words
+
+export ilman argumenttia jaa jumiin, ilmeisesti jotain jaa sulkematta, valittaa vaarasta fd. Varmaan liittyy kun lisasin guardeja 0 -1 casea varten
