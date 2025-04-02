@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:36:25 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 15:59:35 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:42:21 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int	main(int argc, char **argv, char *envp[])
 	while (!ret)
 		ret = prompt_input(NULL, pfd, get_data(), 0);
 	rl_clear_history();
+	deallocate(get_data());
 	return (store_return_value(0, false));
 }

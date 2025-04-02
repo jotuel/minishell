@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 16:02:38 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:06:18 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,7 @@ static t_node	*check_inpipe(t_sent **sentence, t_node *node)
 	{
 		(*sentence)->inpipe = 1;
 		if (get_data()->tokens.last == node || node->next->type == PIPE)
-		{
-			free(*sentence);
-			(*sentence) = NULL;
-			deallocate(get_data());
-			error_printf("syntax error near token", "|");
-			add_envvar(get_data()->env, "?", "2");
-			return (NULL);
-		}
+			return ((t_node *)syntax_error("|"));
 		node = destroy_node(&get_data()->tokens, node);
 	}
 	return (node);
@@ -59,7 +52,7 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
 		{
 			if (node->next->type == REDIRECT || node->next->type == PIPE
 				|| get_data()->tokens.last == node)
-				return (syntax_error("nl", &sentence));
+				return (syntax_error("`newline'"));
 		}
 		else if (is_file(node->type))
 			add_redirection(node, sentence, k++);
@@ -110,8 +103,9 @@ t_sent	**create_page(t_list *stack)
 	i = 0;
 	while (cur)
 	{
-		page[i] = conv_linked_to_sentence(0, 0, get_data()->tokens.first,
-				ft_xcalloc(sizeof(t_sent), 1));
+		page[i] = ft_xcalloc(sizeof(t_sent), 1);
+		page[i] = conv_linked_to_sentence(0, 0, get_data()->tokens.first, \
+		page[i]);
 		if (!page[i])
 			return (destroy_old_page(i, 0, 0, get_data()), NULL);
 		cur = stack->first;

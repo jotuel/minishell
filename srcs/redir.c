@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:39:47 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 14:10:16 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:05:12 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	add_redirection(t_node *node, t_sent *sentence, int i)
 		sentence->redirs[i].path = cnvrt_to_char(node->str);
 	else
 	{
+		deallocate(get_data());
 		error_printf("", "syntax error near unexpected token `newline'");
-		sentence->redirs[i].path = ft_strdup("\0");
+		store_return_value(2, true);
+		return ;
 	}
 }
