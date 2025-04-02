@@ -108,6 +108,8 @@ void	expand_arguments(t_char *dst, t_char *c, t_data *data, int di)
 	dst[di].c = 0;
 }
 
+bool check_for_all_spaces(t_char *line);
+
 // dynamic memory is problematic due to unknown sizes,
 //	last few characters are missing sometimes
 t_char	*lexify(char *line, t_data *data)
@@ -119,6 +121,8 @@ t_char	*lexify(char *line, t_data *data)
 	newline = ft_xcalloc(ft_strlen(line) * 3 + 10, sizeof(t_char));
 	remove_quotes(newline, line, 0, 0);
 	i = 0;
+	if (check_for_all_spaces(newline))
+		return (free(newline), NULL);
 	while (newline[i].c != 0)
 		mark_commands(newline, i++);
 	mark_arguments(newline);

@@ -31,7 +31,7 @@ static void	execute_child(t_sent *sent, int pfd[2], pid_t child)
 			exit(0);
 		if (is_builtin(sent->array[0]))
 			exit(run_builtin(sent->argc, sent->array, sent, false));
-		if (-1 == execve(sent->array[0], sent->array, __environ))
+		if (-1 == execve(sent->array[0], sent->array, NULL))
 			ft_exit(get_data(), sent->array[0], strerror(errno), errno);
 	}
 	else if (child == -1)

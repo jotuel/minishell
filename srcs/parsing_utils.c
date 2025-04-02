@@ -64,3 +64,17 @@ t_sent	*syntax_error(char *token, t_sent **sentence)
 	error_printf("syntax error near unexpected token", token);
 	return (NULL);
 }
+
+bool check_for_all_spaces(t_char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line[i].c)
+	{
+		if (line[i].c != ' ')
+			return (false);
+		i++;
+	}
+	return (true);
+}
