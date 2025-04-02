@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 16:02:38 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:15:39 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,9 @@ t_sent	**create_page(t_list *stack)
 	i = 0;
 	while (cur)
 	{
-		page[i] = conv_linked_to_sentence(0, 0, get_data()->tokens.first,
-				ft_xcalloc(sizeof(t_sent), 1));
+		page[i] = ft_xcalloc(sizeof(t_sent), 1);
+		page[i] = conv_linked_to_sentence(0, 0, get_data()->tokens.first, \
+		page[i]);
 		if (!page[i])
 			return (destroy_old_page(i, 0, 0, get_data()), NULL);
 		cur = stack->first;

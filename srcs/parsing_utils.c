@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:54:24 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 16:12:04 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:16:38 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ char	*cnvrt_to_char(t_char *line)
  */
 t_sent	*syntax_error(char *token, t_sent **sentence)
 {
+	(void) sentence;
 	deallocate(get_data());
-	free(*sentence);
-	(*sentence) = NULL;
-	add_envvar(get_data()->env, "?", "2");
+	store_return_value(2, true);
 	error_printf("syntax error near unexpected token", token);
 	return (NULL);
 }
