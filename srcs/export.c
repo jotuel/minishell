@@ -65,8 +65,11 @@ int	add_envvar(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *envvar,
 //Checks that export identifiers are valid
 int	errorcheck_expand(char *var)
 {
+    FILE *tmp;
 	int	i;
 
+	tmp = stdout;
+	stdout = stderr;
 	i = 0;
 	if (!var || (var[i] != '_' && ft_isalpha(var[i]) == 0))
 	{
@@ -80,6 +83,7 @@ int	errorcheck_expand(char *var)
 		printf("minishell: export: `%s': not a valid identifier\n", var);
 		return (1);
 	}
+	stdout = tmp;
 	return (0);
 }
 
@@ -112,7 +116,7 @@ void	process_new_envvarr(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *var)
 	add_envvar(env, name, value);
 }
 
-//BASH goes through the arguments and even if 
+//BASH goes through the arguments and even if
 //there is error in one it applies the rest
 // if any one of them fails the return value is 1
 int	bi_export(int argc, char *argv[], t_sent *sent, int fd)
