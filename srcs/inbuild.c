@@ -105,5 +105,16 @@ int	bi_pwd(int fd)
 	{
 		error_printf("system", "getcwd() error");
 	}
+	fd = file_closer(fd);
 	return (0);
+}
+
+/*
+*   avoids closing stdout for no good reason and closes other files.
+*/
+int	file_closer(int fd)
+{
+	if (fd == 255)
+		close(fd);
+	return (1);
 }

@@ -58,5 +58,6 @@ int	bi_echo(int argc, char *argv[], int fd)
 	}
 	if (!opt)
 		write(fd, "\n", 1);
+	fd = file_closer(fd);
 	return (0);
 }

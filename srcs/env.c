@@ -94,6 +94,7 @@ void	bi_env(t_data *data, int fd)
 		}
 		i++;
 	}
+	fd = file_closer(fd);
 }
 
 /*
