@@ -158,6 +158,7 @@ void			error_printf(char *cmd, char *message);
 void			test(void);
 void			deallocate(t_data *data);
 int				ft_atoi_spec(const char *nptr, int sign, long ret);
+t_sent			*syntax_error(char *token, t_sent *sentence);
 
 /*
 ** UTILITIES

@@ -6,28 +6,28 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:41:58 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 11:59:15 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:42:39 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//BASH counts heredocs quite early so we do it while creating nodes
+// BASH counts heredocs quite early so we do it while creating nodes
 static void	set_type(t_node *new)
 {
 	if (new->str && new->str[0].c == '|' && new->str[0].com)
 		new->type = PIPE;
-	else if (((new->str && new->str[0].c == '>') || (new->str \
-	&& new->str[0].c == '<' && new->str[0].com)))
+	else if (((new->str && new->str[0].c == '>') || (new->str
+				&& new->str[0].c == '<' && new->str[0].com)))
 		new->type = REDIRECT;
-	else if (new->prev->str && new->prev->str[0].c == '>' \
-	&& new->prev->str[1].c == '>' && new->prev->str[0].com)
+	else if (new->prev->str && new->prev->str[0].c == '>'
+		&& new->prev->str[1].c == '>' && new->prev->str[0].com)
 		new->type = APPEND;
-	else if (new->prev->str && new->prev->str[0].c == '>' \
-	&& new->prev->str[0].com)
+	else if (new->prev->str && new->prev->str[0].c == '>'
+		&& new->prev->str[0].com)
 		new->type = OUT_FILE;
-	else if (new->prev->str && new->prev->str[0].c == '<' \
-	&& new->prev->str[1].c == '<' && new->prev->str[0].com)
+	else if (new->prev->str && new->prev->str[0].c == '<'
+		&& new->prev->str[1].c == '<' && new->prev->str[0].com)
 	{
 		new->type = HERE_DOCS;
 		get_data()->herecount++;
@@ -46,6 +46,8 @@ static void	add_back_utils(t_list *stack, t_node *new, t_node *cur)
 	cur->next = new;
 	stack->last = new;
 }
+
+// TODO error status
 //TODO error status
 
 static void	initialize_empty_stack(t_list *stack, t_node *new)
