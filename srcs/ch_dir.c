@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:39:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/03 09:45:33 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:51:45 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	is_valid_cd(const char *dir)
 	if (stat(dir, &file_stat) == -1)
 	{
 		if (errno == ENOENT)
-			error_printf("cd", "no such file or directory");
+			error_printf("cd", "No such file or directory");
 		else if (errno == EACCES)
 			error_printf("cd", "permission denied");
 		else

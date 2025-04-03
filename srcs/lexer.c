@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/03 08:04:58 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:53:05 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,17 @@ void	mark_env_var(t_char *nl, int end)
 	else
 	{
 		nl[end].var = 1;
+		if (nl[end].c == '?')
+			return ;
 		end++;
 	}
 	while (nl[end].ghost || (nl[end].c != 0 && !nl[end].esc
-			&& (ft_isalnum(nl[end].c) || question_or_underscore(nl[end].c))))
+			&& (ft_isalnum(nl[end].c) || nl[end].c == '_')))
 	{
 		if (nl[end + 1].blok != 1)
+		{
 			nl[end].var = 1;
+		}
 		else
 			return ;
 		end++;

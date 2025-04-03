@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:05:36 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/03 09:46:01 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:49:48 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	do_redirections(t_sent *sent)
 		}
 		if (dup2(fd, 255) == -1)
 		{
+			close(fd);
 			free(sent->redirs[i].path);
 			sent->redirs[i].path = NULL;
 			return (error_printf("dup2", strerror(errno)), 1);
