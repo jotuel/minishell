@@ -32,10 +32,12 @@ int	do_redirections(t_dir *red, int fd, int ir)
 			return (error_printf(red[ir].path, strerror(errno)), -1);
 		if (-1 == dup2(fd, 255))
 			return (error_printf("dup2", strerror(errno)), -1);
-		close(fd);
-		free(red[ir].path);
-		red[ir++].path = NULL;
+		if (fd != 1)
+			close(fd);
+		else
+			close(255);
 		fd = 255;
+		ir += 1;
 	}
 	return (fd);
 }
@@ -48,10 +50,10 @@ int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 {
 	int	fd;
 
+	update_env(store_return_value(0, false), argv[0], update);
 	fd = do_redirections(sent->redirs, 1, 0);
 	if (fd == -1)
 		return (store_return_value(1, true));
-	update_env(store_return_value(0, false), argv[0], update);
 	if (argc == 0)
 		return (1);
 	if (ft_strncmp("cd", argv[0], 3) == 0)
@@ -69,7 +71,7 @@ int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 	else if (ft_strncmp("exit", argv[0], 5) == 0)
 		argc = bi_exit(argc, argv, sent);
 	store_return_value(argc, true);
-	return (deallocate(get_data()), 1);
+	return (deallocate(get_data()), 0);
 }
 
 /*

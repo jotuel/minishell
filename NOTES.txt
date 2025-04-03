@@ -60,33 +60,33 @@ _=/usr/bin/env
 
 echo <INVALID blaa
 
-inbuildit ei voi vaan ignoroida infileja. taytyy katsoa onko valid vai ei 
+inbuildit ei voi vaan ignoroida infileja. taytyy katsoa onko valid vai ei
 
 echo <"./test_files/infile" <missing <"./test_files/infile"
 Bad file descriptor error tulee, mutta ei palauta promptiin ja aiheuttaa memory leakin
 
-Fiksasin memory leaking mutta prompt ei viela palauta.
+Fiksasin memory leaking mutta prompt ei viela palauta. <- mehukas. looppaa prompt_input funktiota mutta readline ei kuulu. oletan et 1 fd suljetaan. :D
 
-echo hi >./outfiles/outfile01 | echo bye 
+echo hi >./outfiles/outfile01 | echo bye
 
 bashi antaa nollan koska vika toimii, meilla antaa ykkosen
 
 /test meilla error code on 2 bashilla 127
 
-echo "$" bugaa 
+echo "$" bugaa
 
 jrimpila:/home/jrimpila/Git/minishell😎>echo $
 $
-jrimpila:/home/jrimpila/Git/minishell😎>echo $ 
+jrimpila:/home/jrimpila/Git/minishell😎>echo $
 $
-jrimpila:/home/jrimpila/Git/minishell😎>echo "$" 
+jrimpila:/home/jrimpila/Git/minishell😎>echo "$"
 
-jrimpila:/home/jrimpila/Git/minishell😎>echo "$?" 
+jrimpila:/home/jrimpila/Git/minishell😎>echo "$?"
 0
-jrimpila:/home/jrimpila/Git/minishell😎>bash 
-jrimpila@c1r6p20:/home/jrimpila/Git/minishell$ export GHOST=123 | env blaa | grep _     
+jrimpila:/home/jrimpila/Git/minishell😎>bash
+jrimpila@c1r6p20:/home/jrimpila/Git/minishell$ export GHOST=123 | env blaa | grep _
 env: 'blaa': No such file or directory
-jrimpila@c1r6p20:/home/jrimpila/Git/minishell$ export GHOST=123 | env | grep _     
+jrimpila@c1r6p20:/home/jrimpila/Git/minishell$ export GHOST=123 | env | grep _
 LS_COLORS=
 _=/usr/bin/env
 jrimpila@c1r6p20:/home/jrimpila/Git/minishell$ echo $_
@@ -133,7 +133,6 @@ pitais handlaa $??
 bashissa olisi das
 
 env | grep $_ ei paivita _ mutta leakkaa, oletettavasti se paivitys leakataan eika kiinniteta enviin
-
 
 cd 123123 antaa permission denied vaikka pitaisi no such file or directory
 

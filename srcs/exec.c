@@ -32,7 +32,9 @@ static void	execute_child(t_sent *sent, int pfd[2], pid_t child, t_data *data)
 		if (is_builtin(sent->array[0]))
 			exit(run_builtin(sent->argc, sent->array, sent, false));
 		if (-1 == execve(sent->array[0], sent->array, __environ))
-			ft_exit(data, sent->array[0], strerror(errno), errno);
+			if (errno == 2)
+				ft_exit(data, sent->array[0], strerror(errno), 127);
+		ft_exit(data, sent->array[0], strerror(errno), errno);
 	}
 	else if (child == -1)
 		ft_exit(data, "fork", strerror(errno), errno);

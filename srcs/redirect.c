@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <unistd.h>
 
 /*
 **  opens a file as stdout where it ends. creating it only if needed.
