@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:39:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/03 08:23:09 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:08:51 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ int	bi_cd(int argc, char *argv[], t_sent *sent)
 	if (is_valid_cd(argv[1]) && !sent->inpipe && !sent->outpipe)
 		add_envvar(get_data()->env, "OLDPWD", getcwd(cwd, PATH_MAX));
 	else
-		return (1);
-	if (argv[1] == NULL)
 	{
-		chdir(find_env_value("$HOME", get_data()));
+		free(cur);
+		return (1);
 	}
+	if (argv[1] == NULL)
+		chdir(find_env_value("$HOME", get_data()));
 	else if (ft_strncmp(argv[1], "-", 2) == 0)
 		chdir(find_env_value("$OLDPWD", get_data()));
 	else
 		chdir(argv[1]);
 	add_envvar(get_data()->env, "PWD", getcwd(cwd, PATH_MAX));
-	free(cur);
-	return (0);
+	return (free(cur), 0);
 }

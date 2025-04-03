@@ -29,9 +29,6 @@ static t_node	*check_inpipe(t_sent *sentence, t_node *node)
 	return (node);
 }
 
-needs to do print error instead of exit.
-
-error_prints for syntax error need to set ?_ correctly.
 
 
 
@@ -73,3 +70,64 @@ echo hi >./outfiles/outfile01 | echo bye
 bashi antaa nollan koska vika toimii, meilla antaa ykkosen
 
 /test meilla error code on 2 bashilla 127
+
+echo "$" bugaa 
+
+jrimpila:/home/jrimpila/Git/minishell😎>echo $
+$
+jrimpila:/home/jrimpila/Git/minishell😎>echo $ 
+$
+jrimpila:/home/jrimpila/Git/minishell😎>echo "$" 
+
+jrimpila:/home/jrimpila/Git/minishell😎>echo "$?" 
+0
+jrimpila:/home/jrimpila/Git/minishell😎>bash 
+jrimpila@c1r6p20:/home/jrimpila/Git/minishell$ export GHOST=123 | env blaa | grep _     
+env: 'blaa': No such file or directory
+jrimpila@c1r6p20:/home/jrimpila/Git/minishell$ export GHOST=123 | env | grep _     
+LS_COLORS=
+_=/usr/bin/env
+jrimpila@c1r6p20:/home/jrimpila/Git/minishell$ echo $_
+/etc/bash_completion
+jrimpila@c1r6p20:/home/jrimpila/Git/minishell$ exit
+jrimpila:/home/jrimpila/Git/minishell😎>env | grep $_
+_=/usr/bin/bash
+jrimpila:/home/jrimpila/Git/minishell😎>ls | grep $_
+jrimpila:/home/jrimpila/Git/minishell😎>ls | grep $_
+jrimpila:/home/jrimpila/Git/minishell😎>ls | grep $_
+jrimpila:/home/jrimpila/Git/minishell😎>ls | grep $_
+jrimpila:/home/jrimpila/Git/minishell😎>ls | grep $_
+jrimpila:/home/jrimpila/Git/minishell😎>ls | grep $_
+jrimpila:/home/jrimpila/Git/minishell😎>ls
+Makefile  NOTES.txt  include  libft  minishell	minishell_tester  srcs
+jrimpila:/home/jrimpila/Git/minishell😎>ls | grep $_
+jrimpila:/home/jrimpila/Git/minishell😎>ls | echo $?
+1
+jrimpila:/home/jrimpila/Git/minishell😎>ls | echo $_
+1
+
+=================================================================
+==1818589==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x49a26d in malloc (/home/jrimpila/Git/minishell/minishell+0x49a26d)
+    #1 0x732e460c8bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+
+Indirect leak of 34 byte(s) in 2 object(s) allocated from:
+    #0 0x49a26d in malloc (/home/jrimpila/Git/minishell/minishell+0x49a26d)
+    #1 0x732e460c8bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+
+SUMMARY: AddressSanitizer: 66 byte(s) leaked in 3 allocation(s).
+jrimpila:/home/jrimpila/Git/minishell😎>
+
+
+cd das
+minishell: cd: permission denied
+jrimpila:/home/jrimpila/Git/minishell😎>echo $_
+cd
+
+pitais handlaa $??
+
+bashissa olisi das
+
+env | grep $_ ei paivita _ mutta leakkaa, oletettavasti se paivitys leakataan eika kiinniteta enviin
