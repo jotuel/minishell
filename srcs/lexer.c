@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 12:41:37 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:04:58 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	expand_arguments(t_char *dst, t_char *c, t_data *data, int di)
 	dst[di].c = 0;
 }
 
-bool check_for_all_spaces(t_char *line);
+bool	check_for_all_spaces(t_char *line);
 
 // dynamic memory is problematic due to unknown sizes,
 //	last few characters are missing sometimes

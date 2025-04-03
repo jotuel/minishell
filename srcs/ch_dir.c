@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:39:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/26 14:34:32 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:23:09 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,6 @@ int	bi_cd(int argc, char *argv[], t_sent *sent)
 	else
 		chdir(argv[1]);
 	add_envvar(get_data()->env, "PWD", getcwd(cwd, PATH_MAX));
-	(void)cur;
+	free(cur);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:54:24 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 17:29:19 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:05:32 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_sent	*syntax_error(char *token)
 	return (NULL);
 }
 
-bool check_for_all_spaces(t_char *line)
+bool	check_for_all_spaces(t_char *line)
 {
 	size_t	i;
 

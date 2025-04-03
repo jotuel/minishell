@@ -52,3 +52,24 @@ mutta bash:
 > $THIS
 
 Lauri lupasi arvioida perjantaina
+
+export GHOST=123 | env | grep GHOST
+_=GHOST
+
+export GHOST=123 | env | grep _
+
+_=/usr/bin/env
+
+
+echo <INVALID blaa
+
+inbuildit ei voi vaan ignoroida infileja. taytyy katsoa onko valid vai ei 
+
+echo <"./test_files/infile" <missing <"./test_files/infile"
+Bad file descriptor error tulee, mutta ei palauta promptiin ja aiheuttaa memory leakin
+
+echo hi >./outfiles/outfile01 | echo bye 
+
+bashi antaa nollan koska vika toimii, meilla antaa ykkosen
+
+/test meilla error code on 2 bashilla 127
