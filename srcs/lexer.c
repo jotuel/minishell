@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/03 10:53:05 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:14:36 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,12 @@ void	mark_arguments(t_char *newline)
 	{
 		if (newline[i].esc)
 			;
-		else if (newline[i].c == '$')
+		else if (newline[i].c == '$' && \
+		(question_or_underscore(newline[i + 1].c) \
+		|| ft_isalnum(newline[i + 1].c)))
+		{
 			mark_env_var(newline, i);
+		}
 		i++;
 	}
 }
