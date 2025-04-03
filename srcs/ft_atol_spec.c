@@ -12,8 +12,6 @@
 
 #include "../include/minishell.h"
 
-static int	all_isspace(char *nptr);
-
 static void	error_print_spec(const char *cmd, const char *message1, \
 const char *message2)
 {
@@ -72,7 +70,7 @@ int	ft_atoi_spec(const char *nptr, int sign, long ret)
 	return ((char)ret * sign);
 }
 
-static int	all_isspace(char *nptr)
+int	all_isspace(char *nptr)
 {
 	int	ret;
 
