@@ -109,7 +109,7 @@ typedef struct s_point
 /*
 ** BUILT' INS
 */
-int				cwd(void);
+int				cwd(t_data *data);
 int				run_builtin(int argc, char *argv[], t_sent *sent, bool update);
 int				is_builtin(char *cmd);
 int				bi_pwd(int fd);
@@ -127,12 +127,13 @@ const char		*find_env_value(char *source, t_data *data);
 int				builtin_cd(char *path);
 
 /*
-** BUILT' IN UTISLS
+** BUILT' IN UTILS
 */
 int				print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1],
 					int fd);
 int				unset_one(char *env_val);
 int				file_closer(int fd);
+int				infile_checker(char *name);
 
 /*
 ** ENVVAR UTILS

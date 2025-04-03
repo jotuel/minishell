@@ -16,29 +16,26 @@
 **  if none fd is returned as it is passed and if any open is dupped to 255
 **  which gets returned.
 */
-int	do_redirections(t_sent *sent, int fd, int i)
+int	do_redirections(t_dir *red, int fd, int ir)
 {
-	while (sent->redirs[i].path)
+	while (red[ir].path)
 	{
-		if (sent->redirs[i].type == OUT_FILE)
-			fd = open(sent->redirs[i].path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (sent->redirs[i].type == APPEND)
-			fd = open(sent->redirs[i].path, O_WRONLY | O_CREAT | O_APPEND,
-					0644);
-		else if (sent->redirs[i].type == HERE_DOCS)
-			fd = sent->redirs[i].here_fd;
-		if (fd == -1 || dup2(fd, 255) == -1)
-		{
-			error_printf(sent->redirs[i].path, strerror(errno));
-			free(sent->redirs[i].path);
-			sent->redirs[i].path = NULL;
-			return (1);
-		}
+		if (red[ir].type == OUT_FILE)
+			fd = open(red[ir].path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if (red[ir].type == IN_FILE && infile_checker(red[ir].path))
+			return (error_printf(red[ir].path, strerror(errno)), -1);
+		else if (red[ir].type == APPEND)
+			fd = open(red[ir].path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else if (red[ir].type == HERE_DOCS)
+			fd = red[ir].here_fd;
+		if (fd == -1)
+			return (error_printf(red[ir].path, strerror(errno)), -1);
+		if (-1 == dup2(fd, 255))
+			return (error_printf("dup2", strerror(errno)), -1);
 		close(fd);
-		free(sent->redirs[i].path);
-		sent->redirs[i].path = NULL;
+		free(red[ir].path);
+		red[ir++].path = NULL;
 		fd = 255;
-		i++;
 	}
 	return (fd);
 }
@@ -49,25 +46,28 @@ int	do_redirections(t_sent *sent, int fd, int i)
 */
 int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 {
+	int	fd;
+
+	fd = do_redirections(sent->redirs, 1, 0);
+	if (fd == -1)
+		return (store_return_value(1, true));
 	update_env(store_return_value(0, false), argv[0], update);
 	if (argc == 0)
 		return (1);
 	if (ft_strncmp("cd", argv[0], 3) == 0)
 		argc = bi_cd(argc, argv, sent);
 	else if (ft_strncmp("pwd", argv[0], 4) == 0)
-		argc = bi_pwd(do_redirections(sent, 0, 1));
+		argc = bi_pwd(fd);
 	else if (ft_strncmp("echo", argv[0], 5) == 0)
-		argc = bi_echo(argc, argv, do_redirections(sent, 0, 1));
+		argc = bi_echo(argc, argv, fd);
 	else if (ft_strncmp("env", argv[0], 4) == 0)
-		bi_env(get_data(), do_redirections(sent, 0, 1));
+		bi_env(get_data(), fd);
 	else if (ft_strncmp("export", argv[0], 7) == 0)
-		argc = bi_export(argc, argv, sent, do_redirections(sent, 0, 1));
+		argc = bi_export(argc, argv, sent, fd);
 	else if (ft_strncmp("unset", argv[0], 6) == 0)
 		argc = bi_unset(argc, argv, sent);
 	else if (ft_strncmp("exit", argv[0], 5) == 0)
 		argc = bi_exit(argc, argv, sent);
-	else
-		return (deallocate(get_data()), 0);
 	store_return_value(argc, true);
 	return (deallocate(get_data()), 1);
 }
@@ -119,7 +119,7 @@ int	bi_pwd(int fd)
 
 /*
 **   avoids closing stdout for no good reason and closes other files.
- */
+*/
 int	file_closer(int fd)
 {
 	if (fd == 255)

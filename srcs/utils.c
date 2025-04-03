@@ -67,24 +67,15 @@ int	question_or_underscore(char const c)
 	return (c == '?' || c == '_');
 }
 
-size_t	ft_wrdlen(t_char *str, t_data *data)
+int	infile_checker(char *name)
 {
-	size_t	i;
-	size_t	count_i;
+	int	fd;
 
-	(void)data;
-	i = 0;
-	count_i = 0;
-	if (str == NULL)
-	{
-		error_printf("system", "failure");
+	fd = open(name, O_RDONLY);
+	if (-1 == fd)
 		return (-1);
-	}
-	while (str[i].c != 0 && (str[i].c != ' ' || str[i].esc == 1))
-	{
-		if (str[i].ghost == 0)
-			count_i++;
-		i++;
-	}
-	return (count_i);
+	if (-1 == dup2(fd, 255))
+		return (-1);
+	close(fd);
+	return (0);
 }

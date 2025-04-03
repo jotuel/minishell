@@ -21,7 +21,7 @@ static void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2]);
  * all the forked subprocesses end up here, redirections are dealt with
  * and commands get executed.
  */
-static void	execute_child(t_sent *sent, int pfd[2], pid_t child)
+static void	execute_child(t_sent *sent, int pfd[2], pid_t child, t_data *data)
 {
 	if (!child)
 	{
@@ -31,13 +31,16 @@ static void	execute_child(t_sent *sent, int pfd[2], pid_t child)
 			exit(0);
 		if (is_builtin(sent->array[0]))
 			exit(run_builtin(sent->argc, sent->array, sent, false));
-		if (-1 == execve(sent->array[0], sent->array, NULL))
-			ft_exit(get_data(), sent->array[0], strerror(errno), errno);
+		if (-1 == execve(sent->array[0], sent->array, __environ))
+			ft_exit(data, sent->array[0], strerror(errno), errno);
 	}
 	else if (child == -1)
-		ft_exit(get_data(), "fork", strerror(errno), errno);
+		ft_exit(data, "fork", strerror(errno), errno);
 }
 
+/*
+** reaps the children and does some return value arithmetic with last
+*/
 static int	wait_for_child(int ret, int state, pid_t last_child, int *i)
 {
 	while (*i)
@@ -80,7 +83,7 @@ int	execute(t_sent *sentence, int pfd[2], pid_t my_child, t_data *data)
 		}
 		return (execute(data->page[i++], pfd, fork(), data));
 	}
-	execute_child(sentence, pfd, my_child);
+	execute_child(sentence, pfd, my_child, data);
 	pipe_closer(&pfd[STDIN_FILENO]);
 	pipe_closer(&pfd[STDOUT_FILENO]);
 	if (i > 0 && data->page[i - 1] && data->page[i - 1]->error > 2)

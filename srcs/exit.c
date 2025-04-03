@@ -99,7 +99,7 @@ int	bi_exit(int argc, char *argv[], t_sent *sentence)
 	tmp = stdout;
 	stdout = stderr;
 	printf("exit\n");
-	if (argc == 0)
+	if (argc == 0 || !argv[1])
 	{
 		if (sentence->outpipe || sentence->inpipe)
 			return (0);

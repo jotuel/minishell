@@ -63,16 +63,24 @@ t_sent	*syntax_error(char *token)
 	return (NULL);
 }
 
-bool	check_for_all_spaces(t_char *line)
+size_t	ft_wrdlen(t_char *str, t_data *data)
 {
 	size_t	i;
+	size_t	count_i;
 
+	(void)data;
 	i = 0;
-	while (line[i].c)
+	count_i = 0;
+	if (str == NULL)
 	{
-		if (line[i].c != ' ')
-			return (false);
+		error_printf("system", "failure");
+		return (-1);
+	}
+	while (str[i].c != 0 && (str[i].c != ' ' || str[i].esc == 1))
+	{
+		if (str[i].ghost == 0)
+			count_i++;
 		i++;
 	}
-	return (true);
+	return (count_i);
 }
