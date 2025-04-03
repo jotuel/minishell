@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:39:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/03 09:08:51 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:45:33 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,23 @@ static int	is_valid_cd(const char *dir)
 	if (dir == NULL)
 		dir = find_env_value("$HOME", get_data());
 	if (dir == NULL)
-	{
-		printf("minishell: cd : HOME not set\n");
-		return (0);
-	}
+		return (printf("minishell: cd: HOME not set\n"), 0);
 	if (dir[0] == 0)
 		return (1);
 	if (stat(dir, &file_stat) == -1)
 	{
-		if (!S_ISREG(file_stat.st_mode) && !S_ISDIR(file_stat.st_mode) \
-		&& !S_ISLNK(file_stat.st_mode))
+		if (errno == ENOENT)
 			error_printf("cd", "no such file or directory");
-		else if (!S_ISDIR(file_stat.st_mode) && !S_ISLNK(file_stat.st_mode))
-			error_printf("cd", "not a directory");
-		else if (access(dir, X_OK))
+		else if (errno == EACCES)
 			error_printf("cd", "permission denied");
 		else
 			error_printf("cd", "unknown stat error");
 		return (0);
 	}
+	if (!S_ISDIR(file_stat.st_mode) && !S_ISLNK(file_stat.st_mode))
+		return (error_printf("cd", "not a directory"), 0);
+	if (access(dir, X_OK))
+		return (error_printf("cd", "permission denied"), 0);
 	return (1);
 }
 
@@ -53,7 +51,6 @@ int	bi_cd(int argc, char *argv[], t_sent *sent)
 
 	if (argc > 2)
 	{
-		(void)argv;
 		error_printf("cd", "too many arguments\n");
 		return (1);
 	}
