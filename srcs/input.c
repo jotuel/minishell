@@ -49,6 +49,8 @@ static char	*rl_gets(void)
 	line = readline(strcwd);
 	free(strcwd);
 	strcwd = NULL;
+	if (line && all_isspace(line))
+		line[0] = '\0';
 	if (line && *line)
 		add_history(line);
 	update_env(store_return_value(0, false), NULL, false);

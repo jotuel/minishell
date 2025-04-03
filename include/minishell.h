@@ -182,6 +182,7 @@ int				copy_env_to_tchar(t_char *dst, int i, const char *env);
 char			*cnvrt_to_char(t_char *line);
 void			destroy_old_page(int i, int j, int k, t_data *data);
 char			*ft_itoa(unsigned int nbr);
+int				all_isspace(char *nptr);
 
 /*
 ** LEXING & PARSING
