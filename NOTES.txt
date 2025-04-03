@@ -136,3 +136,10 @@ env | grep $_ ei paivita _ mutta leakkaa, oletettavasti se paivitys leakataan ei
 
 
 cd 123123 antaa permission denied vaikka pitaisi no such file or directory
+
+
+env | echo blaa
+
+ls | env
+
+nyt eka printtaa normaaliin outputtiin kun sen pitaisi olla vika
