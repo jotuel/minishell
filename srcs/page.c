@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 18:06:18 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:52:43 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,15 @@ bool	is_file(t_token type)
 		|| type == HERE_QUOTE);
 }
 
-// i is 0, k is 0, sentence is calloced, node is pulled from data
-//ft_exit needs to be changed to errpr
-t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence);
-
 static t_node	*check_inpipe(t_sent **sentence, t_node *node)
 {
+	t_data *data;
+
+	data = get_data();
 	if (node && node->type == PIPE)
 	{
 		(*sentence)->inpipe = 1;
-		if (get_data()->tokens.last == node || node->next->type == PIPE)
+		if (data && (data->tokens.last == node || node->next->type == PIPE))
 			return ((t_node *)syntax_error("|"));
 		node = destroy_node(&get_data()->tokens, node);
 	}
@@ -36,17 +35,17 @@ static t_node	*check_inpipe(t_sent **sentence, t_node *node)
 }
 
 // i is 0, k is 0, sentence is calloced, node is pulled from data
-t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
+t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, int nbr)
 {
-	node = check_inpipe(&sentence, node);
+	node = check_inpipe(&get_data()->page[nbr], node);
 	while (node)
 	{
 		node = get_data()->tokens.first;
 		if (node->type == PIPE)
 		{
-			sentence->argc = i;
-			sentence->outpipe = 1;
-			return (sentence);
+			get_data()->page[nbr]->argc = i;
+			get_data()->page[nbr]->outpipe = 1;
+			return (get_data()->page[nbr]);
 		}
 		if (node->type == REDIRECT)
 		{
@@ -55,14 +54,14 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sentence)
 				return (syntax_error("`newline'"));
 		}
 		else if (is_file(node->type))
-			add_redirection(node, sentence, k++);
+			add_redirection(node, get_data()->page[nbr], k++);
 		else
-			sentence->array[i++] = cnvrt_to_char(node->str);
+			get_data()->page[nbr]->array[i++] = cnvrt_to_char(node->str);
 		node = destroy_node(&get_data()->tokens, node);
 	}
-	if (sentence)
-		sentence->argc = i;
-	return (sentence);
+	if (get_data()->page[nbr])
+		get_data()->page[nbr]->argc = i;
+	return (get_data()->page[nbr]);
 }
 
 void	destroy_old_page(int i, int j, int k, t_data *data)
@@ -104,8 +103,7 @@ t_sent	**create_page(t_list *stack)
 	while (cur)
 	{
 		page[i] = ft_xcalloc(sizeof(t_sent), 1);
-		page[i] = conv_linked_to_sentence(0, 0, get_data()->tokens.first, \
-		page[i]);
+		conv_linked_to_sentence(0, 0, get_data()->tokens.first,	i);
 		if (!page[i])
 			return (destroy_old_page(i, 0, 0, get_data()), NULL);
 		cur = stack->first;
