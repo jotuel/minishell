@@ -127,18 +127,15 @@ cd das
 minishell: cd: permission denied
 jrimpila:/home/jrimpila/Git/minishell😎>echo $_
 cd
-
-pitais handlaa $??
-
 bashissa olisi das
+
+
+
 
 env | grep $_ ei paivita _ mutta leakkaa, oletettavasti se paivitys leakataan eika kiinniteta enviin
 
-cd 123123 antaa permission denied vaikka pitaisi no such file or directory
+cd 123123 muuttaa _ to cd vaikka bashissa _ olisi 123123
 
 
-env | echo blaa
 
-ls | env
-
-nyt eka printtaa normaaliin outputtiin kun sen pitaisi olla vika
+echo >test | leakkaa

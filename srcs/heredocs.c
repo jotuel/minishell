@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:18:56 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 14:39:01 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/04 11:04:48 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	*strjoin_wrapper(char *s1, char *s2)
 // If expand is 1, expansion happens
 char	*create_heredoc(char *terminat, int expand, char *result, char *tmp)
 {
-	while (tmp == NULL || ft_strncmp(terminat, tmp, ft_strlen(terminat + 1)))
+	while (tmp == NULL || ft_strncmp(terminat, tmp, ft_strlen(terminat) + 1))
 	{
 		if (tmp)
 		{

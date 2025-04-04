@@ -6,11 +6,43 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:05:36 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/03 10:55:39 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/04 11:11:45 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+//Tried to plug in but the prints failed due
+int file_has_error(char *path, enum e_token type)
+{
+	struct stat file_stat;
+
+	if (type == HERE_DOCS || type == HERE_QUOTE)
+		return 0;
+	if (stat(path, &file_stat) == -1)
+	{
+		if (errno == ENOENT)
+			error_printf(path, "No such file or directory");
+		else if (errno == EACCES)
+			error_printf(path, "permission denied");
+		else
+			error_printf(path, "unknown stat error");
+		return 1;
+	}
+	if (type == IN_FILE)
+	{
+		if (access(path, R_OK) == -1)
+			return (error_printf(path, "permission denied"), 1);
+	}
+	else if (type == OUT_FILE || type == APPEND)
+	{
+		if (access(path, W_OK) == -1)
+			return (error_printf(path, "permission denied"), 1);
+	}
+	return 0;
+}
+
+
 
 /*
 **  if none fd is returned as it is passed and if any open is dupped to 255
