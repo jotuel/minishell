@@ -6,7 +6,7 @@
 #    By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 10:10:39 by jtuomi            #+#    #+#              #
-#    Updated: 2025/04/01 15:57:27 by jrimpila         ###   ########.fr        #
+#    Updated: 2025/04/04 13:02:37 by jrimpila         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,12 +64,12 @@ BONUS_OBJS := $(BONUS_SRCS:%.c=%.o)
 SUPP_OBJS := $(SUPP_SRCS:%.c=%.o)
 OBJS_ALL := $(OBJS) $(BONUS_OBJS) $(SUPP_OBJS)
 INC_DIR = .
-CFLAGS = -Wall -Wextra -Werror -ggdb3 -gdwarf -fsanitize=address -fsanitize=undefined
+CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -I$(INC_DIR)
 NAME = libft.a
 AR = ar rcs $(NAME)
 all: $(NAME)
-$(NAME) : $(OBJS)
+$(NAME): $(OBJS)
 	$(AR) $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
@@ -83,5 +83,6 @@ bonus: $(BONUS_OBJS)
 	$(AR) $(BONUS_OBJS)
 supp: $(SUPP_OBJS)
 	$(AR) $(SUPP_OBJS)
+	
 
 .PHONY: all clean fclean re bonus supp

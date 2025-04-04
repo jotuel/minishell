@@ -6,15 +6,14 @@
 #    By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/14 13:14:15 by jtuomi            #+#    #+#              #
-#    Updated: 2025/04/03 10:45:17 by jrimpila         ###   ########.fr        #
+#    Updated: 2025/04/04 13:13:10 by jrimpila         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 AR = ar rcs
 CC = cc
 INCLUDE_DIRS = libft
-CFLAGS = -Wall -Wextra -Werror -g3 -DUSER=\"$(USER)\" -gdwarf -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer
-
+CFLAGS = -Wall -Wextra -Werror -DUSER=\"$(USER)\" 
 SRC = lexer.c	ft_xcalloc.c parsing_utils.c heredocs.c init_utils.c\
 	exit.c	env.c utils.c page.c rem_quotes.c open.c signal.c \
 	main.c create_list.c ft_lstaddback.c input.c export.c redir.c \
@@ -27,8 +26,8 @@ NAME = minishell
 LIBFT = ./libft/libft.a
 
 all: $(NAME)
-$(NAME) : $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) $(DEBUG_OBJ) -L $(INCLUDE_DIRS) -lft -lreadline
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) -L $(INCLUDE_DIRS) -lft -lreadline
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
 $(LIBFT):
@@ -40,5 +39,6 @@ fclean: clean
 	$(MAKE) libft fclean
 	rm -f $(NAME)
 re: fclean all
+
 .PHONY:
 	all, libft, clean, fclean, re
