@@ -122,7 +122,6 @@ int				bi_exit(int argc, char *argv[], t_sent *sentence);
 const char		*ft_get_env(const char *target);
 int				add_envvar(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *envvar,
 					char *value);
-// const char		*find_env_char(char *source, t_data *data);
 const char		*find_env_value(char *source, t_data *data);
 int				builtin_cd(char *path);
 
@@ -134,6 +133,7 @@ int				print_alphabetically(char env[ENV_SIZE + 1][MAX_LENGTH + 1],
 int				unset_one(char *env_val);
 int				file_closer(int fd);
 int				infile_checker(char *name);
+int				file_has_error(char *path, enum e_token type);
 
 /*
 ** ENVVAR UTILS

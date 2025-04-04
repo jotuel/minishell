@@ -84,3 +84,33 @@ size_t	ft_wrdlen(t_char *str, t_data *data)
 	}
 	return (count_i);
 }
+
+// Tried to plug in but the prints failed due
+int	file_has_error(char *path, enum e_token type)
+{
+	struct stat	file_stat;
+
+	if (type == HERE_DOCS || type == HERE_QUOTE)
+		return (0);
+	if (stat(path, &file_stat) == -1)
+	{
+		if (errno == ENOENT)
+			error_printf(path, "No such file or directory");
+		else if (errno == EACCES)
+			error_printf(path, "permission denied");
+		else
+			error_printf(path, "unknown stat error");
+		return (1);
+	}
+	if (type == IN_FILE)
+	{
+		if (access(path, R_OK) == -1)
+			return (error_printf(path, "permission denied"), 1);
+	}
+	else if (type == OUT_FILE || type == APPEND)
+	{
+		if (access(path, W_OK) == -1)
+			return (error_printf(path, "permission denied"), 1);
+	}
+	return (0);
+}

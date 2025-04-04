@@ -12,38 +12,6 @@
 
 #include "../include/minishell.h"
 
-//Tried to plug in but the prints failed due
-int file_has_error(char *path, enum e_token type)
-{
-	struct stat file_stat;
-
-	if (type == HERE_DOCS || type == HERE_QUOTE)
-		return 0;
-	if (stat(path, &file_stat) == -1)
-	{
-		if (errno == ENOENT)
-			error_printf(path, "No such file or directory");
-		else if (errno == EACCES)
-			error_printf(path, "permission denied");
-		else
-			error_printf(path, "unknown stat error");
-		return 1;
-	}
-	if (type == IN_FILE)
-	{
-		if (access(path, R_OK) == -1)
-			return (error_printf(path, "permission denied"), 1);
-	}
-	else if (type == OUT_FILE || type == APPEND)
-	{
-		if (access(path, W_OK) == -1)
-			return (error_printf(path, "permission denied"), 1);
-	}
-	return 0;
-}
-
-
-
 /*
 **  if none fd is returned as it is passed and if any open is dupped to 255
 **  which gets returned.
@@ -60,7 +28,7 @@ int	do_redirections(t_dir *red, int fd, int ir)
 			fd = open(red[ir].path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else if (red[ir].type == HERE_DOCS)
 			fd = red[ir].here_fd;
-		if (fd == -1)
+		if (fd == -1 || file_has_error(red[ir].path, red[ir].type))
 			return (error_printf(red[ir].path, strerror(errno)), -1);
 		if (-1 == dup2(fd, 255))
 			return (error_printf("dup2", strerror(errno)), -1);
@@ -82,7 +50,7 @@ int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 {
 	int	fd;
 
-	update_env(store_return_value(0, false), argv[0], update);
+	update_env(store_return_value(0, false), argv[argc - 1], update);
 	fd = do_redirections(sent->redirs, 1, 0);
 	if (fd == -1)
 		return (store_return_value(1, true));
@@ -103,7 +71,7 @@ int	run_builtin(int argc, char *argv[], t_sent *sent, bool update)
 	else if (ft_strncmp("exit", argv[0], 5) == 0)
 		argc = bi_exit(argc, argv, sent);
 	store_return_value(argc, true);
-	return (deallocate(get_data()), 0);
+	return (deallocate(get_data()), argc);
 }
 
 /*

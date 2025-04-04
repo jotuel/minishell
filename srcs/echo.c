@@ -15,27 +15,27 @@
 int	echo_check_opt(char *str)
 {
 	int	i;
-	int	isvalid;
+	int	is_valid;
 
 	i = 0;
-	isvalid = 0;
+	is_valid = 0;
 	if (str[i] != '-')
-		return (isvalid);
+		return (is_valid);
 	i++;
 	while (str[i])
 	{
 		if (str[i] == 'n')
 		{
-			isvalid = 1;
+			is_valid = 1;
 			i++;
 		}
 		else
 		{
-			isvalid = 0;
-			return (isvalid);
+			is_valid = 0;
+			return (is_valid);
 		}
 	}
-	return (isvalid);
+	return (is_valid);
 }
 
 int	bi_echo(int argc, char *argv[], int fd)
@@ -47,7 +47,7 @@ int	bi_echo(int argc, char *argv[], int fd)
 	if (argc > 1)
 		opt = echo_check_opt(argv[1]);
 	i = opt + 1;
-	while (opt && echo_check_opt(argv[i]) && i < argc)
+	while (opt && i < argc && echo_check_opt(argv[i]))
 		i++;
 	while (i < argc)
 	{
