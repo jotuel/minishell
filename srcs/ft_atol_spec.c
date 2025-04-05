@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:42:12 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/25 17:34:31 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 19:55:13 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	all_isspace(char *nptr)
 		else if (nptr[ret] == '\f')
 			ret++;
 		else
-			break ;
+			return (0);
 	}
 	return (ret);
 }

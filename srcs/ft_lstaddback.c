@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:41:58 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 19:09:32 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 19:57:12 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static int	initialize_empty_stack(t_list *stack, t_node *new)
 	}
 	return (0);
 }
+
 //returns 0 on success
 int	ft_lstadd_back(t_list *stack, t_node *new)
 {
