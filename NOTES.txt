@@ -1,11 +1,6 @@
 CFLAGS = -Wall -Wextra -Werror -g3 -DUSER=\"$(USER)\" -gdwarf -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer
 
-$ARG=""
 
-ilmeisesti expandaa nollaksi
-
-
-Syntax errorin printtaaminen list creation vaiheessa ja deallocate ei jostain syysta pysayta prosessia, varsin outoa
 
 
 
