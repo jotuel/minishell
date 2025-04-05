@@ -16,7 +16,7 @@ void	mark_commands(t_char *cl, int i)
 {
 	if (!i || cl[i].esc || cl[i - 1].esc || cl[i + 1].c == 0 || cl[i + 1].esc)
 		;
-	else if (cl[i - 1].c == cl[i].c && !cl[i - 2].esc && cl[i - 2].c == ' '
+	else if (cl[i - 1].c == cl[i].c && i < 1 && !cl[i - 2].esc && cl[i - 2].c == ' '
 		&& cl[i + 1].c == ' ' && (cl[i].c == '<' || cl[i].c == '>'))
 	{
 		cl[i].com = 1;
