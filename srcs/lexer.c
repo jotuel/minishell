@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 16:30:24 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 19:18:31 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	mark_commands(t_char *cl, int i)
 {
 	if (!i || cl[i].esc || cl[i - 1].esc || cl[i + 1].c == 0 || cl[i + 1].esc)
 		;
-	else if (cl[i - 1].c == cl[i].c && i < 1 && !cl[i - 2].esc && cl[i - 2].c == ' '
+	else if (cl[i - 1].c == cl[i].c && i > 1 && !cl[i - 2].esc && cl[i - 2].c == ' '
 		&& cl[i + 1].c == ' ' && (cl[i].c == '<' || cl[i].c == '>'))
 	{
 		cl[i].com = 1;
