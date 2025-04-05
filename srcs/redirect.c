@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/02 13:25:30 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 09:57:41 by jtuomi           ###   ########.fr       */
+/*   Created: 2025/03/02 13:25:30 by jtuomi            #+#    #+#             */
+/*   Updated: 2025/03/25 15:59:17 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 */
 static void	handle_append(char *sent, int fd)
 {
-	fd = open(sent, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	fd = open(sent, O_WRONLY | O_CREAT, 0644);
 	if (-1 == fd)
 		ft_exit(get_data(), sent, strerror(errno), 1);
 	dup2(fd, STDOUT_FILENO);
