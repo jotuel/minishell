@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:41:58 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 12:13:08 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 19:09:32 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	add_back_utils(t_list *stack, t_node *new, t_node *cur)
 	stack->last = new;
 }
 
-static void	initialize_empty_stack(t_list *stack, t_node *new)
+static int	initialize_empty_stack(t_list *stack, t_node *new)
 {
 	stack->first = new;
 	stack->last = new;
@@ -58,16 +58,17 @@ static void	initialize_empty_stack(t_list *stack, t_node *new)
 	{
 		deallocate(get_data());
 		store_return_value(2, true);
-		return (error_printf("syntax error near", "unexpected token '|'"));
+		return (error_printf("syntax error near", "unexpected token '|'"), 1);
 	}
+	return (0);
 }
-
-void	ft_lstadd_back(t_list *stack, t_node *new)
+//returns 0 on success
+int	ft_lstadd_back(t_list *stack, t_node *new)
 {
 	t_node	*cur;
 
 	if (new == NULL)
-		return (error_printf("list", "added to an empty list"));
+		return (error_printf("list", "added to an empty list"), 1);
 	if (stack->first == NULL)
 		return (initialize_empty_stack(stack, new));
 	cur = stack->first;
@@ -78,7 +79,7 @@ void	ft_lstadd_back(t_list *stack, t_node *new)
 		new->prev = cur;
 		new->next = cur;
 		set_type(new);
-		return ;
+		return (0);
 	}
 	while (cur != stack->last)
 		cur = cur->next;
@@ -87,4 +88,5 @@ void	ft_lstadd_back(t_list *stack, t_node *new)
 	new->next = stack->first;
 	stack->first->prev = stack->last;
 	set_type(new);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 12:07:23 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 18:50:25 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, int nbr)
 		node = get_data()->tokens.first;
 		if (node->type == PIPE)
 		{
-			if (get_data()->tokens.first == node)
-				return (syntax_error(node));
 			get_data()->page[nbr]->argc = i;
 			get_data()->page[nbr]->outpipe = 1;
 			return (get_data()->page[nbr]);
@@ -100,6 +98,8 @@ t_sent	**create_page(t_list *stack)
 	if (stack == NULL || stack->first == NULL)
 		return (NULL);
 	cur = stack->first;
+	if (cur && cur->type == PIPE)
+		return (syntax_error(cur), NULL);
 	i = 0;
 	while (cur)
 	{
