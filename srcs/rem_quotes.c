@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:27:03 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 10:14:54 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/03/22 19:07:41 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,24 @@
 
 int	next_is_delim(char *str, int i, t_char *dst, int k)
 {
-	if (k && dst[k - 1].added)
+	if (dst[k - 1].added)
 		return (0);
 	if (i != 0 && dst[k - 1].c != ' ' && dst[k - 1].esc != 0)
+	{
 		return (0);
+	}
 	i += 2;
 	while (str[i] != 0 && str[i] != ' ')
+	{
 		if (str[i] == '\'' && str[i] == '\'')
+		{
 			i += 2;
+		}
 		else if (str[i] == '\"' && str[i] == '\"')
 			i += 2;
 		else
 			return (0);
+	}
 	return (1);
 }
 //need a specific test for pipe
