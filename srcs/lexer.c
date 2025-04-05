@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/03 11:14:36 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:30:24 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,10 @@ bool	check_for_all_spaces(t_char *line);
 t_char	*lexify(char *line, t_data *data)
 {
 	t_char			*newline;
-	static t_char	expanded[1000];
+	static t_char	expanded[10000];
 	int				i;
 
-	newline = ft_xcalloc(ft_strlen(line) * 3 + 10, sizeof(t_char));
+	newline = ft_xcalloc(ft_strlen(line) * 3 + 500, sizeof(t_char));
 	remove_quotes(newline, line, 0, 0);
 	i = 0;
 	while (newline[i].c != 0)
