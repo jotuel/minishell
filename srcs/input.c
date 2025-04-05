@@ -56,8 +56,6 @@ static char	*rl_gets(t_data *data)
 	line = readline(strcwd);
 	free(strcwd);
 	strcwd = NULL;
-	if (line && all_isspace(line))
-		line[0] = '\0';
 	if (line && *line)
 		add_history(line);
 	update_env(store_return_value(0, false), NULL, false);
@@ -76,6 +74,8 @@ int	prompt_input(char *line, int pfd[2], t_data *data, int input)
 		line = rl_gets(data);
 	if (line == NULL)
 		return (1);
+	if (line[0] == '\0')
+		return (0);
 	process(line, data, NULL);
 	if (data->page[0] && !data->page[0]->outpipe && !data->page[0]->inpipe
 		&& is_builtin(data->page[0]->array[0]))
