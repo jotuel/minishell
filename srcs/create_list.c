@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:50:42 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 17:20:40 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 17:28:11 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ t_node	*create_node(t_char *line, size_t start, size_t size, int i)
 	str = NULL;
 	node = ft_xcalloc(sizeof(t_node), 1);
 	if (line && line[start].c == 'G' && line[start].ghost)
-	{
 		str = ft_xcalloc(sizeof(t_char), 1);
-		str[0].c = 0;
-	}
 	else if (line)
 	{
 		str = ft_xcalloc(sizeof(t_char), size *2 + 20);
