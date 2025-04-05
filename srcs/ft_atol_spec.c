@@ -90,7 +90,7 @@ int	all_isspace(char *nptr)
 		else if (nptr[ret] == '\f')
 			ret++;
 		else
-			return (0);
+			break ;
 	}
 	return (ret);
 }
