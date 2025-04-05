@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:54:24 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/03 08:05:32 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 12:02:43 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,32 @@ char	*cnvrt_to_char(t_char *line)
 /*
 **   when syntax error occurs frees stuff and returns NULL.
  */
-t_sent	*syntax_error(char *token)
+t_sent	*syntax_error(t_node *node)
 {
+	char	*print;
+	char	*tmp;
+	char	*token;
+	
+	token = NULL;
+	if (get_data()->tokens.first == node && node->type == PIPE)
+		tmp = ft_strjoin("`", "|");
+
+	else if (get_data()->tokens.last == node)
+		tmp = ft_strjoin("`", "newline");
+	else 
+	{
+		token = cnvrt_to_char(node->next->str);
+		tmp = ft_strjoin("`", token);
+	}
+	free(token);
+	token = NULL;
 	deallocate(get_data());
 	store_return_value(2, true);
-	error_printf("syntax error near unexpected token", token);
+	print = ft_strjoin(tmp, "\'");
+	free (tmp);
+	tmp = NULL;
+	error_printf("syntax error near unexpected token", print);
+	free(print);
 	return (NULL);
 }
 

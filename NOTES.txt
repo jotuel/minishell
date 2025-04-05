@@ -1,1 +1,13 @@
 CFLAGS = -Wall -Wextra -Werror -g3 -DUSER=\"$(USER)\" -gdwarf -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer
+
+$ARG=""
+
+ilmeisesti expandaa nollaksi
+
+vim 
+
+:set mouse=a
+
+:packadd termdebug
+
+:Termdebug command

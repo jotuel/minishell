@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:59:49 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/25 19:50:38 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 10:42:39 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,18 @@ static bool	check_write(int fd, char *txt, char *file_name)
 	}
 	return (true);
 }
-//Creates a file, writes in it and unlinks it so that it is destroyed
-//when the last fd closes
+
+/*
+** Creates a file, writes in it and unlinks it so that it is destroyed
+** when the last fd closes. Memory address is used to create an unique
+** suffix so 2 parallel minishells wont start with the same suffix
+*/
 
 int	open_temp_heredocs(t_node *node, int expand, char *eof, char *txt)
 {
 	int					fd;
 	char				*file_name;
-	static unsigned int	suffix = 0;
+	static unsigned long	suffix = (unsigned long)&suffix;
 
 	file_name = ft_strjoin("/tmp/here_docs_", ft_itoa(suffix++));
 	fd = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0640);

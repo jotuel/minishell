@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/04 12:52:43 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 12:07:23 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ bool	is_file(t_token type)
 		|| type == HERE_QUOTE);
 }
 
-static t_node	*check_inpipe(t_sent **sentence, t_node *node)
+static t_node	*check_inpipe(int nbr, t_node *node)
 {
 	t_data *data;
 
 	data = get_data();
 	if (node && node->type == PIPE)
 	{
-		(*sentence)->inpipe = 1;
+		get_data()->page[nbr]->inpipe = 1;
 		if (data && (data->tokens.last == node || node->next->type == PIPE))
-			return ((t_node *)syntax_error("|"));
+			return ((t_node *)syntax_error(node));
 		node = destroy_node(&get_data()->tokens, node);
 	}
 	return (node);
@@ -37,12 +37,14 @@ static t_node	*check_inpipe(t_sent **sentence, t_node *node)
 // i is 0, k is 0, sentence is calloced, node is pulled from data
 t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, int nbr)
 {
-	node = check_inpipe(&get_data()->page[nbr], node);
+	node = check_inpipe(nbr, node);
 	while (node)
 	{
 		node = get_data()->tokens.first;
 		if (node->type == PIPE)
 		{
+			if (get_data()->tokens.first == node)
+				return (syntax_error(node));
 			get_data()->page[nbr]->argc = i;
 			get_data()->page[nbr]->outpipe = 1;
 			return (get_data()->page[nbr]);
@@ -51,7 +53,7 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, int nbr)
 		{
 			if (node->next->type == REDIRECT || node->next->type == PIPE
 				|| get_data()->tokens.last == node)
-				return (syntax_error("`newline'"));
+					return (syntax_error(node));
 		}
 		else if (is_file(node->type))
 			add_redirection(node, get_data()->page[nbr], k++);
