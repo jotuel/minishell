@@ -17,7 +17,7 @@
 */
 static void	handle_append(char *sent, int fd)
 {
-	fd = open(sent, O_WRONLY | O_CREAT, 0644);
+	fd = open(sent, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (-1 == fd)
 		ft_exit(get_data(), sent, strerror(errno), 1);
 	dup2(fd, STDOUT_FILENO);
