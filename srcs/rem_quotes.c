@@ -12,8 +12,9 @@
 
 #include "../include/minishell.h"
 
-//jos seuraava ei ole alnum eika _ eika "" eika '' eika ?
-
+/*
+**  checks whether the next character is a delimiter
+*/
 int	next_is_delim(char *str, int i, t_char *dst, int k)
 {
 	if (k && dst[k - 1].added)
@@ -24,13 +25,12 @@ int	next_is_delim(char *str, int i, t_char *dst, int k)
 	while (str[i] != 0 && str[i] != ' ')
 		if (str[i] == '\'' && str[i] == '\'')
 			i += 2;
-		else if (str[i] == '\"' && str[i] == '\"')
-			i += 2;
-		else
-			return (0);
+	else if (str[i] == '\"' && str[i] == '\"')
+		i += 2;
+	else
+		return (0);
 	return (1);
 }
-//need a specific test for pipe
 
 int	mark_redir(char *src, int *i, t_char *dst, int *k)
 {
@@ -47,8 +47,8 @@ int	mark_redir(char *src, int *i, t_char *dst, int *k)
 		(*k)++;
 		return (1);
 	}
-	else if (src[(*i) + 1] != src[*i] && (src[*i] == '>' || \
-	src[*i] == '<' || src[*i] == '|' ))
+	else if (src[(*i) + 1] != src[*i] && (src[*i] == '>' || src[*i] == '<'
+			|| src[*i] == '|'))
 	{
 		dst[*k].c = ' ';
 		(*k)++;
