@@ -6,12 +6,11 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:27:03 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 16:38:27 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 19:58:45 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 int	next_is_delim(char *str, int i, t_char *dst, int k)
 {
@@ -35,7 +34,6 @@ int	next_is_delim(char *str, int i, t_char *dst, int k)
 	}
 	return (1);
 }
-
 
 int	mark_redir(char *src, int *i, t_char *dst, int *k)
 {

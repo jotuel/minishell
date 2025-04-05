@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:59:49 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 10:42:39 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/05 19:57:26 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static bool	check_write(int fd, char *txt, char *file_name)
 
 int	open_temp_heredocs(t_node *node, int expand, char *eof, char *txt)
 {
-	int					fd;
-	char				*file_name;
+	int						fd;
+	char					*file_name;
 	static unsigned long	suffix = (unsigned long)&suffix;
 
 	file_name = ft_strjoin("/tmp/here_docs_", ft_itoa(suffix++));

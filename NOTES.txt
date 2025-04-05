@@ -14,5 +14,4 @@ vim
 
 :Termdebug command
 
-""e'c'ho'''' is fixed
-
+ spaces at the start are breaking everything. If there is a space at the start, rl_gets puts a null terminator there
