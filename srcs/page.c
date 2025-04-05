@@ -14,14 +14,13 @@
 
 bool	is_file(t_token type)
 {
-	return (type == IN_FILE || type == OUT_FILE
-		|| type == APPEND || type == HERE_DOCS
-		|| type == HERE_QUOTE);
+	return (type == IN_FILE || type == OUT_FILE || type == APPEND
+		|| type == HERE_DOCS || type == HERE_QUOTE);
 }
 
 static t_node	*check_inpipe(int nbr, t_node *node)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = get_data();
 	if (node && node->type == PIPE)
@@ -105,7 +104,7 @@ t_sent	**create_page(t_list *stack)
 	while (cur)
 	{
 		page[i] = ft_xcalloc(sizeof(t_sent), 1);
-		conv_linked_to_sentence(0, 0, get_data()->tokens.first,	i);
+		conv_linked_to_sentence(0, 0, get_data()->tokens.first, i);
 		if (!page[i])
 			return (destroy_old_page(i, 0, 0, get_data()), NULL);
 		cur = stack->first;
