@@ -13,20 +13,8 @@
 #include "../include/minishell.h"
 
 /*
-get_env can have special characters
-
-! is not a valid variable
-
-export SPECIAL_VAR=1@#$%^&*()_!3+{}|:"<>?-=ta[]\;d,./`~
-export SPECIAL_VAR=1@#$%^&*()_cd ..+{}|:"<>?-=ta[]\;d,./`~
-bash: syntax error near unexpected token `_cd'
-
-jrimpila@c1r1p11:~/Hiveprojects/philo5.3$ export
-SPECIAL_VAR=1!@#$%^&*()_3+{}|:"<>?-=ta[]\;d,./`~
-bash: !@#: event not found
-
-
- returns 1 for match, 0 for no match.*/
+* returns 1 for match, 0 for no match.
+*/
 int	match_env_argument(t_char *source, char *env_var)
 {
 	int	i;
@@ -84,7 +72,7 @@ void	bi_env(t_data *data, int fd)
 
 	i = 0;
 	str = NULL;
-	while (i < MAX_LENGTH)
+	while (i < ENV_SIZE)
 	{
 		str = (data->env[i]);
 		if (str && str[0] && str[0] != '?')

@@ -73,23 +73,27 @@ static void	final_print(char **env, int i, int fd)
 	while (i < ENV_SIZE && env[i])
 	{
 		k = 0;
-		if (ft_strchr(env[i], '=') && (ft_strncmp(env[i], "_=", 2) != 0) \
-		&& env[i][0] != '?')
+		if (ft_strchr(env[i], '=') && (ft_strncmp(env[i], "_=", 2) != 0)
+			&& env[i][0] != '?')
 		{
-			write(fd, "declare -x ", 12);
+			write(fd, "declare -x ", 11);
 			while (env[i][k] && env[i][k] != '=')
 			{
 				write(fd, &env[i][k], 1);
 				k++;
 			}
 			k++;
-			write(fd, "=\"", 3);
-			while (env[i][k])
+			if (env[i][k])
 			{
-				write(fd, &env[i][k], 1);
-				k++;
+				write(fd, "=\"", 2);
+				while (env[i][k])
+				{
+					write(fd, &env[i][k], 1);
+					k++;
+				}
+				write(fd, "\"", 1);
 			}
-			write(fd, "\"\n", 3);
+			write(fd, "\n", 1);
 		}
 		i++;
 	}

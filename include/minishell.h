@@ -20,7 +20,7 @@
 #  define MAX_VARS 100
 # endif
 # ifndef MAX_LENGTH
-#  define MAX_LENGTH 400
+#  define MAX_LENGTH 667
 # endif
 # include "../libft/libft.h"
 # include <errno.h>
@@ -38,7 +38,7 @@
 # ifndef PATH_MAX
 #  define PATH_MAX 5000
 # endif
-# define ENV_SIZE 4096
+# define ENV_SIZE 400
 # ifndef MAX_SENT_SIZE
 #  define MAX_SENT_SIZE 2000
 # endif
