@@ -14,4 +14,15 @@ vim
 
 :Termdebug command
 
- spaces at the start are breaking everything. If there is a space at the start, rl_gets puts a null terminator there
+pitka rivi rikkoo viela jotain
+
+export | grep is still broken
+
+jrimpila:/home/jrimpila/Git/mini3😎>env | grep _=
+_=_=
+jrimpila:/home/jrimpila/Git/mini3😎>env | grep _=
+_=_=
+jrimpila:/home/jrimpila/Git/mini3😎>env | grep _=
+_=_=
+
+ei paivity
