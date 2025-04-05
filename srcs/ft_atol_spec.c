@@ -5,17 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 14:42:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 09:57:03 by jtuomi           ###   ########.fr       */
+/*   Created: 2024/10/29 14:42:12 by jtuomi            #+#    #+#             */
+/*   Updated: 2025/03/25 17:34:31 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	amount_of_spaces(char *nptr);
-
-static void	error_print_spec(const char *cmd, const char *message1,
-		const char *message2)
+static void	error_print_spec(const char *cmd, const char *message1, \
+const char *message2)
 {
 	dup2(STDERR_FILENO, STDOUT_FILENO);
 	printf("minishell: %s: %s: %s\n", cmd, message1, message2);
@@ -45,10 +43,10 @@ int	overflow_check(long ret, int sign, int addition, const char *nptr)
 // int sign should be passed as 1
 int	ft_atoi_spec(const char *nptr, int sign, long ret)
 {
-	int	i;
+	int		i;
 
 	ret = 0;
-	i = amount_of_spaces((char *)nptr);
+	i = all_isspace((char *)nptr);
 	if (nptr[i] == '-')
 	{
 		i++;
@@ -72,23 +70,27 @@ int	ft_atoi_spec(const char *nptr, int sign, long ret)
 	return ((char)ret * sign);
 }
 
-static int	amount_of_spaces(char *nptr)
-{
-	size_t	ret;
-
-	ret = 0;
-	while (ft_isspace(nptr[ret]))
-		ret++;
-	return (ret);
-}
-
 int	all_isspace(char *nptr)
 {
-	size_t	ret;
+	int	ret;
 
 	ret = 0;
 	while (nptr[ret])
-		if (!ft_isspace(nptr[ret++]))
-			return (0);
-	return ((ret));
+	{
+		if (nptr[ret] == '\n')
+			ret++;
+		else if (nptr[ret] == '\t')
+			ret++;
+		else if (nptr[ret] == '\v')
+			ret++;
+		else if (nptr[ret] == '\r')
+			ret++;
+		else if (nptr[ret] == ' ')
+			ret++;
+		else if (nptr[ret] == '\f')
+			ret++;
+		else
+			break ;
+	}
+	return (ret);
 }

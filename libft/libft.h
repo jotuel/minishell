@@ -15,22 +15,22 @@
 # define BASE32 "0123456789abcdefghijklmnopqrstuxz"
 # include <limits.h>
 # include <stdarg.h>
-# include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 typedef struct s_char
 {
-	char			c;
-	bool			esc;
-	bool			com;
-	bool			var;
-	bool			blok;
-	bool			ghost;
-	bool			added;
-	bool			multi;
-}					t_char;
+	char	c;
+	bool	esc;
+	bool	com;
+	bool	var;
+	bool	blok;
+	bool	ghost;
+	bool	added;
+	bool	multi;
+}	t_char;
 
 typedef enum e_token
 {
@@ -43,7 +43,7 @@ typedef enum e_token
 	HERE_DOCS,
 	APPEND,
 	HERE_QUOTE
-}					t_token;
+}	t_token;
 
 typedef struct s_ldiv
 {
@@ -57,13 +57,13 @@ typedef struct s_node
 	struct s_node	*next;
 	t_char			*str;
 	t_token			type;
-}					t_node;
+}	t_node;
 
 typedef struct s_list
 {
-	t_node			*first;
-	t_node			*last;
-}					t_list;
+	t_node	*first;
+	t_node	*last;
+}	t_list;
 
 char				*ft_ltostr(long val, unsigned int base);
 char				*ft_strtrim(char const *s1, char const *set);
@@ -84,7 +84,6 @@ int					ft_isalpha(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
-int					ft_isspace(int c);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_tolower(int c);

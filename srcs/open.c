@@ -53,8 +53,8 @@ static bool	check_write(int fd, char *txt, char *file_name)
 
 int	open_temp_heredocs(t_node *node, int expand, char *eof, char *txt)
 {
-	int						fd;
-	char					*file_name;
+	int					fd;
+	char				*file_name;
 	static unsigned long	suffix = (unsigned long)&suffix;
 
 	file_name = ft_strjoin("/tmp/here_docs_", ft_itoa(suffix++));
