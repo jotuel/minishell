@@ -52,7 +52,7 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, int nbr)
 		{
 			if (node->next->type == REDIRECT || node->next->type == PIPE
 				|| get_data()->tokens.last == node)
-					return (syntax_error(node));
+				return (syntax_error(node));
 		}
 		else if (is_file(node->type))
 			add_redirection(node, get_data()->page[nbr], k++);

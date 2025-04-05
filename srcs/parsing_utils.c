@@ -54,20 +54,19 @@ char	*cnvrt_to_char(t_char *line)
 
 /*
 **   when syntax error occurs frees stuff and returns NULL.
- */
+*/
 t_sent	*syntax_error(t_node *node)
 {
 	char	*print;
 	char	*tmp;
 	char	*token;
-	
+
 	token = NULL;
 	if (get_data()->tokens.first == node && node->type == PIPE)
 		tmp = ft_strjoin("`", "|");
-
 	else if (get_data()->tokens.last == node)
 		tmp = ft_strjoin("`", "newline");
-	else 
+	else
 	{
 		token = cnvrt_to_char(node->next->str);
 		tmp = ft_strjoin("`", token);
@@ -77,7 +76,7 @@ t_sent	*syntax_error(t_node *node)
 	deallocate(get_data());
 	store_return_value(2, true);
 	print = ft_strjoin(tmp, "\'");
-	free (tmp);
+	free(tmp);
 	tmp = NULL;
 	error_printf("syntax error near unexpected token", print);
 	free(print);

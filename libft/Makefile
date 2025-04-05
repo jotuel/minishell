@@ -20,6 +20,7 @@ SRCS = ft_atof.c \
 	ft_isascii.c \
 	ft_isdigit.c \
 	ft_isprint.c \
+	ft_isspace.c \
 	ft_memchr.c \
 	ft_memcmp.c \
 	ft_memcpy.c \
@@ -83,6 +84,6 @@ bonus: $(BONUS_OBJS)
 	$(AR) $(BONUS_OBJS)
 supp: $(SUPP_OBJS)
 	$(AR) $(SUPP_OBJS)
-	
+
 
 .PHONY: all clean fclean re bonus supp
