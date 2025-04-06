@@ -31,10 +31,6 @@ jrimpila:/home/jrimpila/Git/mini3😎>echo <Makefile "blaa blaa"
 jrimpila:/home/jrimpila/Git/mini3😎>env <Makefile "blaa blaa"
 jrimpila:/home/jrimpila/Git/mini3😎>
 
-Jos ma oikein luin sun koodia niin infilen lasnaolo aktivoi do_redirections ja do_derictions sit vaihtaa FD:n to 255 joka tapauksessa oli 
-pipe tai ei milai outfilea tai appendia ei ole. 
-
-toi toimii
 
 ls | <Makefile echo blaa
 blaa
