@@ -22,8 +22,11 @@ int	do_redirections(t_dir *red, int fd, int ir)
 	{
 		if (red[ir].type == OUT_FILE)
 			fd = open(red[ir].path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (red[ir].type == IN_FILE && infile_checker(red[ir].path))
-			return (error_printf(red[ir].path, strerror(errno)), -1);
+		else if (red[ir].type == IN_FILE)
+			if (infile_checker(red[ir++].path))
+				return (error_printf(red[ir].path, strerror(errno)), -1);
+			else
+				continue ;
 		else if (red[ir].type == APPEND)
 			fd = open(red[ir].path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else if (red[ir].type == HERE_DOCS)
