@@ -28,7 +28,7 @@ void	mark_commands(t_char *cl, int i)
 		cl[i].com = 1;
 		cl[i + 1].com = 1;
 	}
-	else if (cl[i - 1].c == ' ' && cl[i].c == '<' && cl[i + 1].c == '<' 
+	else if (cl[i - 1].c == ' ' && cl[i].c == '<' && cl[i + 1].c == '<'
 		&& cl[i + 2].esc == 0 && cl[i + 2].c == ' ')
 	{
 		cl[i].com = 1;
@@ -123,10 +123,13 @@ bool	check_for_all_spaces(t_char *line);
 t_char	*lexify(char *line, t_data *data)
 {
 	t_char			*newline;
-	static t_char	expanded[10000];
+	static t_char	expanded[MAX_ARG_STRLEN];
 	int				i;
 
-	newline = ft_xcalloc(ft_strlen(line) * 3 + 500, sizeof(t_char));
+	i = ft_strlen(line);
+	if (i > (int)MAX_ARG_STRLEN)
+	   return (error_printf(line, "File name too long"), NULL);
+	newline = ft_xcalloc(i * 3 + 500, sizeof(t_char));
 	remove_quotes(newline, line, 0, 0);
 	i = 0;
 	while (newline[i].c != 0)

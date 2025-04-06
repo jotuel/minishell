@@ -37,7 +37,7 @@ static void	set_type(t_node *new)
 		if (get_data()->herecount >= 17)
 			ft_exit(get_data(), "Maximum amount of heredocs is 16", "", 2);
 	}
-	
+
 	else
 		new->type = ARG;
 }
@@ -65,30 +65,30 @@ static int	initialize_empty_stack(t_list *stack, t_node *new)
 }
 
 //returns 0 on success
-int	ft_lstadd_back(t_list *stack, t_node *new)
+int	ft_lstadd_back(t_list *stack, t_node *nu)
 {
 	t_node	*cur;
 
-	if (new == NULL)
+	if (nu == NULL)
 		return (error_printf("list", "added to an empty list"), 1);
 	if (stack->first == NULL)
-		return (initialize_empty_stack(stack, new));
+		return (initialize_empty_stack(stack, nu));
 	cur = stack->first;
 	if (stack->first == stack->last)
 	{
-		add_back_utils(stack, new, cur);
-		cur->prev = new;
-		new->prev = cur;
-		new->next = cur;
-		set_type(new);
+		add_back_utils(stack, nu, cur);
+		cur->prev = nu;
+		nu->prev = cur;
+		nu->next = cur;
+		set_type(nu);
 		return (0);
 	}
 	while (cur != stack->last)
 		cur = cur->next;
-	add_back_utils(stack, new, cur);
-	new->prev = cur;
-	new->next = stack->first;
+	add_back_utils(stack, nu, cur);
+	nu->prev = cur;
+	nu->next = stack->first;
 	stack->first->prev = stack->last;
-	set_type(new);
+	set_type(nu);
 	return (0);
 }

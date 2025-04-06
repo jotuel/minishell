@@ -20,47 +20,46 @@ bool	is_file(t_token type)
 
 static t_node	*check_inpipe(int nbr, t_node *node)
 {
-	t_data	*data;
+	t_data     *data;
 
 	data = get_data();
 	if (node && node->type == PIPE)
 	{
-		get_data()->page[nbr]->inpipe = 1;
+		data->page[nbr]->inpipe = 1;
 		if (data && (data->tokens.last == node || node->next->type == PIPE))
 			return ((t_node *)syntax_error(node));
-		node = destroy_node(&get_data()->tokens, node);
+		node = destroy_node(&data->tokens, node);
 	}
 	return (node);
 }
 
 // i is 0, k is 0, sentence is calloced, node is pulled from data
-t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, int nbr)
+t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sent)
 {
-	node = check_inpipe(nbr, node);
 	while (node)
 	{
 		node = get_data()->tokens.first;
 		if (node->type == PIPE)
 		{
-			get_data()->page[nbr]->argc = i;
-			get_data()->page[nbr]->outpipe = 1;
-			return (get_data()->page[nbr]);
+			sent->argc = i;
+			sent->outpipe = 1;
+			return (sent);
 		}
 		if (node->type == REDIRECT)
 		{
-			if (node->next->type == REDIRECT || node->next->type == PIPE \
-			|| get_data()->tokens.last == node)
+			if (node->next->type == REDIRECT || node->next->type == PIPE
+				|| get_data()->tokens.last == node)
 				return (syntax_error(node));
 		}
 		else if (is_file(node->type))
-			add_redirection(node, get_data()->page[nbr], k++);
+			add_redirection(node, sent, k++);
 		else
-			get_data()->page[nbr]->array[i++] = cnvrt_to_char(node->str);
+			sent->array[i++] = cnvrt_to_char(node->str);
 		node = destroy_node(&get_data()->tokens, node);
 	}
-	if (get_data()->page[nbr])
-		get_data()->page[nbr]->argc = i;
-	return (get_data()->page[nbr]);
+	if (sent)
+		sent->argc = i;
+	return (sent);
 }
 
 void	destroy_old_page(int i, int j, int k, t_data *data)
@@ -104,7 +103,8 @@ t_sent	**create_page(t_list *stack)
 	while (cur)
 	{
 		page[i] = ft_xcalloc(sizeof(t_sent), 1);
-		conv_linked_to_sentence(0, 0, get_data()->tokens.first, i);
+		conv_linked_to_sentence(0, 0, check_inpipe(i, get_data()->tokens.first),
+			page[i]);
 		if (!page[i])
 			return (destroy_old_page(i, 0, 0, get_data()), NULL);
 		cur = stack->first;
