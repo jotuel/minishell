@@ -31,14 +31,6 @@ jrimpila:/home/jrimpila/Git/mini3😎>echo <Makefile "blaa blaa"
 jrimpila:/home/jrimpila/Git/mini3😎>env <Makefile "blaa blaa"
 jrimpila:/home/jrimpila/Git/mini3😎>
 
-echo "< >>"
-toimii
 
-echo "> >>"
-ei
-
-minishell: syntax error near unexpected token: `newline'
-
-echo hi < ./test_files/infile bye bye 
 
 
