@@ -20,7 +20,7 @@ bool	is_file(t_token type)
 
 static t_node	*check_inpipe(int nbr, t_node *node)
 {
-	t_data     *data;
+	t_data	*data;
 
 	data = get_data();
 	if (node && node->type == PIPE)
@@ -41,9 +41,8 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sent)
 		node = get_data()->tokens.first;
 		if (node->type == PIPE)
 		{
-			sent->argc = i;
 			sent->outpipe = 1;
-			return (sent);
+			break ;
 		}
 		if (node->type == REDIRECT)
 		{
