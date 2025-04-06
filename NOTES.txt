@@ -45,4 +45,4 @@ Mutta sitten koska bash ei exittaa jos infile ei ole olemassa niin jouduin laaje
 Eli yksinkertainen funktio koittaa nyt tehda paljon asioita. Minulla oli jo versio jossa tuokin toimisi mutta siita tuli niin ruma etta poistin ne rivit. Oikeasti tahtoisin palata siihen alkuperaiseen ja puolustaa sita, se oli kaunis.
 
 Tahdon ensin hoitaa envin loppuun, vaikka tasta varmaan failaa helpommin, niin tuo __environ passaaminen on lahes cheat luokkaa.
-Sen pitaisi vain tehda i + 1 ja continue valideissa infileissa. Export print bugi jonka takia export putki grep ei toiminut on nyt korjattu Laurin checklistilta.
+Sen pitaisi vain tehda i + 1 ja continue valideissa infileissa. Export print bugi jonka takia export putki grep ei toiminut on nyt korjattu Loren checklistilta.
