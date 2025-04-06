@@ -16,7 +16,9 @@ vim
 
 pitka rivi rikkoo viela jotain
 
-export | grep is still broken
+export | grep is still broken <-jtuomi:/home/jtuomi/Git/minishell😎>export GREP
+				jtuomi:/home/jtuomi/Git/minishell😎>export | grep GREP
+				declare -x GREP
 
 jrimpila:/home/jrimpila/Git/mini3😎>env | grep _=
 _=_=
@@ -25,7 +27,8 @@ _=_=
 jrimpila:/home/jrimpila/Git/mini3😎>env | grep _=
 _=_=
 
-ei paivity
+ei paivity ->	jtuomi:/home/jtuomi/Git/minishell😎>env | grep _= | cat
+		_=/usr/bin/cat
 
 jrimpila:/home/jrimpila/Git/mini3😎>echo <Makefile "blaa blaa"
 jrimpila:/home/jrimpila/Git/mini3😎>env <Makefile "blaa blaa"
@@ -39,10 +42,6 @@ blaa
 
 ei toimi
 
-Joo kun alunperin en tehnyt mitaan, enka kylla tahtoisi tehda mitaan edelleenkaan, tiedostotyypeille joita meidan shell ei pysty kayttamaan lainkaan. Built ineissa kun tietaa pystyvatko ne hyodyntamaan tiedostoa. 
-
-Mutta sitten koska bash ei exittaa jos infile ei ole olemassa niin jouduin laajentamaan sita mika rikkoi paljon asioita.
-Eli yksinkertainen funktio koittaa nyt tehda paljon asioita. Minulla oli jo versio jossa tuokin toimisi mutta siita tuli niin ruma etta poistin ne rivit. Oikeasti tahtoisin palata siihen alkuperaiseen ja puolustaa sita, se oli kaunis.
-
-Tahdon ensin hoitaa envin loppuun, vaikka tasta varmaan failaa helpommin, niin tuo __environ passaaminen on lahes cheat luokkaa.
-Sen pitaisi vain tehda i + 1 ja continue valideissa infileissa. Export print bugi jonka takia export putki grep ei toiminut on nyt korjattu Loren checklistilta.
+export A=A
+./minishell
+echo $A
