@@ -31,3 +31,10 @@ jrimpila:/home/jrimpila/Git/mini3😎>echo <Makefile "blaa blaa"
 jrimpila:/home/jrimpila/Git/mini3😎>env <Makefile "blaa blaa"
 jrimpila:/home/jrimpila/Git/mini3😎>
 
+
+
+echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $  <<"
+
+echo hi < ./test_files/infile bye bye 
+
+
