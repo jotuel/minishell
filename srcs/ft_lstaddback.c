@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:41:58 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/06 12:47:38 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/06 18:48:20 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	set_type(t_node *new)
 		&& new->prev->str[0].com)
 		new->type = OUT_FILE;
 	else if (new->prev->str && new->prev->str[0].c == '<'
-			&& new->prev->str[0].com)
-			new->type = IN_FILE;
+		&& new->prev->str[0].com)
+		new->type = IN_FILE;
 	else if (new->prev->str && new->prev->str[0].c == '<'
 		&& new->prev->str[1].c == '<' && new->prev->str[0].com)
 	{
@@ -37,7 +37,6 @@ static void	set_type(t_node *new)
 		if (get_data()->herecount >= 17)
 			ft_exit(get_data(), "Maximum amount of heredocs is 16", "", 2);
 	}
-
 	else
 		new->type = ARG;
 }

@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/06 12:41:16 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/06 18:50:33 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	expand_arguments(t_char *dst, t_char *c, t_data *data, int di)
 	const char	*temp;
 
 	i = 0;
-	while (c[i].c != 0)
+	while (c[i].c != 0 && di < 10000)
 	{
 		if (c[i].c == '$' && c[i].esc == 0 && c[i].var
 			&& (ft_isalnum(c[i + 1].c) || question_or_underscore(c[i + 1].c)))
@@ -123,7 +123,7 @@ bool	check_for_all_spaces(t_char *line);
 t_char	*lexify(char *line, t_data *data)
 {
 	t_char			*newline;
-	static t_char	expanded[MAX_ARG_STRLEN];
+	static t_char	expanded[10500];
 	int				i;
 
 	i = ft_strlen(line);
@@ -136,6 +136,8 @@ t_char	*lexify(char *line, t_data *data)
 		mark_commands(newline, i++);
 	mark_arguments(newline);
 	expand_arguments(expanded, newline, data, 0);
+	if (expanded[9999].c != 0)
+		ft_exit(data, "USER", "Line is too long", 42);
 	create_list(data, expanded);
 	return (newline);
 }
