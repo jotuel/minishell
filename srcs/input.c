@@ -45,7 +45,7 @@ static char	*rl_gets(t_data *data)
 
 	cwd(data);
 	tmp = ft_strjoin(GREEN USER ":" RESET, data->cwd);
-	strcwd = ft_strjoin(tmp, BRIGHT_YELLOW "😎>" RESET);
+	strcwd = ft_strjoin(tmp, BRIGHT_YELLOW EMOJI PROMPT RESET);
 	free(tmp);
 	tmp = NULL;
 	if (line)
