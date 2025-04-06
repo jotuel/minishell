@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/06 18:45:40 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/06 18:50:33 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,10 @@ t_char	*lexify(char *line, t_data *data)
 	static t_char	expanded[10500];
 	int				i;
 
-	newline = ft_xcalloc(ft_strlen(line) * 3 + 500, sizeof(t_char));
+	i = ft_strlen(line);
+	if (i > (int)MAX_ARG_STRLEN)
+	   return (error_printf(line, "File name too long"), NULL);
+	newline = ft_xcalloc(i * 3 + 500, sizeof(t_char));
 	remove_quotes(newline, line, 0, 0);
 	i = 0;
 	while (newline[i].c != 0)

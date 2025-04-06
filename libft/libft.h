@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 17:33:26 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/04/05 19:11:09 by jrimpila         ###   ########.fr       */
+/*   Created: 2024/10/30 17:33:26 by jrimpila          #+#    #+#             */
+/*   Updated: 2025/04/06 14:21:41 by jtuomi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,51 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
-
-typedef struct s_char
-{
-	char	c;
-	bool	esc;
-	bool	com;
-	bool	var;
-	bool	blok;
-	bool	ghost;
-	bool	added;
-	bool	multi;
-}	t_char;
-
-typedef enum e_token
-{
-	DELIMIT,
-	ARG,
-	OUT_FILE,
-	IN_FILE,
-	PIPE,
-	REDIRECT,
-	HERE_DOCS,
-	APPEND,
-	HERE_QUOTE
-}	t_token;
-
-typedef struct s_ldiv
-{
-	long int		quot;
-	long int		rem;
-}					t_ldiv;
-
-typedef struct s_node
-{
-	struct s_node	*prev;
-	struct s_node	*next;
-	t_char			*str;
-	t_token			type;
-}	t_node;
-
-typedef struct s_list
-{
-	t_node	*first;
-	t_node	*last;
-}	t_list;
+# include "../include/types.h"
 
 char				*ft_ltostr(long val, unsigned int base);
 char				*ft_strtrim(char const *s1, char const *set);

@@ -54,7 +54,7 @@ char	*cnvrt_to_char(t_char *line)
 
 /*
 **   when syntax error occurs frees stuff and returns NULL.
- */
+*/
 t_sent	*syntax_error(t_node *node)
 {
 	char	*print;
@@ -76,7 +76,7 @@ t_sent	*syntax_error(t_node *node)
 	deallocate(get_data());
 	store_return_value(2, true);
 	print = ft_strjoin(tmp, "\'");
-	free (tmp);
+	free(tmp);
 	tmp = NULL;
 	error_printf("syntax error near unexpected token", print);
 	free(print);
