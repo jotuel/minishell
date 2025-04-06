@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:41:58 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 19:57:12 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/06 12:47:38 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	set_type(t_node *new)
 {
 	if (new->str && new->str[0].c == '|' && new->str[0].com)
 		new->type = PIPE;
-	else if (((new->str && new->str[0].c == '>') || (new->str
+	else if (((new->str && new->str[0].c == '>' && new->str[0].com) || (new->str
 				&& new->str[0].c == '<' && new->str[0].com)))
 		new->type = REDIRECT;
 	else if (new->prev->str && new->prev->str[0].c == '>'
@@ -27,6 +27,9 @@ static void	set_type(t_node *new)
 		&& new->prev->str[0].com)
 		new->type = OUT_FILE;
 	else if (new->prev->str && new->prev->str[0].c == '<'
+			&& new->prev->str[0].com)
+			new->type = IN_FILE;
+	else if (new->prev->str && new->prev->str[0].c == '<'
 		&& new->prev->str[1].c == '<' && new->prev->str[0].com)
 	{
 		new->type = HERE_DOCS;
@@ -34,9 +37,7 @@ static void	set_type(t_node *new)
 		if (get_data()->herecount >= 17)
 			ft_exit(get_data(), "Maximum amount of heredocs is 16", "", 2);
 	}
-	else if (new->prev->str && new->prev->str[0].c == '<'
-		&& new->prev->str[0].com)
-		new->type = IN_FILE;
+	
 	else
 		new->type = ARG;
 }
