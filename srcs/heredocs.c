@@ -100,8 +100,8 @@ char	*create_heredoc(char *terminat, int expand, char *result, char *tmp)
 		tmp = readline(">");
 		if (!tmp)
 		{
-			printf("%s: %s: at line %d %s (wanted `%s`)\n",
-			SHELL, WARN, __LINE__, DOC, terminat);
+			printf("%s: %s: %s at line %d %s (wanted `%s`)\n",
+			SHELL, WARN, DOC, __LINE__, DELIM, terminat);
 			break ;
 		}
 	}
