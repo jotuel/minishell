@@ -42,7 +42,6 @@ int				add_envvar(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *envvar,
 					char *value);
 const char		*find_env_value(char *source, t_data *data);
 int				builtin_cd(char *path);
-int				ft_isspace(unsigned char c);
 
 /*
 ** BUILT' IN UTILS

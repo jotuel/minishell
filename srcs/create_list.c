@@ -42,23 +42,6 @@ t_node	*create_node(t_char *line, size_t sta, size_t size, int i)
 	return (node);
 }
 
-int	ft_isspace(unsigned char c)
-{	
-	if (c == '\n')
-		return (1);
-	else if (c == '\t')
-		return (1);
-	else if (c == '\v')
-		return (1);
-	else if (c == '\r')
-		return (1);
-	else if (c == ' ')
-		return (1);
-	else if (c == '\f')
-		return (1);
-	return (0);
-}
-
 void	create_list(t_data *data, t_char *line)
 {
 	size_t	i;
