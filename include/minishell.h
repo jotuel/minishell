@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/06 18:47:17 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:50:49 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ char			*test_outfile(t_char *raw_path);
 char			*test_append(t_char *raw_path);
 int				prompt_input(char *line, int pfd[2], t_data *data, int input);
 void			add_redirection(t_node *node, t_sent *sentence, int i);
-t_sent			*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sent);
+t_sent			*conv_linked_to_sentence(int i, int k, t_node *node, \
+				t_sent *sent);
 int				check_emp_arg(char *src, int i, t_char *dst, int *k);
 void			remove_quotes(t_char *dst, char *src, int i, int k);
 int				open_temp_heredocs(t_node *node, int expand, char *eof,

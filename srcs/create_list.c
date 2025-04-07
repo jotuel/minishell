@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:50:42 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 19:56:49 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:36:26 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,23 @@ t_node	*create_node(t_char *line, size_t start, size_t size, int i)
 	return (node);
 }
 
+static int	ft_isspace(unsigned char c)
+{	
+	if (c == '\n')
+		return (1);
+	else if (c == '\t')
+		return (1);
+	else if (c == '\v')
+		return (1);
+	else if (c == '\r')
+		return (1);
+	else if (c == ' ')
+		return (1);
+	else if (c == '\f')
+		return (1);
+	return (0);
+}
+
 void	create_list(t_data *data, t_char *line)
 {
 	size_t	i;
@@ -50,7 +67,7 @@ void	create_list(t_data *data, t_char *line)
 	i = 0;
 	while (line[i].c != 0)
 	{
-		while (line[i].c == ' ' && line[i].esc == 0)
+		while (ft_isspace(line[i].c) && line[i].esc == 0)
 			i++;
 		if (line[i].c == 0)
 			break ;

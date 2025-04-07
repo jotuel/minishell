@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:05:36 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/04 11:11:45 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:38:42 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	do_redirections(t_dir *red, int fd, int ir)
 		else if (red[ir].type == IN_FILE)
 			if (infile_checker(red[ir++].path))
 				return (error_printf(red[ir].path, strerror(errno)), -1);
-			else
-				continue ;
+		else
+			continue ;
 		else if (red[ir].type == APPEND)
 			fd = open(red[ir].path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else if (red[ir].type == HERE_DOCS)

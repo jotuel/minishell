@@ -45,3 +45,5 @@ ei toimi
 export A=A
 ./minishell
 echo $A
+
+do_redirections nayttaa aivan hirvealta, norminette ei tajua mita siina kay ja pakottaa poistamaan indentin
