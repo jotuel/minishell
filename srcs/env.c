@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:26 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/01 12:39:43 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:11:15 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	match_env_argument(t_char *source, char *env_var)
 	i = 0;
 	if (env_var == NULL || env_var[0] == '\0')
 		return (0);
-	if ((ft_isalnum(source[1].c) == 0 && source[1].c != '_'
+	if ((ft_isalnum(source[1].c) == 0 && ft_isspace(source[1].c) == 0
 			&& source[1].c != '?'))
 	{
 		source[0].esc = 1;

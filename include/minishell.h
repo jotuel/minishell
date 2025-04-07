@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 11:50:49 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:54:21 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int				add_envvar(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *envvar,
 					char *value);
 const char		*find_env_value(char *source, t_data *data);
 int				builtin_cd(char *path);
+int				ft_isspace(unsigned char c);
 
 /*
 ** BUILT' IN UTILS
