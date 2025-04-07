@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:26 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 12:11:15 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 21:19:43 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	bi_env(t_data *data, int fd)
 	while (i < ENV_SIZE)
 	{
 		str = (data->env[i]);
-		if (str && str[0] && str[0] != '?')
+		if (str && str[0])
 		{
 			write(fd, str, ft_strlen(str));
 			write(fd, "\n", 1);
