@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:11:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 18:14:59 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:06:34 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,23 @@ void get_more_input(void)
 	char 	*line;
 	t_char *result;
 
-	line = readline("pipe>");
+	get_data()->herecount = 0;
+	line = NULL;
+	while(line == 0)
+	{
+		line = readline("pipe>");
+		if (NULL == line)
+			ft_exit(get_data(), "syntax error", "unexpected end of file", 2);
+		else if(line[0] == 0)
+		{
+			free(line);
+			line = NULL;
+		}
+		 
+	}
 	result = lexify(line, get_data());
 	free(result);
 	result = NULL;
 	free(line);
 	return ;
-
-
-
-
 }

@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 15:51:06 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:06:01 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	destroy_old_page(int i, int j, int k, t_data *data)
 		data->page[i] = NULL;
 		i++;
 	}
+	data->herecount = 0;
 }
 
 t_sent	**create_page(t_list *stack)
