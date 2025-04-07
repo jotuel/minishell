@@ -27,7 +27,6 @@
 /*
 ** BUILT' INS
 */
-int				cwd(t_data *data);
 int				run_builtin(int argc, char *argv[], t_sent *sent, bool update);
 int				is_builtin(char *cmd);
 int				bi_pwd(int fd);

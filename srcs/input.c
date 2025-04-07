@@ -17,7 +17,6 @@
 */
 int	cwd(t_data *data)
 {
-	getcwd(data->cwd, sizeof(data->cwd));
 	return (0);
 }
 
@@ -43,7 +42,7 @@ static char	*rl_gets(t_data *data)
 	static char	*strcwd;
 	static char	*tmp;
 
-	cwd(data);
+	getcwd(data->cwd, sizeof(data->cwd));
 	tmp = ft_strjoin(GREEN USER ":" RESET, data->cwd);
 	strcwd = ft_strjoin(tmp, BRIGHT_YELLOW EMOJI PROMPT RESET);
 	free(tmp);

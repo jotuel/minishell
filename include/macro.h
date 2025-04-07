@@ -40,4 +40,16 @@
 # ifndef PROMPT
 #  define PROMPT ">"
 # endif
+# ifndef SHELL
+#  define SHELL "minishell"
+# endif
+# ifndef DOC
+#  define DOC "here document at line"
+# endif
+# ifndef WARN
+#  define WARN "warning"
+# endif
+# ifndef DELIM
+#  define DELIM "delimited by end-of-file"
+# endif
 #endif

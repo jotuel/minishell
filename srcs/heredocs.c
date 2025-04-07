@@ -100,7 +100,8 @@ char	*create_heredoc(char *terminat, int expand, char *result, char *tmp)
 		tmp = readline(">");
 		if (!tmp)
 		{
-			error_printf("warning", "here-document limited by end-of-file");
+			printf("%s: %s: at line %d %s (wanted `%s`)\n",
+			SHELL, WARN, __LINE__, DOC, terminat);
 			break ;
 		}
 	}
