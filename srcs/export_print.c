@@ -78,19 +78,13 @@ static void	final_print(char **env, int i, int fd)
 		{
 			write(fd, "declare -x ", 11);
 			while (env[i][k] && env[i][k] != '=')
-			{
-				write(fd, &env[i][k], 1);
-				k++;
-			}
+				write(fd, &env[i][k++], 1);
 			k++;
 			if (env[i][k])
 			{
 				write(fd, "=\"", 2);
 				while (env[i][k])
-				{
-					write(fd, &env[i][k], 1);
-					k++;
-				}
+					write(fd, &env[i][k++], 1);
 				write(fd, "\"", 1);
 			}
 			write(fd, "\n", 1);

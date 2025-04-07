@@ -13,6 +13,8 @@
 #ifndef MACRO_H
 # define MACRO_H
 
+# define RL_BEGIN "\001"
+# define RL_END "\002"
 # ifndef MAX_VARS
 #  define MAX_VARS 100
 # endif
@@ -29,8 +31,13 @@
 # ifndef MAX_SENTENCES
 #  define MAX_SENTENCES 50
 # endif
-
+# ifndef EMOJI
+#  define EMOJI "😎"
+# endif
 # ifndef USER
 #  define USER "minishell"
+# endif
+# ifndef PROMPT
+#  define PROMPT ">"
 # endif
 #endif
