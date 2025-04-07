@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 19:57:45 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:51:06 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static t_node	*check_inpipe(int nbr, t_node *node)
 	if (node && node->type == PIPE)
 	{
 		data->page[nbr]->inpipe = 1;
-		if (data && (data->tokens.last == node || node->next->type == PIPE))
-			return ((t_node *)syntax_error(node));
+		// if (data && (data->tokens.last == node || node->next->type == PIPE))
+		// 	return ((t_node *)syntax_error(node));
 		node = destroy_node(&data->tokens, node);
 	}
 	return (node);
@@ -42,6 +42,8 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sent)
 		if (node->type == PIPE)
 		{
 			sent->outpipe = 1;
+			if (get_data()->tokens.last == node)
+				get_more_input();
 			break ;
 		}
 		if (node->type == REDIRECT)

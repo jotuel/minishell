@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:11:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 19:56:14 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 18:14:59 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	process(char *line, t_data *data, t_char *result)
 	result = NULL;
 	create_page(&data->tokens);
 }
+
+
 
 /*
 **  it's from the readline manuals but extented (a bit)
@@ -90,4 +92,26 @@ int	prompt_input(char *line, int pfd[2], t_data *data, int input)
 		store_return_value(execute(data->page[0], pfd, 1, data), true);
 	}
 	return (0);
+}
+
+/*
+** This is meant to get more input and process it until it is added to 
+** link list, then return.
+** rl_gets doesnt add the historyy the w 
+*/
+void get_more_input(void)
+{
+	char 	*line;
+	t_char *result;
+
+	line = readline("pipe>");
+	result = lexify(line, get_data());
+	free(result);
+	result = NULL;
+	free(line);
+	return ;
+
+
+
+
 }

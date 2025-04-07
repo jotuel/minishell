@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 11:54:21 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:45:36 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void			mark_commands(t_char *com_line, int i);
 int				handle_rest(char *src, t_char *dst, int i, int *k);
 int				handle_d_quotes(char *src, t_char *dst, int *k, int *exp);
 int				handle_s_quotes(char *src, t_char *dst, int i, int *k);
+void			get_more_input(void);
 
 /*
 ** SIGNALS
