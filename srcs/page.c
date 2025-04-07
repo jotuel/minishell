@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 19:06:01 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:09:07 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static t_node	*check_inpipe(int nbr, t_node *node)
 	if (node && node->type == PIPE)
 	{
 		data->page[nbr]->inpipe = 1;
-		// if (data && (data->tokens.last == node || node->next->type == PIPE))
-		// 	return ((t_node *)syntax_error(node));
 		node = destroy_node(&data->tokens, node);
 	}
 	return (node);
