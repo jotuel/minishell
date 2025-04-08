@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:43:34 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/20 12:40:00 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 21:14:42 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,26 @@ int	handle_d_quotes(char *src, t_char *dst, int *k, int *exp)
 	}
 }
 
+int	handle_tilde(char *src, t_char *dst, int i, int *k)
+{
+	if ((i == 0 || ft_isspace(src[i - 1])) && src[i] == '~' && (ft_isspace(src[i + 1]) || src[i + 1] == '/' || src[i + 1] == '\0'))
+	{
+		dst[*k].c = '$';
+		(*k)++;
+		dst[*k].c = 'H';
+		(*k)++;
+		dst[*k].c = 'O';
+		(*k)++;
+		dst[*k].c = 'M';
+		(*k)++;
+		dst[*k].c = 'E';
+		(*k)++;
+		return (1);
+	}
+	return (0);
+	
+}
+
 int	handle_rest(char *src, t_char *dst, int i, int *k)
 {
 	if (src[i] == '\'')
@@ -68,6 +88,8 @@ int	handle_rest(char *src, t_char *dst, int i, int *k)
 		dst[*k].esc = 1;
 		(*k)++;
 	}
+	else if (handle_tilde(src, dst, i, k))
+		;
 	else
 	{
 		dst[*k].c = src[i];
