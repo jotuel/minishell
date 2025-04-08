@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:40 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 16:07:27 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:17:24 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	errorcheck_expand(char *var)
 	}
 	while (ft_isalnum(var[i]) || var[i] == '_')
 		i++;
-	if (var[i] != 0 && var[i] != '=')
+	if (var[i] != 0 && (var[i] != '=' && !(var[i] == '+' && var[i + 1] == '=')))
 	{
 		printf("minishell: export: `%s': not a valid identifier\n", var);
 		return (1);
@@ -87,33 +87,36 @@ int	errorcheck_expand(char *var)
 	return (0);
 }
 
-void	process_new_envvarr(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char *var)
+
+
+//i and k and append get passed as 0
+static void	process_new_envvarr(int append, char *var, int i, int k)
 {
 	char	name[MAX_LENGTH + 1];
 	char	value[MAX_LENGTH + 1];
-	int		i;
-	int		k;
 
-	i = 0;
-	k = 0;
-	while (k < MAX_LENGTH + 1 && var[i] != '=' && var[i] != '\0')
+	while (k < MAX_LENGTH + 1 && var[i] != '=' && var[i] && var[i] != '+')
 	{
-		name[k] = var[i];
-		i++;
+		name[k] = var[i++];
 		k++;
 	}
 	name[k] = '\0';
+	if (var[i] == '+' && var[i++] == '+')
+	{
+		append = 1;
+	}
 	if (var[i] == '=')
 		i++;
 	k = 0;
 	while (k < MAX_LENGTH + 1 && var[i] != '\0')
 	{
-		value[k] = var[i];
+		value[k] = var[i++];
 		k++;
-		i++;
 	}
 	value[k] = '\0';
-	add_envvar(env, name, value);
+	if (append)
+		return ((void)append_envvar(get_data()->env, name, value));
+	add_envvar(get_data()->env, name, value);
 }
 
 //BASH goes through the arguments and even if
@@ -134,7 +137,7 @@ int	bi_export(int argc, char *argv[], t_sent *sent, int fd)
 		if (argv[i] && retval == 0)
 		{
 			if (sent->inpipe == 0 && sent->outpipe == 0)
-				process_new_envvarr(get_data()->env, argv[i]);
+				process_new_envvarr(0, argv[i], 0, 0);
 		}
 		else
 			retval = 1;

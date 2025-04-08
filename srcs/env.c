@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:26 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 11:20:38 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:58:19 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ const char	*ft_get_env(const char *target)
 	return (target);
 }
 
-// export finds all, ENV only finds if there is =
+// export prints  all, ENV only finds if there is =
 const char	*find_env(t_char *source, t_data *data)
 {
 	int	i;
@@ -64,7 +64,7 @@ const char	*find_env(t_char *source, t_data *data)
 	return (NULL);
 }
 
-// Our env is not supposed to take arguments so dicard or error?
+//Our env discards any arguments
 void	bi_env(t_data *data, int fd)
 {
 	const char	*str;
