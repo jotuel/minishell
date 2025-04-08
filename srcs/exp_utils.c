@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:55:23 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 13:29:31 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:50:41 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ static int	match_env_argument_char(char *source, char *env_var)
 	return (0);
 }
 
-static const char	*ret_ptrr_to_envval(char *source, t_data *data)
+const char	*ret_ptr_to_envval(char *source, t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->env_count)
+	while (i < ENV_SIZE)
 	{
 		if (match_env_argument_char(source, data->env[i]))
 			return (((const char *)data->env[i]));
@@ -54,7 +54,7 @@ const char	*find_env_value(char *source, t_data *data)
 	const char	*ptr;
 
 	i = 0;
-	ptr = ret_ptrr_to_envval(source, data);
+	ptr = ret_ptr_to_envval(source, data);
 	if (ptr)
 	{
 		while (ptr[i] && ptr[i] != '=')
@@ -77,7 +77,7 @@ void	expand_envvar(char *unexp, char *exp, int *i, int *k)
 	const char	*ptr_envvar;
 	int			j;
 
-	ptr_envvar = ret_ptrr_to_envval(unexp + *i, get_data());
+	ptr_envvar = ret_ptr_to_envval(unexp + *i, get_data());
 	j = 0;
 	while (ptr_envvar && ptr_envvar[j] && ptr_envvar[j] != '=')
 		j++;

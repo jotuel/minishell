@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:43:34 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 12:54:15 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:53:02 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	handle_tilde(char *src, t_char *dst, int i, int *k)
 	if ((i == 0 || ft_isspace(src[i - 1])) && src[i] == '~' && (ft_isspace(src[i + 1]) || src[i + 1] == '/' || src[i + 1] == '\0'))
 	{
 		j = 0;
-		if (find_env_value("HOME", get_data()) && find_env_value("HOME", get_data())[0])
+		if (ret_ptr_to_envval("$HOME", get_data()) && ret_ptr_to_envval("$HOME", get_data())[4])
 		{
 			while ("$HOME"[j])
 			{
