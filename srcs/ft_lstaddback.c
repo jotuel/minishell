@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:41:58 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 15:12:46 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:18:38 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	set_type(t_node *new)
 	else if (new->prev->str && new->prev->str[0].c == '<'
 		&& new->prev->str[0].com)
 		new->type = IN_FILE;
-	
 	else
 		new->type = ARG;
 }

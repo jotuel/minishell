@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:36:25 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 15:37:52 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:26:26 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int argc, char **argv, char *envp[])
 	init(get_data()->env, envp);
 	set_signals();
 	ret = 0;
-
 	if (argc == 2)
 		ret = prompt_input(argv[1], pfd, get_data(), 1);
 	while (!ret)

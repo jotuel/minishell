@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:40 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 17:17:24 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:25:40 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int	errorcheck_expand(char *var)
 	stdout = tmp;
 	return (0);
 }
-
-
 
 //i and k and append get passed as 0
 static void	process_new_envvarr(int append, char *var, int i, int k)

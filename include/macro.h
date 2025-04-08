@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:05:42 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/04/08 11:30:35 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:17:38 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 #  define USER "minishell"
 # endif
 #ifndef HOME
-#  define HOME ""
+# define HOME ""
 # endif
 # ifndef PROMPT
 #  define PROMPT ">"

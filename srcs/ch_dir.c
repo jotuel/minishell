@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:39:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 14:57:46 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:25:31 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	is_valid_cd(const char *dir)
 		return (error_printf("cd", "permission denied"), 0);
 	return (1);
 }
-
 
 int	bi_cd(int argc, char *argv[], t_sent *sent)
 {
