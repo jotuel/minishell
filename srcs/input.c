@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:11:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 19:56:14 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:19:56 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,34 @@ int	prompt_input(char *line, int pfd[2], t_data *data, int input)
 		store_return_value(execute(data->page[0], pfd, 1, data), true);
 	}
 	return (0);
+}
+
+/*
+** This is meant to get more input and process it until it is added to 
+** link list, then return.
+** rl_gets doesnt add the historyy the w 
+*/
+void	get_more_input(void)
+{
+	char	*line;
+	t_char	*result;
+
+	get_data()->herecount = 0;
+	line = NULL;
+	while (line == 0)
+	{
+		line = readline("pipe>");
+		if (NULL == line)
+			ft_exit(get_data(), "syntax error", "unexpected end of file", 2);
+		else if (line[0] == 0)
+		{
+			free(line);
+			line = NULL;
+		}
+	}
+	result = lexify(line, get_data());
+	free(result);
+	result = NULL;
+	free(line);
+	return ;
 }

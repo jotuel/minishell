@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 17:45:36 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:18:23 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ int				file_has_error(char *path, enum e_token type);
 void			expand_envvar(char *unexp, char *exp, int *i, int *k);
 void			update_env(int value, char *name, bool update);
 int				question_or_underscore(char c);
+char			*ret_ptr_to_envval(char *source, t_data *data);
+int				append_envvar(char env[ENV_SIZE + 1][MAX_LENGTH + 1], char \
+				*name, char *value);
 
 /*
 ** EXECUTION

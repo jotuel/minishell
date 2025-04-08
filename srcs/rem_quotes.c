@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:27:03 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 19:58:45 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:38:50 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int	next_is_delim(char *str, int i, t_char *dst, int k)
 {
 	if (k > 0 && dst[k - 1].added)
 		return (0);
-	if (i != 0 && dst[k - 1].c != ' ' && dst[k - 1].esc != 0)
+	if (i != 0 && !ft_isspace(dst[k - 1].c) && dst[k - 1].esc != 0)
 	{
 		return (0);
 	}
 	i += 2;
-	while (str[i] != 0 && str[i] != ' ')
+	while (str[i] != 0 && !ft_isspace(str[i]))
 	{
 		if (str[i] == '\'' && str[i + 1] == '\'')
 		{

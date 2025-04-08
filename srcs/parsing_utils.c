@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:54:24 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 19:58:08 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:42:09 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ size_t	ft_wrdlen(t_char *str, t_data *data)
 		error_printf("system", "failure");
 		return (-1);
 	}
-	while (str[i].c != 0 && (str[i].c != ' ' || str[i].esc == 1))
+	while (str[i].c != 0 && (!ft_isspace(str[i].c) || str[i].esc == 1))
 	{
 		if (str[i].ghost == 0)
 			count_i++;

@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:43:34 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/03/20 12:40:00 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:25:24 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,35 @@ int	handle_d_quotes(char *src, t_char *dst, int *k, int *exp)
 	}
 }
 
+int	handle_tilde(char *src, t_char *dst, int i, int *k)
+{
+	int	j;
+
+	if ((i == 0 || ft_isspace(src[i - 1])) && src[i] == '~' && (ft_isspace \
+	(src[i + 1]) || src[i + 1] == '/' || src[i + 1] == '\0'))
+	{
+		j = 0;
+		if (ret_ptr_to_envval("$HOME", get_data()) && ret_ptr_to_envval \
+		("$HOME", get_data())[4])
+		{
+			while ("$HOME"[j])
+			{
+				dst[*k].c = "$HOME"[j];
+				(*k)++;
+				j++;
+			}
+			return (1);
+		}
+		while (HOME[j])
+		{
+			dst[*k].c = HOME[j++];
+			(*k)++;
+		}
+		return (1);
+	}
+	return (0);
+}
+
 int	handle_rest(char *src, t_char *dst, int i, int *k)
 {
 	if (src[i] == '\'')
@@ -68,6 +97,8 @@ int	handle_rest(char *src, t_char *dst, int i, int *k)
 		dst[*k].esc = 1;
 		(*k)++;
 	}
+	else if (handle_tilde(src, dst, i, k))
+		;
 	else
 	{
 		dst[*k].c = src[i];
