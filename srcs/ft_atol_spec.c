@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:42:12 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/04/05 19:55:13 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:58:56 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	overflow_check(long ret, int sign, int addition, const char *nptr)
 	return (0);
 }
 
-// Meant to handle the inbuilt exit the same way as bash.
+
 // int sign should be passed as 1
 int	ft_atoi_spec(const char *nptr, int sign, long ret)
 {
