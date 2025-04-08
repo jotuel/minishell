@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macro.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtuomi <jtuomi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:05:42 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/04/06 14:28:25 by jtuomi           ###   ########.fr       */
+/*   Updated: 2025/04/08 11:30:35 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # endif
 # ifndef USER
 #  define USER "minishell"
+# endif
+#ifndef HOME
+#  define HOME ""
 # endif
 # ifndef PROMPT
 #  define PROMPT ">"
