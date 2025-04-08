@@ -6,12 +6,11 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:55:05 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/02 17:16:52 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:05:41 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <unistd.h>
 
 /*
  *frees all heap memory, prints message to stderr and exits with correct code

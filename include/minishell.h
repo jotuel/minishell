@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 11:54:21 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:45:36 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h" // our own library
 # include "color.h" // different control codes
+# include <signal.h> // signal handling
 # include <readline/history.h> // add_history
 # include <readline/readline.h> // readline
 # include <linux/binfmts.h> // ARG_MAX_STRLEN
@@ -23,6 +24,8 @@
 # include <sys/user.h> // PAGE_SIZE
 # include <sys/stat.h> // fstat
 # include <sys/wait.h> // WEXITSTATUS
+
+extern sig_atomic_t g_sig;
 
 /*
 ** BUILT' INS
@@ -128,6 +131,7 @@ void			mark_commands(t_char *com_line, int i);
 int				handle_rest(char *src, t_char *dst, int i, int *k);
 int				handle_d_quotes(char *src, t_char *dst, int *k, int *exp);
 int				handle_s_quotes(char *src, t_char *dst, int i, int *k);
+void			get_more_input(void);
 
 /*
 ** SIGNALS
@@ -137,5 +141,7 @@ void			set_signals(void);
 void			signal_handler(int sig_nbr);
 void			void_signal(int sig_nbr);
 void			unset_signals(void);
+int				heredoc_hook(void);
+int				rl_hook(void);
 
 #endif

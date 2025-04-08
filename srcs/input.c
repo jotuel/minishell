@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include <readline/readline.h>
 
 /*
 ** tokenises cmd and parses it.
@@ -34,16 +35,14 @@ static char	*rl_gets(t_data *data)
 	static char	*strcwd;
 	static char	*tmp;
 
+	rl_event_hook = rl_hook;
 	getcwd(data->cwd, sizeof(data->cwd));
 	tmp = ft_strjoin(GREEN USER ":" RESET, data->cwd);
 	strcwd = ft_strjoin(tmp, BRIGHT_YELLOW EMOJI PROMPT RESET);
 	free(tmp);
 	tmp = NULL;
 	if (line)
-	{
 		free(line);
-		line = NULL;
-	}
 	line = readline(strcwd);
 	free(strcwd);
 	strcwd = NULL;

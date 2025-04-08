@@ -56,3 +56,15 @@ char	**get_own_env(void)
 	cpy[i] = NULL;
 	return (cpy);
 }
+
+/*
+** keeps the last executed programs return value
+*/
+int	store_return_value(int ret_val, bool add)
+{
+	static int	ret;
+
+	if (add)
+		ret = ret_val;
+	return (ret);
+}

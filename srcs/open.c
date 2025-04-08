@@ -47,11 +47,6 @@ static bool	check_write(int fd, char *txt, char *file_name)
 	return (true);
 }
 
-static int  rl_signal_handler(void)
-{
-    RL_SETSTATE(RL_STATE_DONE);
-    return (1);
-}
 
 /*
 ** Creates a file, writes in it and unlinks it so that it is destroyed
@@ -69,9 +64,9 @@ int	open_temp_heredocs(t_node *node, int expand, char *eof, char *txt)
 	if (-1 == fd)
 		return (free(file_name), fd);
 	eof = cnvrt_to_char(node->str);
-	rl_signal_event_hook = &rl_signal_handler;
+	rl_event_hook = heredoc_hook;
 	txt = create_heredoc(eof, expand, NULL, NULL);
-	rl_signal_event_hook = NULL;
+	rl_event_hook = NULL;
 	free(eof);
 	if (!check_write(fd, txt, file_name))
 		return (-1);
