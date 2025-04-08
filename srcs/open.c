@@ -47,11 +47,10 @@ static bool	check_write(int fd, char *txt, char *file_name)
 	return (true);
 }
 
-static int signal_hook(void)
+static int  rl_signal_handler(void)
 {
-		printf("^C\n");
-		RL_SETSTATE(RL_STATE_DONE);
-		return (1);
+    RL_SETSTATE(RL_STATE_DONE);
+    return (1);
 }
 
 /*
@@ -70,7 +69,7 @@ int	open_temp_heredocs(t_node *node, int expand, char *eof, char *txt)
 	if (-1 == fd)
 		return (free(file_name), fd);
 	eof = cnvrt_to_char(node->str);
-	rl_signal_event_hook = signal_hook;
+	rl_signal_event_hook = &rl_signal_handler;
 	txt = create_heredoc(eof, expand, NULL, NULL);
 	rl_signal_event_hook = NULL;
 	free(eof);

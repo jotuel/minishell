@@ -13,14 +13,6 @@
 #include "../include/minishell.h"
 
 /*
-** this functions purpose is beyond me.
-*/
-int	cwd(t_data *data)
-{
-	return (0);
-}
-
-/*
 ** tokenises cmd and parses it.
 */
 static void	process(char *line, t_data *data, t_char *result)
