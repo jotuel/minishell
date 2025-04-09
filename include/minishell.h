@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/09 14:55:29 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:43:19 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <sys/stat.h> // fstat
 # include <sys/wait.h> // WEXITSTATUS
 
-extern sig_atomic_t g_sig;
+extern sig_atomic_t	g_sig;
 
 /*
 ** BUILT' INS
@@ -87,7 +87,7 @@ t_sent			*syntax_error(t_node *node);
 /*
 ** UTILITIES
 */
-typedef void	(*t_node_func)(t_list *list, t_node *node);
+typedef void		(*t_node_func)(t_list *list, t_node *node);
 void			*ft_xcalloc(size_t nmemb, size_t size);
 void			*ft_memset(void *s, int c, size_t n);
 size_t			ft_wrdlen(t_char *str, t_data *data);
