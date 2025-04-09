@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 19:09:07 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:55:49 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,34 @@ static t_node	*check_inpipe(int nbr, t_node *node)
 }
 
 // i is 0, k is 0, sentence is calloced, node is pulled from data
-t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent *sent)
+t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent **sent)
 {
 	while (node)
 	{
 		node = get_data()->tokens.first;
-		if (node->type == PIPE)
+		if (node && node->type == PIPE)
 		{
-			sent->outpipe = 1;
+			(*sent)->outpipe = 1;
 			if (get_data()->tokens.last == node)
 				get_more_input();
 			break ;
 		}
-		if (node->type == REDIRECT)
+		if (node && node->type == REDIRECT)
 		{
 			if (node->next->type == REDIRECT || node->next->type == PIPE
 				|| get_data()->tokens.last == node)
 				return (syntax_error(node));
 		}
-		else if (is_file(node->type))
-			add_redirection(node, sent, k++);
-		else
-			sent->array[i++] = cnvrt_to_char(node->str);
-		node = destroy_node(&get_data()->tokens, node);
+		else if (node && is_file(node->type))
+			add_redirection(node, *sent, k++);
+		else if (node)
+			(*sent)->array[i++] = cnvrt_to_char(node->str);
+		if (get_data()->tokens.first && node)
+			node = destroy_node(&get_data()->tokens, node);
 	}
-	if (sent)
-		sent->argc = i;
-	return (sent);
+	if (*sent)
+		(*sent)->argc = i;
+	return (*sent);
 }
 
 void	destroy_old_page(int i, int j, int k, t_data *data)
@@ -104,7 +105,7 @@ t_sent	**create_page(t_list *stack)
 	{
 		page[i] = ft_xcalloc(sizeof(t_sent), 1);
 		conv_linked_to_sentence(0, 0, check_inpipe(i, get_data()->tokens.first),
-			page[i]);
+			&page[i]);
 		if (!page[i])
 			return (destroy_old_page(i, 0, 0, get_data()), NULL);
 		cur = stack->first;
