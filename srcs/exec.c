@@ -6,11 +6,12 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:21:45 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/04/06 18:42:21 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:41:02 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
 bool		handle_redirection(char *sentence, enum e_token type, int fd);
 static void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2]);
 
@@ -37,10 +38,10 @@ static void	execute_child(t_sent *sent, int pfd[2], pid_t child, t_data *data)
 		ft_exit(data, "fork", strerror(errno), errno);
 }
 
-static int return_value(int ret)
+static int	return_value(int ret)
 {
-   	if (WIFSIGNALED(ret))
-    {
+	if (WIFSIGNALED(ret))
+	{
 		if (WTERMSIG(ret) == SIGINT)
 			printf("\n");
 		else if (WTERMSIG(ret) == SIGQUIT)

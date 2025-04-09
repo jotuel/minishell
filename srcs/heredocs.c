@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:18:56 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 18:43:01 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:45:21 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,6 @@ char	*expand_heredocs(char *unexpanded)
 	return (expanded);
 }
 
-int	t_compare(t_char *str, char *str2)
-{
-	int	i;
-
-	if (!str)
-		error_printf("debug", "heredoc delimiter should not be NULL");
-	if (!str2)
-		return (1);
-	i = 0;
-	while (str[i].c && str2[i])
-	{
-		if (str[i].c != str2[i])
-			return (1);
-		i++;
-	}
-	if (str[i].c != str2[i])
-		return (1);
-	return (0);
-}
-
 static char	*return_result(char *result, int expand)
 {
 	if (result == NULL)
@@ -65,38 +45,47 @@ static char	*return_result(char *result, int expand)
 }
 
 /*
+* Utility function for freeing and setting to NULL
+*/
+static void	free_and_set_null(void **ptr)
+{
+	if (ptr == NULL)
+		return ;
+	free(*ptr);
+	(*ptr) = NULL;
+}
+
+/*
  * strjoin_wrapper - wrapper for ft_strjoin that frees the first string
  * @s1: first string to join
  * @s2: second string to join
  *
  * Return: pointer to the joined string
  */
-static char	*strjoin_wrapper(char *s1, char *s2)
+static char	*strjoin_wrapper(char *s1, char **s2, int free_second)
 {
 	char	*result;
 
-	result = ft_strjoin(s1, s2);
+	result = ft_strjoin(s1, *s2);
 	free(s1);
+	if (free_second)
+		free_and_set_null((void **)s2);
 	return (result);
 }
 
 // If expand is 1, expansion happens
 char	*create_heredoc(char *terminat, int expand, char *result, char *tmp)
 {
-	char  *prompt;
+	char	*prompt;
 
 	prompt = ft_strjoin(terminat, ">");
 	while (tmp == NULL || ft_strncmp(terminat, tmp, ft_strlen(terminat) + 1))
 	{
 		if (tmp)
 		{
-			tmp = strjoin_wrapper(tmp, "\n");
+			tmp = strjoin_wrapper(tmp, (char *[]){"\n"}, 0);
 			if (result)
-			{
-				result = strjoin_wrapper(result, tmp);
-				free(tmp);
-				tmp = NULL;
-			}
+				result = strjoin_wrapper(result, &tmp, 1);
 			else
 				result = tmp;
 		}
@@ -104,10 +93,7 @@ char	*create_heredoc(char *terminat, int expand, char *result, char *tmp)
 		if (!tmp)
 		{
 			if (g_sig == SIGINT)
-			{
-                free(result);
-                result = NULL;
-			}
+				free_and_set_null((void **)&result);
 			else
 				printf(FORMAT, SHELL, WARN, DOC, __LINE__, DELIM, terminat);
 			break ;

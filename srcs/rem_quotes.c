@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:27:03 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 13:38:50 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:38:20 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	remove_quotes(t_char *dst, char *src, int i, int k)
 		error_printf("user", "quotes need to be closed");
 }
 
-// I will later refactor to remove the i and just pass the pointer to (src + i);
 int	check_emp_arg(char *src, int i, t_char *dst, int *k)
 {
 	if (src[i] == '\'' && src[i + 1] == '\'' && next_is_delim(src, i, dst, *k))

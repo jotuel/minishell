@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:59:49 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 19:57:26 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:39:50 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ char	*ft_itoa(unsigned int nbr)
 
 static bool	check_write(int fd, char *txt, char *file_name)
 {
-    if (g_sig == SIGINT)
-    {
-        unlink(file_name);
-        free(file_name);
-        close(fd);
-        free(txt);
-        return (false);
-    }
+	if (g_sig == SIGINT)
+	{
+		unlink(file_name);
+		free(file_name);
+		close(fd);
+		free(txt);
+		return (false);
+	}
 	else if (write(fd, txt, ft_strlen(txt)) < 0)
 	{
 		unlink(file_name);
@@ -52,7 +52,6 @@ static bool	check_write(int fd, char *txt, char *file_name)
 	}
 	return (true);
 }
-
 
 /*
 ** Creates a file, writes in it and unlinks it so that it is destroyed

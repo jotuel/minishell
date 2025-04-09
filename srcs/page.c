@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/09 14:55:49 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:34:13 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ t_sent	*conv_linked_to_sentence(int i, int k, t_node *node, t_sent **sent)
 		}
 		if (node && node->type == REDIRECT)
 		{
-			if (node->next->type == REDIRECT || node->next->type == PIPE
-				|| get_data()->tokens.last == node)
+			if (node->next->type == REDIRECT || node->next->type == PIPE)
 				return (syntax_error(node));
 		}
 		else if (node && is_file(node->type))

@@ -6,20 +6,20 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 19:56:50 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/04/01 12:45:15 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:40:13 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-sig_atomic_t g_sig = 0;
+sig_atomic_t	g_sig = 0;
 
 /*
  * Signal handler for SIGINT and SIGQUIT signals.
  */
 void	signal_handler(int sig_nbr)
 {
-    g_sig = sig_nbr;
+	g_sig = sig_nbr;
 }
 
 /*
