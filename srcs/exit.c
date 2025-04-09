@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <unistd.h>
 
 /*
  *frees all heap memory, prints message to stderr and exits with correct code

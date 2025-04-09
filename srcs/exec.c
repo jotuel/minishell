@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <stdlib.h>
-#include <unistd.h>
-
 bool		handle_redirection(char *sentence, enum e_token type, int fd);
 static void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2]);
 
@@ -40,6 +37,28 @@ static void	execute_child(t_sent *sent, int pfd[2], pid_t child, t_data *data)
 		ft_exit(data, "fork", strerror(errno), errno);
 }
 
+static int return_value(int ret)
+{
+   	if (WIFSIGNALED(ret))
+    {
+		if (WTERMSIG(ret) == SIGINT)
+			printf("\n");
+		else if (WTERMSIG(ret) == SIGQUIT)
+			printf("Quit (core dumped)\n");
+		return (WTERMSIG(ret));
+	}
+	if (WIFEXITED(ret))
+	{
+		if (WEXITSTATUS(ret) == 13)
+			return (126);
+		else if (WEXITSTATUS(ret) == 21)
+			return (1);
+		else
+			return (WEXITSTATUS(ret));
+	}
+	return (EXIT_SUCCESS);
+}
+
 /*
 ** reaps the children and does some return value arithmetic with last
 */
@@ -52,18 +71,7 @@ static int	wait_for_child(int ret, int state, pid_t last_child, int *i)
 		(*i) -= 1;
 	}
 	deallocate(get_data());
-	if (WIFSIGNALED(ret))
-		return (WTERMSIG(ret) + 128);
-	if (WIFEXITED(ret))
-	{
-		if (WEXITSTATUS(ret) == 13)
-			return (126);
-		else if (WEXITSTATUS(ret) == 21)
-			return (1);
-		else
-			return (WEXITSTATUS(ret));
-	}
-	return (EXIT_SUCCESS);
+	return (return_value(ret));
 }
 
 /*
@@ -124,16 +132,4 @@ void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2])
 	pipe_closer(&pfd[STDIN_FILENO]);
 	pipe_closer(&pfd[STDOUT_FILENO]);
 	pipe_closer(&sentence->error);
-}
-
-/*
-** keeps the last executed programs return value
-*/
-int	store_return_value(int ret_val, bool add)
-{
-	static int	ret;
-
-	if (add)
-		ret = ret_val;
-	return (ret);
 }

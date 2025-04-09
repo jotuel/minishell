@@ -43,4 +43,19 @@
 # ifndef PROMPT
 #  define PROMPT ">"
 # endif
+# ifndef SHELL
+#  define SHELL "minishell"
+# endif
+# ifndef DOC
+#  define DOC "here document at line"
+# endif
+# ifndef WARN
+#  define WARN "warning"
+# endif
+# ifndef DELIM
+#  define DELIM "delimited by end-of-file"
+# endif
+# ifndef FORMAT
+#  define FORMAT "%s: %s: %s at line %d %s (wanted `%s`)\n"
+# endif
 #endif

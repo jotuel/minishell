@@ -18,7 +18,7 @@ SRC = lexer.c	ft_xcalloc.c parsing_utils.c heredocs.c init_utils.c\
 	exit.c	env.c utils.c page.c rem_quotes.c open.c signal.c \
 	main.c create_list.c ft_lstaddback.c input.c export.c redir.c \
 	redirect.c exec.c path.c inbuild.c ft_atol_spec.c exp_utils.c \
-	unset.c export_print.c echo.c ch_dir.c rem_quotes_utils.c
+	unset.c export_print.c echo.c ch_dir.c rem_quotes_utils.c hook.c
 SRC := $(addprefix srcs/, $(SRC))
 OBJ := $(SRC:%.c=%.o)
 MAKE = make -C

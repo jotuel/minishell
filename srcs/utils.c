@@ -53,6 +53,9 @@ t_node	*destroy_node(t_list *list, t_node *node)
 	return (cur);
 }
 
+/*
+* Closes the given file descriptor if it is greater than 2.
+*/
 void	pipe_closer(int *fd)
 {
 	if (*fd > 2)
@@ -62,11 +65,19 @@ void	pipe_closer(int *fd)
 	}
 }
 
+/*
+* Checks if the given character is a question mark or an underscore.
+* Returns 1 if the character is a question mark or an underscore, 0 otherwise.
+*/
 int	question_or_underscore(char const c)
 {
 	return (c == '?' || c == '_');
 }
 
+/*
+* Checks if the given file name is a valid input file.
+* Returns 0 if the file exists and is readable, -1 otherwise.
+*/
 int	infile_checker(char *name)
 {
 	int	fd;

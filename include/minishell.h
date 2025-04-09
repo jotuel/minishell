@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 17:18:23 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:55:29 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h" // our own library
 # include "color.h" // different control codes
+# include <signal.h> // signal handling
 # include <readline/history.h> // add_history
 # include <readline/readline.h> // readline
 # include <linux/binfmts.h> // ARG_MAX_STRLEN
@@ -24,10 +25,11 @@
 # include <sys/stat.h> // fstat
 # include <sys/wait.h> // WEXITSTATUS
 
+extern sig_atomic_t g_sig;
+
 /*
 ** BUILT' INS
 */
-int				cwd(t_data *data);
 int				run_builtin(int argc, char *argv[], t_sent *sent, bool update);
 int				is_builtin(char *cmd);
 int				bi_pwd(int fd);
@@ -118,7 +120,7 @@ char			*test_append(t_char *raw_path);
 int				prompt_input(char *line, int pfd[2], t_data *data, int input);
 void			add_redirection(t_node *node, t_sent *sentence, int i);
 t_sent			*conv_linked_to_sentence(int i, int k, t_node *node, \
-				t_sent *sent);
+				t_sent **sent);
 int				check_emp_arg(char *src, int i, t_char *dst, int *k);
 void			remove_quotes(t_char *dst, char *src, int i, int k);
 int				open_temp_heredocs(t_node *node, int expand, char *eof,
@@ -142,5 +144,7 @@ void			set_signals(void);
 void			signal_handler(int sig_nbr);
 void			void_signal(int sig_nbr);
 void			unset_signals(void);
+int				heredoc_hook(void);
+int				rl_hook(void);
 
 #endif

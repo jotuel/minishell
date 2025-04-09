@@ -45,4 +45,11 @@ void	add_redirection(t_node *node, t_sent *sentence, int i)
 		store_return_value(2, true);
 		return ;
 	}
+	if (g_sig == SIGINT)
+	{
+		g_sig = 0;
+		deallocate(get_data());
+		store_return_value(2, true);
+		return ;
+	}
 }
