@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <readline/readline.h>
-#include <readline/rltypedefs.h>
 
 static char	*ft_itoa_rec(unsigned int nbr, char *buffer)
 {
@@ -35,7 +33,15 @@ char	*ft_itoa(unsigned int nbr)
 
 static bool	check_write(int fd, char *txt, char *file_name)
 {
-	if (write(fd, txt, ft_strlen(txt)) < 0)
+    if (g_sig == SIGINT)
+    {
+        unlink(file_name);
+        free(file_name);
+        close(fd);
+        free(txt);
+        return (false);
+    }
+	else if (write(fd, txt, ft_strlen(txt)) < 0)
 	{
 		unlink(file_name);
 		free(file_name);
@@ -66,7 +72,6 @@ int	open_temp_heredocs(t_node *node, int expand, char *eof, char *txt)
 	eof = cnvrt_to_char(node->str);
 	rl_event_hook = heredoc_hook;
 	txt = create_heredoc(eof, expand, NULL, NULL);
-	rl_event_hook = NULL;
 	free(eof);
 	if (!check_write(fd, txt, file_name))
 		return (-1);

@@ -64,7 +64,6 @@ static int return_value(int ret)
 */
 static int	wait_for_child(int ret, int state, pid_t last_child, int *i)
 {
-    rl_event_hook = NULL;
 	while (*i)
 	{
 		if (last_child == waitpid(0, &state, 0))

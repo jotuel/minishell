@@ -46,5 +46,6 @@ int	main(int argc, char **argv, char *envp[])
 		ret = prompt_input(NULL, pfd, get_data(), 0);
 	rl_clear_history();
 	deallocate(get_data());
+	printf("exit\n");
 	return (store_return_value(0, false));
 }
