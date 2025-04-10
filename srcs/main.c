@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:36:25 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 18:26:26 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:32:13 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*increment_shlvl(char *var, char *ret)
 	if (var[6])
 	{
 		ft_memcpy(ret, var, 6);
-		ft_memcpy(&ret[6], ft_itoa(ft_atoi(&var[6]) + 1), 10);
+		ft_memcpy(&ret[6], ft_itoa((unsigned int)ft_atoi(&var[6]) + 1), 10);
 		return (ret);
 	}
 	return (var);

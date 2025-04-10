@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:43:34 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 18:25:24 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:26:36 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	handle_tilde(char *src, t_char *dst, int i, int *k)
 	{
 		j = 0;
 		if (ret_ptr_to_envval("$HOME", get_data()) && ret_ptr_to_envval \
-		("$HOME", get_data())[4])
+			("$HOME", get_data())[4])
 		{
 			while ("$HOME"[j])
 			{

@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:25:30 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/03/25 15:59:17 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:39:59 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,22 @@ static void	handle_infile(char *sent, int fd)
 */
 static void	handle_heredoc(int fd)
 {
+	t_data	*data;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	data = get_data();
 	dup2(fd, STDIN_FILENO);
+	while (data->page[i])
+	{
+		while (j < 20)
+			if (data->page[i]->redirs[j++].here_fd > 2)
+				close(data->page[i]->redirs[j - 1].here_fd);
+		j = 0;
+		i += 1;
+	}
 	close(fd);
 }
 
