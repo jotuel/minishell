@@ -79,7 +79,7 @@ int	prompt_input(char *line, int pfd[2], t_data *data, int input)
 			ft_exit(data, "pipe", strerror(errno), errno);
 		store_return_value(execute(data->page[0], pfd, 1, data), true);
 	}
-	return (0);
+	return (input);
 }
 
 /*
