@@ -6,13 +6,12 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:41:58 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 18:18:38 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:57:07 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// BASH counts heredocs quite early so we do it while creating nodes
 static void	set_type(t_node *new)
 {
 	if (new->str && new->str[0].c == '|' && new->str[0].com)

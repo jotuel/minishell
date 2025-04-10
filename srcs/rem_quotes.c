@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:27:03 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/09 15:38:20 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:00:17 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ int	mark_redir(char *src, int *i, t_char *dst, int *k)
 	return (0);
 }
 
-// i and k are set to zero
+/*
+** i and k should be passed as zero
+*/
 void	remove_quotes(t_char *dst, char *src, int i, int k)
 {
 	int	in_s_quotes;

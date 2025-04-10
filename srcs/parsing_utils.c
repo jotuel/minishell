@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:54:24 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 13:42:09 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:59:57 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ size_t	ft_wrdlen(t_char *str, t_data *data)
 	return (count_i);
 }
 
-// Tried to plug in but the prints failed due
 int	file_has_error(char *path, enum e_token type)
 {
 	struct stat	file_stat;

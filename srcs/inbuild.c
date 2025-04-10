@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:05:36 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 11:38:42 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:57:39 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-// BASH version ignores arguments
+/*
+**   We ignore any arguments
+*/
 int	bi_pwd(int fd)
 {
 	char	cwd[PATH_MAX];

@@ -6,14 +6,13 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:39:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 18:25:31 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:55:33 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 // Only takes 1 argument, throws error otherwise
-// TODO handle -1 Has some issues, needs debugging 
 static int	is_valid_cd(const char *dir)
 {
 	struct stat	file_stat;

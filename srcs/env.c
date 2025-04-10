@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:26 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/08 14:58:19 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:56:18 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ const char	*find_env(t_char *source, t_data *data)
 	return (NULL);
 }
 
-//Our env discards any arguments
+/*
+**prints the env variables that have a value
+**discards any arguments
+*/
 void	bi_env(t_data *data, int fd)
 {
 	const char	*str;
