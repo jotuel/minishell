@@ -12,17 +12,35 @@
 
 #include "../include/minishell.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t		ft_strlcpy(char *dst, const char *src, size_t size);
+
+static char	*increment_shlvl(char *var, char *ret)
+{
+	int	i;
+
+	ft_bzero(ret, 17);
+	i = 0;
+	if (var[6])
+	{
+		ft_memcpy(ret, var, 6);
+		ft_memcpy(&ret[6], ft_itoa(ft_atoi(&var[6]) + 1), 10);
+		return (ret);
+	}
+	return (var);
+}
 
 void	init(char env_cpy[MAX_VARS + 1][MAX_LENGTH + 1], char **orig)
 {
-	int	i;
+	char	lvl[17];
+	int		i;
 
 	i = 0;
 	while (i < MAX_VARS && orig[i])
 	{
 		if (ft_strncmp(orig[i], "SHELL=", 6) == 0)
 			ft_strlcpy(env_cpy[i], "SHELL=minishell", MAX_LENGTH);
+		else if (ft_strncmp(orig[i], "SHLVL=", 6) == 0)
+			ft_strlcpy(env_cpy[i], increment_shlvl(orig[i], lvl), MAX_LENGTH);
 		else if (ft_strncmp(orig[i], "_=", 2))
 			ft_strlcpy(env_cpy[i], orig[i], MAX_LENGTH);
 		i++;
@@ -46,6 +64,5 @@ int	main(int argc, char **argv, char *envp[])
 		ret = prompt_input(NULL, pfd, get_data(), 0);
 	rl_clear_history();
 	deallocate(get_data());
-	printf("exit\n");
 	return (store_return_value(0, false));
 }
