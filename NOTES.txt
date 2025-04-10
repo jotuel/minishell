@@ -14,36 +14,4 @@ vim
 
 :Termdebug command
 
-pitka rivi rikkoo viela jotain
 
-export | grep is still broken <-jtuomi:/home/jtuomi/Git/minishell😎>export GREP
-				jtuomi:/home/jtuomi/Git/minishell😎>export | grep GREP
-				declare -x GREP
-
-jrimpila:/home/jrimpila/Git/mini3😎>env | grep _=
-_=_=
-jrimpila:/home/jrimpila/Git/mini3😎>env | grep _=
-_=_=
-jrimpila:/home/jrimpila/Git/mini3😎>env | grep _=
-_=_=
-
-ei paivity ->	jtuomi:/home/jtuomi/Git/minishell😎>env | grep _= | cat
-		_=/usr/bin/cat
-
-jrimpila:/home/jrimpila/Git/mini3😎>echo <Makefile "blaa blaa"
-jrimpila:/home/jrimpila/Git/mini3😎>env <Makefile "blaa blaa"
-jrimpila:/home/jrimpila/Git/mini3😎>
-
-
-ls | <Makefile echo blaa
-blaa
-
-< Makefile echo blaa 
-
-ei toimi
-
-export A=A
-./minishell
-echo $A
-
-do_redirections nayttaa aivan hirvealta, norminette ei tajua mita siina kay ja pakottaa poistamaan indentin
