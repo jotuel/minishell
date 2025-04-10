@@ -74,7 +74,7 @@ typedef struct s_sent
 	bool			inpipe;
 	t_dir			redirs[20];
 	bool			outpipe;
-	int				error;
+	int				pipe_end;
 	int				heredocs;
 	int				argc;
 }					t_sent;

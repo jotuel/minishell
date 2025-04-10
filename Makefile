@@ -13,7 +13,7 @@
 AR = ar rcs
 CC = cc
 INCLUDE_DIRS = libft
-CFLAGS = -Wall -Wextra -Werror -DUSER=\"$(USER)\" -DHOME=\"$(HOME)\" -gdwarf -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer
+CFLAGS = -Wall -Wextra -Werror -DUSER=\"$(USER)\" -DHOME=\"$(HOME)\" -g2
 SRC = lexer.c	ft_xcalloc.c parsing_utils.c heredocs.c init_utils.c\
 	exit.c	env.c utils.c page.c rem_quotes.c open.c signal.c \
 	main.c create_list.c ft_lstaddback.c input.c export.c redir.c \

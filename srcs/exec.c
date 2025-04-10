@@ -87,9 +87,9 @@ int	execute(t_sent *sentence, int pfd[2], pid_t my_child, t_data *data)
 		pipe_closer(&pfd[STDOUT_FILENO]);
 		if (sentence->outpipe)
 		{
-			if (i >= 1 && data->page[i - 1] && data->page[i - 1]->error > 2)
-				pipe_closer(&data->page[i - 1]->error);
-			data->page[i]->error = pfd[STDIN_FILENO];
+			if (i >= 1 && data->page[i - 1] && data->page[i - 1]->pipe_end > 2)
+				pipe_closer(&data->page[i - 1]->pipe_end);
+			data->page[i]->pipe_end = pfd[STDIN_FILENO];
 			pipe(pfd);
 		}
 		return (execute(data->page[i++], pfd, fork(), data));
@@ -97,8 +97,8 @@ int	execute(t_sent *sentence, int pfd[2], pid_t my_child, t_data *data)
 	execute_child(sentence, pfd, my_child, data);
 	pipe_closer(&pfd[STDIN_FILENO]);
 	pipe_closer(&pfd[STDOUT_FILENO]);
-	if (i > 0 && data->page[i - 1] && data->page[i - 1]->error > 2)
-		pipe_closer(&data->page[i - 1]->error);
+	if (i > 0 && data->page[i - 1] && data->page[i - 1]->pipe_end > 2)
+		pipe_closer(&data->page[i - 1]->pipe_end);
 	return (wait_for_child(0, 0, my_child, &i));
 }
 
@@ -126,11 +126,11 @@ void	deal_with_sentence(t_sent *sentence, int i, int pfd[2], bool w[2])
 	if (sentence->inpipe)
 	{
 		if (!w[0])
-			dup2(sentence->error, STDIN_FILENO);
+			dup2(sentence->pipe_end, STDIN_FILENO);
 	}
 	if (sentence->outpipe && !w[1])
 		dup2(pfd[STDOUT_FILENO], STDOUT_FILENO);
 	pipe_closer(&pfd[STDIN_FILENO]);
 	pipe_closer(&pfd[STDOUT_FILENO]);
-	pipe_closer(&sentence->error);
+	pipe_closer(&sentence->pipe_end);
 }
