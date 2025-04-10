@@ -63,7 +63,7 @@ int	prompt_input(char *line, int pfd[2], t_data *data, int input)
 	if (input == 0)
 		line = rl_gets(data);
 	if (line == NULL)
-		return (1);
+		return (printf("exit\n"));
 	if (line[0] == '\0')
 		return (0);
 	process(line, data, NULL);
@@ -79,13 +79,13 @@ int	prompt_input(char *line, int pfd[2], t_data *data, int input)
 			ft_exit(data, "pipe", strerror(errno), errno);
 		store_return_value(execute(data->page[0], pfd, 1, data), true);
 	}
-	return (0);
+	return (input);
 }
 
 /*
-** This is meant to get more input and process it until it is added to 
+** This is meant to get more input and process it until it is added to
 ** link list, then return.
-** rl_gets doesnt add the historyy the w 
+** rl_gets doesnt add the historyy the w
 */
 void	get_more_input(void)
 {
