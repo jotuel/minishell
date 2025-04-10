@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:20:15 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/10 18:02:57 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/10 20:11:19 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	destroy_old_page(int i, int j, int k, t_data *data)
 		}
 		j = 0;
 		while (data->page[i] && j <= 20)
-			if (data->page[i]->redirs[j].here_fd > 2)
-				close (data->page[i]->redirs[j].here_fd);
+			if (data->page[i]->redirs[j++].here_fd > 2)
+				close (data->page[i]->redirs[j - 1].here_fd);
 		k = 0;
 		while (k < MAX_SENT_SIZE && data->page[i])
 		{
