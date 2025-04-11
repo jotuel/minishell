@@ -46,7 +46,7 @@ static int	return_value(int ret)
 			printf("\n");
 		else if (WTERMSIG(ret) == SIGQUIT)
 			printf("Quit (core dumped)\n");
-		return (WTERMSIG(ret + 128));
+		return (WTERMSIG(ret) + 128);
 	}
 	if (WIFEXITED(ret))
 	{
