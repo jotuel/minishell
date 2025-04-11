@@ -13,7 +13,7 @@
 #include "../include/minishell.h"
 
 /*
- *frees all heap memory, prints message to stderr and exits with correct code
+ *  frees all heap memory, prints message to stderr and exits with correct code
  */
 void	ft_exit(t_data *data, char *cmd, char *message, int exit_code)
 {

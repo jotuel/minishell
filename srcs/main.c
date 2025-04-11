@@ -16,10 +16,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 
 static char	*increment_shlvl(char *var, char *ret)
 {
-	int	i;
-
 	ft_bzero(ret, 17);
-	i = 0;
 	if (var[6])
 	{
 		ft_memcpy(ret, var, 6);
