@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:20:09 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/04/13 12:40:40 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 15:57:54 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_data
 	int				herecount;
 	char			cwd[200];
 	t_char			*newline;
+	int				error;
 }					t_data;
 
 typedef struct s_point

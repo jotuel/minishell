@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:11:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/13 13:49:21 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 16:01:15 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	process(char *line, t_data *data, t_char *result)
 	result = lexify(line, data);
 	free(data->newline);
 	data->newline = NULL;
+	if (data->error == 0)
 	create_page(&data->tokens);
 }
 
@@ -59,6 +60,7 @@ static char	*rl_gets(t_data *data)
 */
 int	prompt_input(char *line, int pfd[2], t_data *data, int input)
 {
+	data->error = 0;
 	set_signals();
 	if (input == 0)
 		line = rl_gets(data);
