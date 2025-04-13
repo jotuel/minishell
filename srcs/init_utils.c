@@ -6,13 +6,13 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:24:54 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/13 16:36:01 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 17:01:50 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int is_redirection(t_char *dst, int i)
+static int	is_redirection(t_char *dst, int i)
 {
 	if (i > 0)
 		i--;
@@ -25,10 +25,8 @@ static int is_redirection(t_char *dst, int i)
 
 int	check_amb_redir(t_char *dst, int i, const char *env, int env_i)
 {
-	int word_count;
-	int orig;
-	
-	orig = env_i;
+	int	word_count;
+
 	if (is_redirection(dst, i) == 0)
 		return (0);
 	word_count = 0;

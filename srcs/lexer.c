@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/13 16:29:34 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 17:02:37 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void	expand_variables(t_char *dst, t_char *c, t_data *data, int di)
 	const char	*temp;
 
 	i = 0;
-	while (!data->error && c[i].c != 0 && di < (int)MAX_ARG_STRLEN )
+	while (!data->error && c[i].c != 0 && di < (int)MAX_ARG_STRLEN)
 	{
 		if (!data->error && c[i].c == '$' && c[i].esc == 0 && c[i].var
 			&& (ft_isalnum(c[i + 1].c) || question_or_underscore(c[i + 1].c)))
