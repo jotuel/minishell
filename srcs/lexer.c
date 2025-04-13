@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/13 13:53:48 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 17:02:37 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	mark_env_var(t_char *nl, int end)
 	}
 }
 
-void	mark_arguments(t_char *newline)
+void	mark_envvar(t_char *newline)
 {
 	int	i;
 	int	heredoc;
@@ -98,21 +98,21 @@ void	mark_arguments(t_char *newline)
 }
 
 // di is passed as a 0 to reduce lines
-static void	expand_envvar(t_char *dst, t_char *c, t_data *data, int di)
+static void	expand_variables(t_char *dst, t_char *c, t_data *data, int di)
 {
 	int			i;
 	const char	*temp;
 
 	i = 0;
-	while (c[i].c != 0 && di < (int)MAX_ARG_STRLEN)
+	while (!data->error && c[i].c != 0 && di < (int)MAX_ARG_STRLEN)
 	{
-		if (c[i].c == '$' && c[i].esc == 0 && c[i].var
+		if (!data->error && c[i].c == '$' && c[i].esc == 0 && c[i].var
 			&& (ft_isalnum(c[i + 1].c) || question_or_underscore(c[i + 1].c)))
 		{
 			temp = find_env(c + i, data);
 			di = copy_env_to_tchar(dst, di, temp);
 		}
-		if (c[i].var == 0)
+		if (!data->error && c[i].var == 0)
 		{
 			dst[di].ghost = c[i].ghost;
 			dst[di].c = c[i].c;
@@ -145,15 +145,15 @@ t_char	*lexify(char *line, t_data *data)
 	if (data->newline)
 		remove_quotes(newline, line, 0, 0);
 	i = 0;
-	while (data->newline && newline[i].c != 0)
+	while (data->newline && newline[i].c != 0 && data->error == 0)
 		mark_commands(newline, i++);
-	if (data->newline)
-		mark_arguments(newline);
-	if (data->newline)
-		expand_envvar(expanded, newline, data, 0);
+	if (data->newline && data->error == 0)
+		mark_envvar(newline);
+	if (data->newline && data->error == 0)
+		expand_variables(expanded, newline, data, 0);
 	if (expanded[MAX_ARG_STRLEN - 1].c != 0)
 		ft_exit(data, "USER", "Line is too long", 42);
-	if (data->newline)
+	if (data->newline && data->error == 0)
 		create_list(data, expanded);
 	return (newline);
 }

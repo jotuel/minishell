@@ -6,20 +6,57 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:24:54 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/06 18:47:04 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 17:01:50 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+static int	is_redirection(t_char *dst, int i)
+{
+	if (i > 0)
+		i--;
+	while (i > 0 && ft_isspace(dst[i].c) && dst[i].esc == 0)
+		i--;
+	if (dst[i].com)
+		return (1);
+	return (0);
+}
+
+int	check_amb_redir(t_char *dst, int i, const char *env, int env_i)
+{
+	int	word_count;
+
+	if (is_redirection(dst, i) == 0)
+		return (0);
+	word_count = 0;
+	while (env && !get_data()->error && env[env_i] && env_i < MAX_LENGTH)
+	{
+		if (ft_isspace(env[env_i] == 0))
+			word_count++;
+		while (env_i < MAX_LENGTH && ft_isspace(env[env_i]) == 0)
+			env_i++;
+		while (env_i < MAX_LENGTH && ft_isspace(env[env_i]))
+			env_i++;
+	}
+	if (word_count == 0 || word_count > 1)
+	{
+		get_data()->error = 1;
+		return_to_prompt(1, "syntax", "ambigious redirection");
+		return (1);
+	}
+	return (0);
+}
+
 int	copy_env_to_tchar(t_char *dst, int i, const char *env)
 {
 	int	env_i;
 
-	if (env == NULL)
+	if (get_data()->error)
 		return (i);
 	env_i = 0;
-	while (env[env_i])
+	check_amb_redir(dst, i, env, 0);
+	while (env && env[env_i] && get_data()->error == 0)
 	{
 		dst[i].c = env[env_i];
 		dst[i].var = 1;
