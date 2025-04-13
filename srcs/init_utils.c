@@ -6,11 +6,41 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:24:54 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/06 18:47:04 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 14:15:24 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+static int is_redirection(t_char *dst, int i)
+{
+	
+}
+
+static void check_amb_redir(t_char *dst, int i, const char *env, int env_i)
+{
+	int word_count;
+	
+	if (is_redirection(dst, i) == 0)
+		return ;
+	word_count = 0;
+	while (env[env_i])
+	{
+		if (ft_isspace(env[env_i] == 0))
+			word_count++;
+		while (ft_isspace(env[env_i] == 0))
+			env_i++;
+		while (ft_isspace(env[env_i]))
+			env_i++;
+	}
+	if (word_count == 0 || word_count > 1)
+	{
+		deallocate(get_data());
+		store_return_value(1, true);
+		
+	}
+
+}
 
 int	copy_env_to_tchar(t_char *dst, int i, const char *env)
 {
@@ -19,6 +49,7 @@ int	copy_env_to_tchar(t_char *dst, int i, const char *env)
 	if (env == NULL)
 		return (i);
 	env_i = 0;
+	check_amb_redir(dst, i, env, 0);
 	while (env[env_i])
 	{
 		dst[i].c = env[env_i];
