@@ -49,7 +49,7 @@ void	add_redirection(t_node *node, t_sent *sentence, int i)
 	{
 		g_sig = 0;
 		deallocate(get_data());
-		store_return_value(2, true);
+		store_return_value(130, true);
 		return ;
 	}
 }
