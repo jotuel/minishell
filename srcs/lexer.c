@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/13 13:49:54 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:53:48 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	mark_arguments(t_char *newline)
 }
 
 // di is passed as a 0 to reduce lines
-void	expand_arguments(t_char *dst, t_char *c, t_data *data, int di)
+static void	expand_envvar(t_char *dst, t_char *c, t_data *data, int di)
 {
 	int			i;
 	const char	*temp;
@@ -150,7 +150,7 @@ t_char	*lexify(char *line, t_data *data)
 	if (data->newline)
 		mark_arguments(newline);
 	if (data->newline)
-		expand_arguments(expanded, newline, data, 0);
+		expand_envvar(expanded, newline, data, 0);
 	if (expanded[MAX_ARG_STRLEN - 1].c != 0)
 		ft_exit(data, "USER", "Line is too long", 42);
 	if (data->newline)
