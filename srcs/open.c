@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:59:49 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/05 19:57:26 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:48:59 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static bool	check_write(int fd, char *txt, char *file_name)
 	}
 	return (true);
 }
-
 
 /*
 ** Creates a file, writes in it and unlinks it so that it is destroyed

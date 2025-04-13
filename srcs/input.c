@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:11:31 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/13 12:40:18 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:49:21 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 */
 static void	process(char *line, t_data *data, t_char *result)
 {
-	
 	result = lexify(line, data);
 	free(data->newline);
 	data->newline = NULL;
