@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/10 18:06:39 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:50:17 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void			destroy_old_page(int i, int j, int k, t_data *data);
 char			*ft_itoa(unsigned int nbr);
 int				all_isspace(char *nptr);
 char			**get_own_env(void);
+void			return_to_prompt(void);
 
 /*
 ** LEXING & PARSING
