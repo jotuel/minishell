@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:55:05 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/07 19:05:41 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:09:32 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	deallocate(t_data *data)
 {
 	int	i;
 
+	free (data->newline);
+	data->newline = NULL;
 	while (data->tokens.first)
 		destroy_node(&data->tokens, data->tokens.first);
 	destroy_old_page(0, 0, 0, data);

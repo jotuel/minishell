@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:20:09 by jtuomi            #+#    #+#             */
-/*   Updated: 2025/04/07 18:18:19 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 12:40:40 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_data
 	t_sent			*page[MAX_SENT_SIZE];
 	int				herecount;
 	char			cwd[200];
+	t_char			*newline;
 }					t_data;
 
 typedef struct s_point

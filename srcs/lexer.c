@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:32:12 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/10 18:08:09 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 12:48:09 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,16 @@ t_char	*lexify(char *line, t_data *data)
 	if (i > (int)MAX_ARG_STRLEN)
 		return (error_printf(line, "File name too long"), NULL);
 	newline = ft_xcalloc(i * 3 + 500, sizeof(t_char));
-	remove_quotes(newline, line, 0, 0);
+	data->newline = newline;
+	if (data->newline)
+		remove_quotes(newline, line, 0, 0);
 	i = 0;
-	while (newline[i].c != 0)
+	while (data->newline && newline[i].c != 0)
 		mark_commands(newline, i++);
-	mark_arguments(newline);
-	expand_arguments(expanded, newline, data, 0);
+	if (data->newline)
+		mark_arguments(newline);
+	if (data->newline)	
+		expand_arguments(expanded, newline, data, 0);
 	if (expanded[MAX_ARG_STRLEN - 1].c != 0)
 		ft_exit(data, "USER", "Line is too long", 42);
 	create_list(data, expanded);
