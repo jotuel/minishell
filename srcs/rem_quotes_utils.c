@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:43:34 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/13 13:49:11 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 14:25:38 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ int	handle_rest(char *src, t_char *dst, int i, int *k)
 	return (0);
 }
 
-void	return_to_prompt(void)
+void	return_to_prompt(int retval)
 {
 	deallocate(get_data());
 	error_printf("user", "quotes need to be closed");
-	store_return_value(1, true);
+	store_return_value(retval, true);
 }

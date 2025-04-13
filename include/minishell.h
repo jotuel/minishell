@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:39:37 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/13 13:50:17 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 14:36:22 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			pipe_closer(int *fd);
 ** EXIT & ERROR PRINTING
 */
 void			ft_exit(t_data *data, char *cmd, char *message, int exit_code);
-void			error_printf(char *cmd, char *message);
+void			error_printf(const char *cmd, char *message);
 void			test(void);
 void			deallocate(t_data *data);
 int				ft_atoi_spec(const char *nptr, int sign, long ret);
@@ -105,7 +105,7 @@ void			destroy_old_page(int i, int j, int k, t_data *data);
 char			*ft_itoa(unsigned int nbr);
 int				all_isspace(char *nptr);
 char			**get_own_env(void);
-void			return_to_prompt(void);
+void			return_to_prompt(int retval);
 
 /*
 ** LEXING & PARSING

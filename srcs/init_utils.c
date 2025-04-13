@@ -6,7 +6,7 @@
 /*   By: jrimpila <jrimpila@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:24:54 by jrimpila          #+#    #+#             */
-/*   Updated: 2025/04/13 14:15:24 by jrimpila         ###   ########.fr       */
+/*   Updated: 2025/04/13 15:00:40 by jrimpila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,38 @@
 
 static int is_redirection(t_char *dst, int i)
 {
-	
+	if (i > 0)
+		i--;
+	while (i > 0 && ft_isspace(dst[i].c) && dst[i].esc == 0)
+		i--;
+	if (dst[i].com)
+		return (1);
+	return (0);
 }
 
 static void check_amb_redir(t_char *dst, int i, const char *env, int env_i)
 {
 	int word_count;
+	int orig;
 	
+	orig = env_i;
 	if (is_redirection(dst, i) == 0)
 		return ;
 	word_count = 0;
-	while (env[env_i])
+	while (env[env_i] && env_i < MAX_LENGTH)
 	{
 		if (ft_isspace(env[env_i] == 0))
 			word_count++;
-		while (ft_isspace(env[env_i] == 0))
+		while (ft_isspace(env[env_i]) == 0)
 			env_i++;
 		while (ft_isspace(env[env_i]))
 			env_i++;
 	}
 	if (word_count == 0 || word_count > 1)
 	{
-		deallocate(get_data());
-		store_return_value(1, true);
-		
+		error_printf("syntax", "ambigious redirection");
+		return_to_prompt(1);
 	}
-
 }
 
 int	copy_env_to_tchar(t_char *dst, int i, const char *env)
